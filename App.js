@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute', // Position the button container absolutely
-    bottom: 0, // Position it at the bottom of the screen
+    bottom: 30, // Position it at the bottom of the screen
     width: '100%', // Make it span the full width of the screen
     flexDirection: 'row',
     justifyContent: 'space-around', // Space the buttons equally
