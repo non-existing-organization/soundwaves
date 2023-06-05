@@ -46,6 +46,9 @@ const styles = StyleSheet.create({
       borderRadius: 15,
       marginVertical: 5,
     },
+    activeButton: {
+      borderColor: 'green',
+  },
   });
 
 

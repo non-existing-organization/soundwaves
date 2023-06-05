@@ -3,24 +3,13 @@
 
 const colorMap = new Map([
     [
-      'blue',
+      'white',
       {
-        name: 'Blue',
-        image: require('./assets/noise_colours/blue.png'),
-        thumbnail: require('./assets/noise_colours/blue.png'),
-        buttons: [
-          {
-            name: 'Sub Button 1',
-            image: require('./assets/noise_colours/blue.png'),
-            thumbnail: require('./assets/noise_colours/blue.png'),
-          },
-          {
-            name: 'Sub Button 2',
-            image: require('./assets/noise_colours/blue.png'),
-            thumbnail: require('./assets/noise_colours/blue.png'),
-          },
-        ],
-      },
+        name: 'white',
+        image: require('./assets/noise_colours/white.png'),
+        thumbnail: require('./assets/noise_colours/white.png'),
+        audio_file: require('./assets/noise_audios/brown.mp3'),
+      }
     ],
     [
       'brown',
@@ -28,13 +17,7 @@ const colorMap = new Map([
         name: 'Brown',
         image: require('./assets/noise_colours/brown.png'),
         thumbnail: require('./assets/noise_colours/brown.png'),
-        buttons: [
-          {
-            name: 'Sub Button 1',
-            image: require('./assets/noise_colours/blue.png'),
-            thumbnail: require('./assets/noise_colours/blue.png'),
-          },
-        ],
+        audio_file: require('./assets/noise_audios/brown.mp3'),
       },
     ],
     // ... Repeat for the rest of the colors
