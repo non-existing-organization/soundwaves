@@ -12,7 +12,9 @@ const styles = StyleSheet.create({
       bottom: 30,
       width: '100%',
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexWrap: 'wrap',
       padding: 10,
     },
     button: {
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
       borderRadius: 30,
       width: 60,
       height: 60,
+      margin: 10
     },
     fadedButton: {
       opacity: 0.5,
