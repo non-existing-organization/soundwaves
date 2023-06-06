@@ -8,7 +8,7 @@ const colorMap = new Map([
         name: 'white',
         image: require('./assets/noise_colours/white.png'),
         thumbnail: require('./assets/noise_colours/white.png'),
-        audio_file: require('./assets/noise_audios/brown.mp3'),
+        audio_file: require('./assets/noise_audios/white.mp3'),
       }
     ],
     [
@@ -20,7 +20,7 @@ const colorMap = new Map([
         audio_file: require('./assets/noise_audios/brown.mp3'),
       },
     ],
-    // ... Repeat for the rest of the colors
+
   ]);
 
 
