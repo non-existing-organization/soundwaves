@@ -62,6 +62,8 @@ const App = () => {
       : undefined;
   }, [sound]);
 
+  useEffect(() => { Audio.setAudioModeAsync({ playsInSilentModeIOS: true }); });
+
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) => colorA.localeCompare(colorB));
 
   return (
