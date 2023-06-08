@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Audio } from 'expo-av';
@@ -13,39 +14,44 @@ const App = () => {
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
 
   const handleButtonPress = async (image, audio_file) => {
+    console.log(`Button press detected. Image: ${image}, Audio File: ${audio_file}`);
     setMainImage(image);
 
-    if (sound) {
-      if (audio_file === currentAudioFile) {
-        const isPlaying = await sound.getStatusAsync();
-        if (isPlaying.isPlaying) {
-          console.log('Pausing sound');
-          await sound.pauseAsync();
-        } else {
-          console.log('Resuming sound');
-          await sound.playAsync();
-        }
-      } else {
-        console.log('Stopping and unloading previous sound');
-        await sound.stopAsync();
-        await sound.unloadAsync();
+    const isOtherSoundPlaying = sound && audio_file !== currentAudioFile;
+    const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
 
-        console.log('Loading new sound');
-        const { sound: newSound } = await Audio.Sound.createAsync(audio_file);
-        setSound(newSound);
-        setCurrentAudioFile(audio_file);
-        console.log('Playing sound');
-        await newSound.playAsync();
-      }
-    } else {
-      console.log('Loading new sound');
-      const { sound: newSound } = await Audio.Sound.createAsync(audio_file);
-      setSound(newSound);
-      setCurrentAudioFile(audio_file);
-      console.log('Playing sound');
-      await newSound.playAsync();
+    if (sound && isSoundLoaded) {
+        const status = await sound.getStatusAsync();
+        if (isOtherSoundPlaying) {
+            console.log('Stopping and unloading previous sound');
+            await sound.stopAsync();
+            await sound.unloadAsync();
+            console.log('Previous sound unloaded');
+        } else if (status.isPlaying) {
+            console.log('Pausing current sound');
+            await sound.pauseAsync();
+            console.log('Current sound paused');
+            return;
+        } else {
+            console.log('Resuming current sound');
+            await sound.playAsync();
+            console.log('Current sound resumed');
+            return;
+        }
     }
-  };
+
+    console.log('Loading new sound');
+    const { sound: newSound } = await Audio.Sound.createAsync(audio_file);
+    setSound(newSound);
+    setCurrentAudioFile(audio_file);
+    console.log('New sound loaded');
+
+    console.log('Playing new sound');
+    await newSound.playAsync();
+    console.log('New sound playing');
+};
+
+
 
   useEffect(() => {
     return sound
