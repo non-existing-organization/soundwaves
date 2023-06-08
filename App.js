@@ -12,6 +12,18 @@ const App = () => {
   const [mainImage, setMainImage] = useState(backgroundImage);
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
+  const [loopCount, setLoopCount] = useState(0);
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          console.log('Unloading Sound on component unmount');
+          sound.unloadAsync();
+        }
+      : undefined;
+  }, [sound]);
+
+  useEffect(() => { Audio.setAudioModeAsync({ playsInSilentModeIOS: true }); });
 
   const handleButtonPress = async (image, audio_file) => {
     console.log(`Button press detected. Image: ${image}, Audio File: ${audio_file}`);
@@ -41,7 +53,22 @@ const App = () => {
     }
 
     console.log('Loading new sound');
-    const { sound: newSound } = await Audio.Sound.createAsync(audio_file);
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      audio_file,
+      {
+        isLooping: true,
+        isMuted: false,
+        volume: 1.0,
+        rate: 1.0,
+        shouldCorrectPitch: true,
+      },
+      (status) => {
+        if (status.didJustFinish && !status.isLooping) {
+          setLoopCount(loopCount + 1);
+          console.log('Loop count:', loopCount);
+        }
+      },
+    );
     setSound(newSound);
     setCurrentAudioFile(audio_file);
     console.log('New sound loaded');
@@ -49,20 +76,7 @@ const App = () => {
     console.log('Playing new sound');
     await newSound.playAsync();
     console.log('New sound playing');
-};
-
-
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log('Unloading Sound on component unmount');
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
-
-  useEffect(() => { Audio.setAudioModeAsync({ playsInSilentModeIOS: true }); });
+  };
 
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) => colorA.localeCompare(colorB));
 
