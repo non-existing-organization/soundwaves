@@ -1,6 +1,4 @@
 // colorMap.js
-
-
 const colorMap = new Map([
     [
       'white',
@@ -22,9 +20,5 @@ const colorMap = new Map([
     ],
 
   ]);
-
-
-
-
 
 export default colorMap;
