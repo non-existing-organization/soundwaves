@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "soundwaves",
+    "name": "SoundWaves",
     "slug": "soundwaves",
+    "description": "Experience the therapeutic power of noise colors, finely tuned to promote focus, relaxation, and a restful sleep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "owner": "non-existing-organization",
+    "githubUrl": "https://github.com/stiliajohny/soundwaves",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -15,16 +18,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.soundwaves",
+      "buildNumber": "1.0.0",
+      "infoPlist": {}
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
     }
   }
 }
