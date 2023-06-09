@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 20,
       fontSize: 16,
-      fontFamily: './assets/fonts/Roboto-Regular.ttf',
+      fontFamily: 'HelveticaNeue-Light',
     },
     buttonContainer: {
       position: 'absolute',
