@@ -13,7 +13,7 @@ const App = () => {
   useKeepAwake();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="About">
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="Main" component={MainScreen} />
       </Stack.Navigator>
