@@ -2,12 +2,15 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useKeepAwake } from 'expo-keep-awake';
+
 import AboutScreen from './AboutScreen';
 import MainScreen from './MainScreen';
 
 const Stack = createStackNavigator();
 
 const App = () => {
+  useKeepAwake();
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="About">
