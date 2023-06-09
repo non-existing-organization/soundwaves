@@ -1,6 +1,7 @@
 // styles.jsw
 import { StyleSheet } from 'react-native';
 
+
 const styles = StyleSheet.create({
     backgroundImage: {
       flex: 1,
@@ -11,14 +12,14 @@ const styles = StyleSheet.create({
       backgroundColor: '#000',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: 30, // Add some padding for the text
+      paddingHorizontal: 30,
     },
     aboutText: {
       color: '#fff',
       textAlign: 'center',
       marginBottom: 20,
       fontSize: 16,
-      fontFamily: 'Helvetica',
+      fontFamily: './assets/fonts/Roboto-Regular.ttf',
     },
     buttonContainer: {
       position: 'absolute',
