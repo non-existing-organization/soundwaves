@@ -1,17 +1,19 @@
 // CustomButton.js
-
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, Text, View } from 'react-native';
 import styles from './styles';
 
-const CustomButton = ({ onPress, name, image, thumbnail }) => {
-  const handlePress = () => {
-    onPress(image);
-  };
-
+const CustomButton = ({ onPress, name, image, thumbnail, isActive }) => {
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.button}>
-      <Image source={thumbnail} style={styles.buttonImage} />
+    <TouchableOpacity
+      onPress={onPress}
+      style={isActive ? [styles.button, styles.activeButton] : styles.button}
+    >
+      <Image
+        source={thumbnail}
+        style={styles.buttonImage}
+      />
+      <Text style={styles.buttonText}>{name}</Text>
     </TouchableOpacity>
   );
 };
