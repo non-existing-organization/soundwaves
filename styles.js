@@ -1,10 +1,24 @@
-// styles.js
+// styles.jsw
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     backgroundImage: {
       flex: 1,
       resizeMode: 'cover',
+    },
+    container: {
+      flex: 1,
+      backgroundColor: '#000',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 30, // Add some padding for the text
+    },
+    aboutText: {
+      color: '#fff',
+      textAlign: 'center',
+      marginBottom: 20,
+      fontSize: 16,
+      fontFamily: 'Helvetica',
     },
     buttonContainer: {
       position: 'absolute',
@@ -19,12 +33,25 @@ const styles = StyleSheet.create({
     button: {
       alignItems: 'center',
       justifyContent: 'center',
-      borderColor: 'purple',
+      borderColor: 'white',
       borderWidth: 2,
       borderRadius: 30,
       width: 60,
       height: 60,
       margin: 10
+    },
+    aboutButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderColor: 'white',
+      borderWidth: 2,
+      borderRadius: 30,
+      width: 60,
+      height: 60,
+      margin: 10
+    },
+    aboutButtonText: {
+      color: '#fff',
     },
     fadedButton: {
       opacity: 0.5,
@@ -33,7 +60,7 @@ const styles = StyleSheet.create({
       width: 40,
       height: 40,
       borderRadius: 20,
-      margin: 4, // Adjust the gap between the border and the image
+      margin: 4,
     },
     subButtonContainer: {
       position: 'absolute',
