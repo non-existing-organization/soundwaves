@@ -13,7 +13,7 @@ const MainScreen = () => {
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
-  const [activeColor, setActiveColor] = useState(null); // Add this state
+  const [activeColor, setActiveColor] = useState(null);
 
   useEffect(() => {
     return sound ?
@@ -30,7 +30,7 @@ const MainScreen = () => {
 
   const handleButtonPress = async (colorName, image, audioFile) => {
     console.log(
-        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`
+        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`,
     );
     setMainImage(image);
 
@@ -44,18 +44,18 @@ const MainScreen = () => {
         await sound.stopAsync();
         await sound.unloadAsync();
         console.log('Previous sound unloaded');
-        setActiveColor(null); // Add this line
+        setActiveColor(null);
       } else if (status.isPlaying) {
         console.log('Pausing current sound');
         await sound.pauseAsync();
         console.log('Current sound paused');
-        setActiveColor(null); // Add this line
+        setActiveColor(null);
         return;
       } else {
         console.log('Resuming current sound');
         await sound.playAsync();
         console.log('Current sound resumed');
-        setActiveColor(colorName); // Add this line
+        setActiveColor(colorName);
         return;
       }
     }
@@ -79,7 +79,7 @@ const MainScreen = () => {
     );
     setSound(newSound);
     setCurrentAudioFile(audioFile);
-    setActiveColor(colorName); // Add this line
+    setActiveColor(colorName);
     console.log('New sound loaded');
 
     console.log('Playing new sound');
@@ -95,7 +95,7 @@ const MainScreen = () => {
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
       <View style={styles.buttonContainer}>
         {sortedColorMap.map(
-            ([colorName, { name, image, thumbnail, audioFile }]) => (
+            ([colorName, {name, image, thumbnail, audioFile}]) => (
               <View key={colorName}>
                 <CustomButton
                   onPress={() => handleButtonPress(colorName, image, audioFile)}
