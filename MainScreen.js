@@ -1,12 +1,12 @@
 // MainScreen.js
-import React, { useState, useEffect } from "react";
-import { View, ImageBackground } from "react-native";
-import { Audio } from "expo-av";
-import CustomButton from "./CustomButton";
-import colorMap from "./colorMap";
-import styles from "./styles";
+import React, {useState, useEffect} from 'react';
+import {View, ImageBackground} from 'react-native';
+import {Audio} from 'expo-av';
+import CustomButton from './CustomButton';
+import colorMap from './colorMap';
+import styles from './styles';
 
-const backgroundImage = require("./assets/background.png");
+const backgroundImage = require('./assets/background.png');
 
 const MainScreen = () => {
   const [mainImage, setMainImage] = useState(backgroundImage);
