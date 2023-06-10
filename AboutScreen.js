@@ -1,10 +1,10 @@
 // AboutScreen.js
 import React from 'react';
 import PropTypes from 'prop-types'; // <- Import PropTypes
-import { View, Text, TouchableOpacity } from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 
-const AboutScreen = ({ navigation }) => {
+const AboutScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.aboutText}>
@@ -21,7 +21,7 @@ const AboutScreen = ({ navigation }) => {
 };
 
 AboutScreen.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired }).isRequired,
+  navigation: PropTypes.shape({navigate: PropTypes.func.isRequired}).isRequired,
 };
 
 
