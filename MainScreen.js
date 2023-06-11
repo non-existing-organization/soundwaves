@@ -20,8 +20,8 @@ const MainScreen = () => {
       () => {
         console.log('Unloading Sound on component unmount');
         sound.unloadAsync();
-      }
-      : undefined;
+      } :
+      undefined;
   }, [sound]);
 
   useEffect(() => {
