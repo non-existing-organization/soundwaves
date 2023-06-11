@@ -21,7 +21,11 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.example.soundwaves",
       "buildNumber": "1.0.0",
-      "infoPlist": {}
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
