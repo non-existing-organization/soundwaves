@@ -50,6 +50,8 @@ const MainScreen = () => {
         await sound.pauseAsync();
         console.log("Current sound paused");
         setActiveColor(null); // Add this line
+        setMainImage(backgroundImage); // Change the image to the background
+
         return;
       } else {
         console.log("Resuming current sound");
