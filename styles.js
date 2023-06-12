@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     fontSize: 16,
-    fontFamily: 'HelveticaNeue-Light',
   },
   buttonContainer: {
     position: 'absolute',
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontFamily: 'HelveticaNeue-Light',
 
   },
   fadedButton: {
