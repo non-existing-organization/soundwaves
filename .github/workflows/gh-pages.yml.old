@@ -12,5 +12,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: run gh-pages deploy
         run: |
-          yarn add -D gh-pages
-          npm run web-deploy
+          npx expo export:web
