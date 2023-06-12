@@ -1,0 +1,14 @@
+name: ESLint
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  expo-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: run gh-pages deploy
+        run: npm run web-deploy
