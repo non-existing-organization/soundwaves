@@ -1,5 +1,9 @@
 // styles.jsw
-import { StyleSheet } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
+
+console.log('screenWidth', screenWidth);
 
 
 const styles = StyleSheet.create({
@@ -10,15 +14,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
+    paddingHorizontal: screenWidth > 480 ? screenWidth * 0.3 : 0,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 30,
   },
   aboutText: {
     color: '#fff',
     textAlign: 'center',
     marginBottom: 20,
-
     fontSize: 16,
     fontFamily: 'HelveticaNeue-Light',
   },
@@ -54,6 +57,9 @@ const styles = StyleSheet.create({
   },
   aboutButtonText: {
     color: '#fff',
+    fontSize: 16,
+    fontFamily: 'HelveticaNeue-Light',
+
   },
   fadedButton: {
     opacity: 0.5,
@@ -79,7 +85,7 @@ const styles = StyleSheet.create({
   },
   activeButton: {
     borderColor: 'green',
-},
+  },
 });
 
 
