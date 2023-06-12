@@ -1,4 +1,4 @@
-name: ESLint
+name: GH Pages deploy
 
 on:
   push:
