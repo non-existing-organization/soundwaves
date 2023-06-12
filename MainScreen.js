@@ -1,12 +1,12 @@
 // MainScreen.js
-import React, { useState, useEffect } from "react";
-import { View, ImageBackground } from "react-native";
-import { Audio } from "expo-av";
-import CustomButton from "./CustomButton";
-import colorMap from "./colorMap";
-import styles from "./styles";
+import React, {useState, useEffect} from 'react';
+import {View, ImageBackground} from 'react-native';
+import {Audio} from 'expo-av';
+import CustomButton from './customButton';
+import colorMap from './colorMap';
+import styles from './styles';
 
-const backgroundImage = require("./assets/background.png");
+const backgroundImage = require('./assets/background.png');
 
 const MainScreen = () => {
   const [mainImage, setMainImage] = useState(backgroundImage);
@@ -16,21 +16,21 @@ const MainScreen = () => {
   const [activeColor, setActiveColor] = useState(null); // Add this state
 
   useEffect(() => {
-    return sound
-      ? () => {
-          console.log("Unloading Sound on component unmount");
-          sound.unloadAsync();
-        }
-      : undefined;
+    return sound ?
+      () => {
+        console.log('Unloading Sound on component unmount');
+        sound.unloadAsync();
+      } :
+      undefined;
   }, [sound]);
 
   useEffect(() => {
-    Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    Audio.setAudioModeAsync({playsInSilentModeIOS: true});
   });
 
   const handleButtonPress = async (colorName, image, audio_file) => {
     console.log(
-        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`
+        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
     );
     setMainImage(image);
 
@@ -40,29 +40,29 @@ const MainScreen = () => {
     if (sound && isSoundLoaded) {
       const status = await sound.getStatusAsync();
       if (isOtherSoundPlaying) {
-        console.log("Stopping and unloading previous sound");
+        console.log('Stopping and unloading previous sound');
         await sound.stopAsync();
         await sound.unloadAsync();
-        console.log("Previous sound unloaded");
+        console.log('Previous sound unloaded');
         setActiveColor(null); // Add this line
       } else if (status.isPlaying) {
-        console.log("Pausing current sound");
+        console.log('Pausing current sound');
         await sound.pauseAsync();
-        console.log("Current sound paused");
+        console.log('Current sound paused');
         setActiveColor(null); // Add this line
         setMainImage(backgroundImage); // Change the image to the background
 
         return;
       } else {
-        console.log("Resuming current sound");
+        console.log('Resuming current sound');
         await sound.playAsync();
-        console.log("Current sound resumed");
+        console.log('Current sound resumed');
         setActiveColor(colorName); // Add this line
         return;
       }
     }
 
-    console.log("Loading new sound");
+    console.log('Loading new sound');
     const { sound: newSound } = await Audio.Sound.createAsync(
       audio_file,
       {
