@@ -1,15 +1,16 @@
+/* eslint-disable react/prop-types */
 // SettingsScreen.js
 import React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {View, Text, TouchableOpacity, ImageBackground} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 import styles from '../utils/styles';
 
-const backgroundImage = require('../assets/background.png');  // assuming you have a similar background image
+const backgroundImage = require('../assets/background.png');
 
-const SettingsScreen = ({ navigation }) => {
+const SettingsScreen = ({navigation}) => {
   const handleBackButtonPress = () => {
     console.log('Back button pressed');
-    navigation.goBack();  // Go back to the previous screen in the stack
+    navigation.goBack();
   };
 
   return (
