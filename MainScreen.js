@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, {useState, useEffect} from 'react';
-import {View, ImageBackground, TouchableOpacity, Text} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
-import {Audio} from 'expo-av';
+import React, { useState, useEffect } from 'react';
+import { View, ImageBackground } from 'react-native';
+import { Audio } from 'expo-av';
 import CustomButton from './CustomButton';
 import colorMap from './colorMap';
 import styles from './styles';
@@ -12,7 +11,7 @@ import SettingsButton from './SettingsButton';
 
 const backgroundImage = require('./assets/background.png');
 
-const MainScreen = ({navigation}) => {
+const MainScreen = ({ navigation }) => {
   const [mainImage, setMainImage] = useState(backgroundImage);
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
@@ -20,21 +19,21 @@ const MainScreen = ({navigation}) => {
   const [activeColor, setActiveColor] = useState(null);
 
   useEffect(() => {
-    return sound ?
-      () => {
+    return () => {
+      if (sound) {
         console.log('Unloading Sound on component unmount');
         sound.unloadAsync();
-      } :
-      undefined;
+      }
+    };
   }, [sound]);
 
   useEffect(() => {
-    Audio.setAudioModeAsync({playsInSilentModeIOS: true});
-  });
+    Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+  }, []);
 
   const handleButtonPress = async (colorName, image, audio_file) => {
     console.log(
-        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
+      `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
     );
     setMainImage(image);
 
@@ -67,22 +66,19 @@ const MainScreen = ({navigation}) => {
     }
 
     console.log('Loading new sound');
-    const {sound: newSound} = await Audio.Sound.createAsync(
-        audio_file,
-        {
-          isLooping: true,
-          isMuted: false,
-          volume: 1.0,
-          rate: 1.0,
-          shouldCorrectPitch: true,
-        },
-        (status) => {
-          if (status.didJustFinish && !status.isLooping) {
-            setLoopCount(loopCount + 1);
-            console.log('Loop count:', loopCount);
-          }
-        },
-    );
+    const { sound: newSound } = await Audio.Sound.createAsync(audio_file, {
+      isLooping: true,
+      isMuted: false,
+      volume: 1.0,
+      rate: 1.0,
+      shouldCorrectPitch: true,
+    },
+    (status) => {
+      if (status.didJustFinish && !status.isLooping) {
+        setLoopCount((prevCount) => prevCount + 1);
+        console.log('Loop count:', loopCount);
+      }
+    });
     setSound(newSound);
     setCurrentAudioFile(audio_file);
     setActiveColor(colorName);
@@ -103,8 +99,23 @@ const MainScreen = ({navigation}) => {
     navigation.navigate('Settings');
   };
 
+  const renderCustomButton = ([colorName, { name, image, thumbnail, audio_file }]) => {
+    const onPress = () => handleButtonPress(colorName, image, audio_file);
+
+    return (
+      <View key={colorName}>
+        <CustomButton
+          onPress={onPress}
+          image={image}
+          thumbnail={thumbnail}
+          isActive={activeColor === colorName}
+        />
+      </View>
+    );
+  };
+
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
-    colorA.localeCompare(colorB),
+    colorA.localeCompare(colorB)
   );
 
   return (
@@ -115,18 +126,7 @@ const MainScreen = ({navigation}) => {
       </View>
 
       <View style={styles.buttonContainer}>
-        {sortedColorMap.map(
-            ([colorName, {name, image, thumbnail, audio_file}]) => (
-              <View key={colorName}>
-                <CustomButton
-                  onPress={() => handleButtonPress(colorName, image, audio_file)}
-                  image={image}
-                  thumbnail={thumbnail}
-                  isActive={activeColor === colorName}
-                />
-              </View>
-            ),
-        )}
+        {sortedColorMap.map(renderCustomButton)}
       </View>
     </ImageBackground>
   );
