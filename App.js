@@ -6,6 +6,7 @@ import {useKeepAwake} from 'expo-keep-awake';
 
 import AboutScreen from './AboutScreen';
 import MainScreen from './MainScreen';
+import SettingsScreen from './SettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
