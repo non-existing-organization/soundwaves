@@ -1,6 +1,10 @@
+/* eslint-disable react/prop-types */
+
 // AboutScreen.js
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
+
 import styles from './styles';
 
 const AboutScreen = ({navigation}) => {
@@ -13,7 +17,7 @@ const AboutScreen = ({navigation}) => {
         {'Through regular exposure to these therapeutic sounds, individuals may experience reduced stress, improved productivity, and better overall well-being.'}
       </Text>
       <TouchableOpacity style={styles.aboutButton} onPress={() => navigation.navigate('Main')}>
-        <Text style={styles.aboutButtonText}>Next</Text>
+        <Ionicons name="arrow-forward" size={24} style={styles.icon}/>
       </TouchableOpacity>
     </View>
   );
