@@ -17,7 +17,7 @@ const MainScreen = ({navigation}) => {
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
-  const [activeColor, setActiveColor] = useState(null); // Add this state
+  const [activeColor, setActiveColor] = useState(null);
 
   useEffect(() => {
     return sound ?
@@ -93,10 +93,6 @@ const MainScreen = ({navigation}) => {
     console.log('New sound playing');
   };
 
-  const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
-    colorA.localeCompare(colorB),
-  );
-
   const handleBackButtonPress = () => {
     console.log('Back button pressed');
     navigation.navigate('About');
@@ -106,6 +102,10 @@ const MainScreen = ({navigation}) => {
     console.log('Settings button pressed');
     navigation.navigate('Settings');
   };
+
+  const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
+    colorA.localeCompare(colorB),
+  );
 
   return (
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
