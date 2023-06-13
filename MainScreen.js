@@ -46,20 +46,20 @@ const MainScreen = ({navigation}) => {
         await sound.stopAsync();
         await sound.unloadAsync();
         console.log('Previous sound unloaded');
-        setActiveColor(null); // Add this line
+        setActiveColor(null);
       } else if (status.isPlaying) {
         console.log('Pausing current sound');
         await sound.pauseAsync();
         console.log('Current sound paused');
-        setActiveColor(null); // Add this line
-        setMainImage(backgroundImage); // Change the image to the background
+        setActiveColor(null);
+        setMainImage(backgroundImage);
 
         return;
       } else {
         console.log('Resuming current sound');
         await sound.playAsync();
         console.log('Current sound resumed');
-        setActiveColor(colorName); // Add this line
+        setActiveColor(colorName);
         return;
       }
     }
@@ -83,7 +83,7 @@ const MainScreen = ({navigation}) => {
     );
     setSound(newSound);
     setCurrentAudioFile(audio_file);
-    setActiveColor(colorName); // Add this line
+    setActiveColor(colorName);
     console.log('New sound loaded');
 
     console.log('Playing new sound');
@@ -102,7 +102,7 @@ const MainScreen = ({navigation}) => {
 
   const handleSettingsButtonPress = () => {
     console.log('Settings button pressed');
-    // Handle your settings button logic here
+    navigation.navigate('Settings');
   };
 
   return (
