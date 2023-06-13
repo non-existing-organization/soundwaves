@@ -5,7 +5,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
-import styles from './styles';
+import styles from '../utils/styles';
 
 const AboutScreen = ({navigation}) => {
   return (
