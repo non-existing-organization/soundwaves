@@ -7,6 +7,8 @@ import {Audio} from 'expo-av';
 import CustomButton from './CustomButton';
 import colorMap from './colorMap';
 import styles from './styles';
+import BackButton from './BackButton';
+import SettingsButton from './SettingsButton';
 
 const backgroundImage = require('./assets/background.png');
 
@@ -108,12 +110,8 @@ const MainScreen = ({navigation}) => {
   return (
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
       <View style={styles.topButtonsBar}>
-        <TouchableOpacity style={styles.topButton} onPress={handleBackButtonPress}>
-          <Ionicons name="arrow-back" size={24} style={styles.icon} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.topButton} onPress={handleSettingsButtonPress}>
-          <Ionicons name="settings" size={24} style={styles.icon} />
-        </TouchableOpacity>
+        <BackButton onPress={handleBackButtonPress} />
+        <SettingsButton onPress={handleSettingsButtonPress} />
       </View>
 
       <View style={styles.buttonContainer}>
