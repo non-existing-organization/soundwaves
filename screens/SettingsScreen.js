@@ -2,9 +2,9 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import styles from './styles';
+import styles from '../utils/styles';
 
-const backgroundImage = require('./assets/background.png');  // assuming you have a similar background image
+const backgroundImage = require('../assets/background.png');  // assuming you have a similar background image
 
 const SettingsScreen = ({ navigation }) => {
   const handleBackButtonPress = () => {
