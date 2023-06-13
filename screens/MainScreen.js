@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, { useState, useEffect } from 'react';
-import { View, ImageBackground } from 'react-native';
-import { Audio } from 'expo-av';
-import CustomButton from './CustomButton';
-import colorMap from './colorMap';
-import styles from './styles';
-import BackButton from './BackButton';
-import SettingsButton from './SettingsButton';
+import React, {useState, useEffect} from 'react';
+import {View, ImageBackground} from 'react-native';
+import {Audio} from 'expo-av';
 
-const backgroundImage = require('./assets/background.png');
+import colorMap from '../utils/colorMap';
+import styles from '../utils/styles';
 
-const MainScreen = ({ navigation }) => {
+import BackButton from '../components/BackButton';
+import SettingsButton from '../components/SettingsButton';
+import CustomButton from '../components/CustomButton';
+
+const backgroundImage = require('../assets/background.png');
+
+const MainScreen = ({navigation}) => {
   const [mainImage, setMainImage] = useState(backgroundImage);
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
@@ -28,12 +30,12 @@ const MainScreen = ({ navigation }) => {
   }, [sound]);
 
   useEffect(() => {
-    Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    Audio.setAudioModeAsync({playsInSilentModeIOS: true});
   }, []);
 
   const handleButtonPress = async (colorName, image, audio_file) => {
     console.log(
-      `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
+        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
     );
     setMainImage(image);
 
@@ -66,7 +68,7 @@ const MainScreen = ({ navigation }) => {
     }
 
     console.log('Loading new sound');
-    const { sound: newSound } = await Audio.Sound.createAsync(audio_file, {
+    const {sound: newSound} = await Audio.Sound.createAsync(audio_file, {
       isLooping: true,
       isMuted: false,
       volume: 1.0,
@@ -99,7 +101,7 @@ const MainScreen = ({ navigation }) => {
     navigation.navigate('Settings');
   };
 
-  const renderCustomButton = ([colorName, { name, image, thumbnail, audio_file }]) => {
+  const renderCustomButton = ([colorName, {name, image, thumbnail, audio_file}]) => {
     const onPress = () => handleButtonPress(colorName, image, audio_file);
 
     return (
@@ -115,7 +117,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
-    colorA.localeCompare(colorB)
+    colorA.localeCompare(colorB),
   );
 
   return (
