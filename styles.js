@@ -42,17 +42,14 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: 60,
     height: 60,
-    margin: 10
+    margin: 10,
   },
   aboutButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 30,
     width: 60,
     height: 60,
-    margin: 10
+    margin: 10,
   },
   aboutButtonText: {
     color: '#fff',
@@ -83,6 +80,21 @@ const styles = StyleSheet.create({
   },
   activeButton: {
     borderColor: 'green',
+  },
+  topButtonsBar: {
+    position: 'absolute',
+    top: 50,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    zIndex: 10,
+  },
+  topButton: {
+    padding: 10,
+  },
+  icon: {
+    color: '#fff', // make it grey
   },
 });
 
