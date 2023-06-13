@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useKeepAwake} from 'expo-keep-awake';
 
-import AboutScreen from './aboutScreen';
-import MainScreen from './mainScreen';
+import AboutScreen from './AboutScreen';
+import MainScreen from './MainScreen';
 
 const Stack = createStackNavigator();
 
