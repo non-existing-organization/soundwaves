@@ -33,6 +33,7 @@ const colorMap = new Map([
       description: 'Pink noise, often compared to the steady rustle of leaves in the wind, has equal energy per octave, providing a balanced mix of high and low frequency sounds that can help improve sleep and focus.',
     },
   ],
+
 ]);
 
 export default colorMap;
