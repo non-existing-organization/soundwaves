@@ -18,6 +18,15 @@ const colorMap = new Map([
       audio_file: require('../assets/noise_audios/brown.mp3'),
     },
   ],
+  [
+    'pink',
+    {
+      name: 'Pink',
+      image: require('../assets/noise_colours/pink.png'),
+      thumbnail: require('../assets/noise_colours/pink.png'),
+      audio_file: require('../assets/noise_audios/pink.mp3'),
+    },
+  ],
 ]);
 
 export default colorMap;
