@@ -6,6 +6,9 @@ import {Audio} from 'expo-av';
 
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
+
+import BackButton from '../components/BackButton';
+import SettingsButton from '../components/SettingsButton';
 import CustomButton from '../components/CustomButton';
 
 const backgroundImage = require('../assets/background.png');
@@ -88,7 +91,15 @@ const MainScreen = ({navigation}) => {
     console.log('New sound playing');
   };
 
+  const handleBackButtonPress = () => {
+    console.log('Back button pressed');
+    navigation.navigate('About');
+  };
 
+  const handleSettingsButtonPress = () => {
+    console.log('Settings button pressed');
+    navigation.navigate('Settings');
+  };
 
   const renderCustomButton = ([colorName, {name, image, thumbnail, audio_file}]) => {
     const onPress = () => handleButtonPress(colorName, image, audio_file);
@@ -111,6 +122,10 @@ const MainScreen = ({navigation}) => {
 
   return (
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
+      <View style={styles.topButtonsBar}>
+        <BackButton onPress={handleBackButtonPress} />
+        <SettingsButton onPress={handleSettingsButtonPress} />
+      </View>
 
       <View style={styles.buttonContainer}>
         {sortedColorMap.map(renderCustomButton)}
