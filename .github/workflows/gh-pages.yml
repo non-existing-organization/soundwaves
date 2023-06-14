@@ -1,4 +1,4 @@
-name: Web
+name: web-deployment-on-gh-pages
 on:
   push:
     branches:
