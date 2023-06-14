@@ -6,7 +6,6 @@ import {Audio} from 'expo-av';
 
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
-
 import CustomButton from '../components/CustomButton';
 
 const backgroundImage = require('../assets/background.png');
