@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 // CustomButton.js
 import React from 'react';
-import {View, TouchableOpacity, Image, Text} from 'react-native';
+import {View, TouchableOpacity, Image} from 'react-native';
 import styles from '../utils/styles';
 
 const CustomButton = ({onPress, name, image, thumbnail, isActive}) => {
