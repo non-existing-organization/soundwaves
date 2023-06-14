@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 // CustomButton.js
 import React from 'react';
-import {TouchableOpacity, Image, Text} from 'react-native';
+import {View, TouchableOpacity, Image, Text} from 'react-native';
 import styles from '../utils/styles';
 
 const CustomButton = ({onPress, name, image, thumbnail, isActive}) => {
@@ -10,11 +9,12 @@ const CustomButton = ({onPress, name, image, thumbnail, isActive}) => {
       onPress={onPress}
       style={isActive ? [styles.button, styles.activeButton] : styles.button}
     >
-      <Image
-        source={thumbnail}
-        style={styles.buttonImage}
-      />
-      <Text style={styles.buttonText}>{name}</Text>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          source={thumbnail}
+          style={styles.buttonImage}
+        />
+      </View>
     </TouchableOpacity>
   );
 };
