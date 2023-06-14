@@ -12,8 +12,8 @@ post_bump_hooks = [
 path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
-repository = "cocogitto_bot_playground"
-owner = "cocogitto"
+repository = "soundwaves"
+owner = "stiliajohny"
 authors = [
-  { username = "stilia.johny", signature = "John Stilia"}
+  { username = "stiliajohny", signature = "John Stilia"}
 ]
