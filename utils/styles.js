@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderColor: 'white',
-    borderWidth: 2,
-    borderRadius: 30,
-    width: 60,
-    height: 60,
+    borderWidth: 1,
+    borderRadius: 15,
+    width: 70,
+    height: 70,
     margin: 10,
   },
   aboutButton: {
@@ -58,12 +58,6 @@ const styles = StyleSheet.create({
   },
   fadedButton: {
     opacity: 0.5,
-  },
-  buttonImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    margin: 4,
   },
   subButtonContainer: {
     position: 'absolute',
@@ -95,6 +89,13 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#fff', // make it grey
+  },
+  buttonImage: {
+    width: 30,
+    height: 30,
+    borderRadius: 20,
+    margin: 0,
+
   },
 });
 
