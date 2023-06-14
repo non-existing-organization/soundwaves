@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   buttonImage: {
-    width: 30,
-    height: 30,
-    borderRadius: 20,
+    width: 40,
+    height: 40,
+    borderRadius: 10,
     margin: 0,
   },
   noiseItem: {
