@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+// SettingsButton.js
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
