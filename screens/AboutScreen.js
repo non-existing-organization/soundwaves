@@ -11,7 +11,7 @@ const AboutScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.aboutText}>
-        {'Each color of noise possesses distinct frequencies and sounds that can influence our brains in different ways. White and Brown noises, with their consistent, gentle hum, can help mask disturbing ambient sounds, promoting better focus and more restful sleep.\n'}
+        {'Soothing sounds cocoon us in serenity, promoting relaxation and peaceful sleep. These therapeutic soundscapes nurture mindfulness and melt away stress, enhancing well-being and focus.\n'}
       </Text>
       {Array.from(colorMap.values()).map((color) => (
         <Text style={styles.aboutText} key={color.name}>
