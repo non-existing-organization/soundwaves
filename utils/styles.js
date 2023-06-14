@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   aboutButtonText: {
     color: '#fff',
     fontSize: 16,
-
   },
   fadedButton: {
     opacity: 0.5,
@@ -85,14 +84,32 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   icon: {
-    color: '#fff', // make it grey
+    color: '#fff',
   },
   buttonImage: {
     width: 30,
     height: 30,
     borderRadius: 20,
     margin: 0,
-
+  },
+  noiseItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  noiseTextContainer: {
+    flex: 1,
+  },
+  noiseText: {
+    color: '#ffffff',
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  segmentTitle: {
+    color: '#ffffff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
 });
 
