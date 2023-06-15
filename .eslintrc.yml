@@ -11,4 +11,5 @@ plugins:
   - react
 rules: {
     "max-len": "off",
-}
+  }
+ignorePatterns: [ "**/web-build/*.js"]
