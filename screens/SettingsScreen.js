@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ImageBackground, Switch } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, ImageBackground, Switch} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 import styles from '../utils/styles';
 import colorMap from '../utils/colorMap';
 
 const backgroundImage = require('../assets/background.png');
 
-const SettingsScreen = ({ navigation, route }) => {
+const SettingsScreen = ({navigation, route}) => {
   const [selectedNoises, setSelectedNoises] = useState([]);
 
   const handleBackButtonPress = () => {
@@ -47,7 +47,7 @@ const SettingsScreen = ({ navigation, route }) => {
             </View>
             <View style={styles.switchContainer}>
               <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
+                trackColor={{false: '#767577', true: '#81b0ff'}}
                 thumbColor={selectedNoises.includes(color.name) ? color.color : '#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => handleNoiseToggle(color.name)}
