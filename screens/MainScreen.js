@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, {useState, useEffect} from 'react';
-import {View, ImageBackground} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {View, ImageBackground, TouchableOpacity} from 'react-native';
 import {Audio} from 'expo-av';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
-
-import BackButton from '../components/BackButton';
 import SettingsButton from '../components/SettingsButton';
 import CustomButton from '../components/CustomButton';
 
@@ -19,6 +17,9 @@ const MainScreen = ({navigation}) => {
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
   const [activeColor, setActiveColor] = useState(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const previousColorRef = useRef(null);
+
 
   useEffect(() => {
     return () => {
@@ -91,19 +92,33 @@ const MainScreen = ({navigation}) => {
     console.log('New sound playing');
   };
 
-  const handleBackButtonPress = () => {
-    console.log('Back button pressed');
-    navigation.navigate('About');
-  };
-
   const handleSettingsButtonPress = () => {
     console.log('Settings button pressed');
     navigation.navigate('Settings');
   };
 
-  const renderCustomButton = ([colorName, {name, image, thumbnail, audio_file}]) => {
-    const onPress = () => handleButtonPress(colorName, image, audio_file);
+  const handleSpeakerButtonPress = async () => {
+    if (sound) {
+      if (isMuted) {
+        console.log('Unmuting sound');
+        await sound.setIsMutedAsync(false);
+        setIsMuted(false);
+        setActiveColor(previousColorRef.current || null);
+        previousColorRef.current = null;
+        console.log('Sound unmuted');
+      } else {
+        console.log('Muting sound');
+        await sound.setIsMutedAsync(true);
+        setIsMuted(true);
+        previousColorRef.current = activeColor;
+        setActiveColor('red');
+        console.log('Sound muted');
+      }
+    }
+  };
 
+  const renderCustomButton = ([colorName, { name, image, thumbnail, audio_file }]) => {
+    const onPress = () => handleButtonPress(colorName, image, audio_file);
     return (
       <View key={colorName}>
         <CustomButton
@@ -111,10 +126,12 @@ const MainScreen = ({navigation}) => {
           image={image}
           thumbnail={thumbnail}
           isActive={activeColor === colorName}
+          isMuted={isMuted}
         />
       </View>
     );
   };
+
 
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
     colorA.localeCompare(colorB),
@@ -122,8 +139,15 @@ const MainScreen = ({navigation}) => {
 
   return (
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
+
       <View style={styles.topButtonsBar}>
-        <BackButton onPress={handleBackButtonPress} />
+        <TouchableOpacity onPress={handleSpeakerButtonPress}>
+          <Icon
+            name={isMuted ? 'volume-off' : 'volume-up'}
+            size={24}
+            color={isMuted ? 'red' : 'white'}
+          />
+        </TouchableOpacity>
         <SettingsButton onPress={handleSettingsButtonPress} />
       </View>
 
