@@ -6,7 +6,7 @@ import {Audio} from 'expo-av';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
-import SettingsButton from '../components/SettingsButton';
+// import SettingsButton from '../components/SettingsButton';
 import CustomButton from '../components/CustomButton';
 
 const backgroundImage = require('../assets/background.png');
@@ -101,11 +101,11 @@ const MainScreen = ({navigation}) => {
     console.log('New sound playing');
   };
 
-  // Handle settings button press
-  const handleSettingsButtonPress = () => {
-    console.log('Settings button pressed');
-    navigation.navigate('Settings');
-  };
+  // // Handle settings button press
+  // const handleSettingsButtonPress = () => {
+  //   console.log('Settings button pressed');
+  //   navigation.navigate('Settings');
+  // };
 
   // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
