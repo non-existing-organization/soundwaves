@@ -13,3 +13,6 @@ rules: {
     "max-len": "off",
   }
 ignorePatterns: [ "**/web-build/*.js"]
+settings:
+  react:
+    version: "detect"
