@@ -31,16 +31,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 10,
   },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 15,
-    width: 70,
-    height: 70,
-    margin: 10,
-  },
   aboutButton: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -68,20 +58,33 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginVertical: 5,
   },
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderRadius: 15,
+    width: 70,
+    height: 70,
+    margin: 10,
+  },
+  inactiveButton: {
+    borderColor: 'white',
+  },
   activeButton: {
     borderColor: 'green',
   },
-  topButtonsBar: {
-    position: 'absolute',
-    top: 50,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    zIndex: 10,
+  muteButton: {
+    borderColor: 'red',
   },
   topButton: {
     padding: 10,
+  },
+  topButtonsBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 54,
   },
   icon: {
     color: '#fff',
@@ -111,6 +114,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+
+
 });
 
 
