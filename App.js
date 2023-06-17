@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useKeepAwake} from 'expo-keep-awake';
 
-import AboutScreen from './screens/AboutScreen';
+// import AboutScreen from './screens/AboutScreen';
 import MainScreen from './screens/MainScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
