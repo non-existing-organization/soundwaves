@@ -34,16 +34,23 @@ const MainScreen = ({navigation}) => {
     Audio.setAudioModeAsync({playsInSilentModeIOS: true});
   }, []);
 
-  const handleButtonPress = async (colorName, image, audio_file) => {
-    console.log(
-        `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audio_file}`,
-    );
-    setMainImage(image);
+  // Handle button press
+  const handleButtonPress = async (colorName, image, audioFile) => {
+    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
 
-    const isOtherSoundPlaying = sound && audio_file !== currentAudioFile;
+    const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
     const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
 
-    if (sound && isSoundLoaded) {
+    console.log('isMuted:', isMuted);
+
+    if (isMuted) {
+      console.log('Stoping and unloading previous sound');
+      await sound.stopAsync();
+      sound.setIsMutedAsync(false);
+      setIsMuted(false);
+    }
+    setMainImage(image);
+    if (sound && isSoundLoaded && !isMuted) {
       const status = await sound.getStatusAsync();
       if (isOtherSoundPlaying) {
         console.log('Stopping and unloading previous sound');
@@ -57,7 +64,6 @@ const MainScreen = ({navigation}) => {
         console.log('Current sound paused');
         setActiveColor(null);
         setMainImage(backgroundImage);
-
         return;
       } else {
         console.log('Resuming current sound');
@@ -69,21 +75,24 @@ const MainScreen = ({navigation}) => {
     }
 
     console.log('Loading new sound');
-    const {sound: newSound} = await Audio.Sound.createAsync(audio_file, {
-      isLooping: true,
-      isMuted: false,
-      volume: 1.0,
-      rate: 1.0,
-      shouldCorrectPitch: true,
-    },
-    (status) => {
-      if (status.didJustFinish && !status.isLooping) {
-        setLoopCount((prevCount) => prevCount + 1);
-        console.log('Loop count:', loopCount);
-      }
-    });
+    const {sound: newSound} = await Audio.Sound.createAsync(
+        audioFile,
+        {
+          isLooping: true,
+          isMuted: false,
+          volume: 1.0,
+          rate: 1.0,
+          shouldCorrectPitch: true,
+        },
+        (status) => {
+          if (status.didJustFinish && !status.isLooping) {
+            setLoopCount((prevCount) => prevCount + 1);
+            console.log('Loop count:', loopCount);
+          }
+        },
+    );
     setSound(newSound);
-    setCurrentAudioFile(audio_file);
+    setCurrentAudioFile(audioFile);
     setActiveColor(colorName);
     console.log('New sound loaded');
 
@@ -92,11 +101,13 @@ const MainScreen = ({navigation}) => {
     console.log('New sound playing');
   };
 
+  // Handle settings button press
   const handleSettingsButtonPress = () => {
     console.log('Settings button pressed');
     navigation.navigate('Settings');
   };
 
+  // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
     if (sound) {
       if (isMuted) {
@@ -117,8 +128,9 @@ const MainScreen = ({navigation}) => {
     }
   };
 
-  const renderCustomButton = ([colorName, { name, image, thumbnail, audio_file }]) => {
-    const onPress = () => handleButtonPress(colorName, image, audio_file);
+  // Render a custom button for each color in the color map
+  const renderCustomButton = ([colorName, {name, image, thumbnail, audioFile}]) => {
+    const onPress = () => handleButtonPress(colorName, image, audioFile);
     return (
       <View key={colorName}>
         <CustomButton
@@ -132,11 +144,12 @@ const MainScreen = ({navigation}) => {
     );
   };
 
-
+  // Sort the color map by color name
   const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
     colorA.localeCompare(colorB),
   );
 
+  // Render the main screen
   return (
     <ImageBackground source={mainImage} style={styles.backgroundImage}>
 
@@ -148,7 +161,7 @@ const MainScreen = ({navigation}) => {
             color={isMuted ? 'red' : 'white'}
           />
         </TouchableOpacity>
-        <SettingsButton onPress={handleSettingsButtonPress} />
+        {/* <SettingsButton onPress={handleSettingsButtonPress} /> */}
       </View>
 
       <View style={styles.buttonContainer}>
