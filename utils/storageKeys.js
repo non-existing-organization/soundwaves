@@ -1,5 +1,5 @@
-const storageItemsKeys = {
+export const storageItemsKeys = {
     settings: {
-        firstTimeOpened: '1000001'
+        firstItemOpened: '1000001'
     }
 }

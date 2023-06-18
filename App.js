@@ -14,13 +14,27 @@ const Stack = createStackNavigator();
 const App = () => {
   useKeepAwake();
   const navigation = useNavigation();
-  const [data = true] = useLocalStorage(storageItemsKeys.settings.firstTimeOpened)
+  const [firstTimeOpened] = useLocalStorage(storageItemsKeys.settings.firstTimeOpened)
 
   useEffect(() => {
-    if (!data) {
+    if (firstTimeOpened === null) {
       navigation.navigate('About');
     }
   }, [data, navigation]);
+
+
+useEffect(() => {
+  const checkFirstTime = async () => {
+    try {
+      const value = await AsyncStorage.getItem('isFirstTime');
+      setIsFirstTime(value === null);
+    } catch (error) {
+      console.log('Error retrieving isFirstTime value:', error);
+    }
+  };
+
+  checkFirstTime();
+}, []);
 
   return (
     <NavigationContainer>

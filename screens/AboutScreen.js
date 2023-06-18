@@ -7,10 +7,11 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../utils/styles';
 import colorMap from '../utils/colorMap';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { storageItemsKeys } from '../utils/storageKeys';
 
 const AboutScreen = ({ navigation }) => {
 
-  const [_, setKeyItem] = useLocalStorage(storageItemsKeys.settings.firstTimeOpened);
+  const [_, setKeyItem] = useLocalStorage(storageItemsKeys.settings.firstItemOpened);
 
   return (
     <View style={styles.container}>
