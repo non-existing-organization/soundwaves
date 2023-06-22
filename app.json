@@ -2,7 +2,7 @@
   "expo": {
     "name": "SoundWaves",
     "slug": "soundwaves",
-    "description": "Experience the therapeutic power of noise colors, finely tuned to promote focus, relaxation, and a restful sleep",
+    "description": "Experience the therapeutic power of soundwaves, finely tuned to promote focus, relaxation, and a restful sleep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,7 +19,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.example.soundwaves",
+      "bundleIdentifier": "com.non-existing-organization.soundwaves",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "UIBackgroundModes": [
@@ -38,6 +38,11 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ee2a1a14-bd1f-462f-b2e3-ed94801478d5"
+      }
     }
   }
 }
