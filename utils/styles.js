@@ -2,19 +2,10 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    paddingHorizontal: screenWidth > 480 ? screenWidth * 0.3 : 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
   aboutText: {
     color: '#fff',
     textAlign: 'center',
@@ -61,7 +52,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 15,
     width: 70,
     height: 70,
@@ -72,9 +63,11 @@ const styles = StyleSheet.create({
   },
   activeButton: {
     borderColor: 'green',
+    borderWidth: 2,
   },
   muteButton: {
     borderColor: 'red',
+    borderWidth: 4,
   },
   topButton: {
     padding: 10,
@@ -114,7 +107,62 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
-
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    // paddingHorizontal: screenWidth > 480 ? screenWidth * 0.3 : 0,
+  },
+  topBarContainer: {
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    marginBottom: 10,
+    marginTop: 50,
+    width: '100%',
+  },
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center',
+  },
+  speakerButton: {
+    padding: 10,
+  },
+  gradient: {
+    flex: 1,
+  },
+  // buttonsContainer: {
+  //   paddingBottom: 30,
+  //   width: '100%',
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   justifyContent: 'center',
+  //   alignItems: 'flex-start', // Align buttons to the top
+  // },
+  // buttonWrapper: {
+  //   width: '50%', // Adjust as needed for the desired button distribution
+  //   paddingHorizontal: 10, // Add some horizontal spacing between buttons
+  //   marginBottom: 30, // Add vertical spacing between rows of buttons
+  // },
+  buttonsContainer: {
+    paddingBottom: 30,
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'flex-start', // Align buttons to the left
+    alignItems: 'flex-start', // Align buttons to the top
+  },
+  buttonWrapper: {
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    width: '20%', // Adjust as needed for the desired button distribution
+    alignItems: 'center',
+  },
 
 });
 
