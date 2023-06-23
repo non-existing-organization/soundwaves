@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 import styles from '../utils/styles';
 
-const CustomButton = ({onPress, name, image, thumbnail, isActive, isMuted}) => {
+const CustomButton = ({onPress, thumbnail, isActive, isMuted}) => {
   const [buttonStyle, setButtonStyle] = useState(styles.button);
 
   useEffect(() => {
