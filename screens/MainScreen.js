@@ -1,24 +1,25 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, {useState, useEffect, useRef} from 'react';
-import {View, ImageBackground, TouchableOpacity} from 'react-native';
-import {Audio} from 'expo-av';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TouchableOpacity } from 'react-native';
+import { Audio } from 'expo-av';
+import { LinearGradient } from 'expo-linear-gradient';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
-// import SettingsButton from '../components/SettingsButton';
 import CustomButton from '../components/CustomButton';
 
-const backgroundImage = require('../assets/background.png');
 
-const MainScreen = ({navigation}) => {
-  const [mainImage, setMainImage] = useState(backgroundImage);
+const MainScreen = ({ navigation }) => {
+  const [mainColor, setMainColor] = useState(null);
   const [sound, setSound] = useState(null);
   const [currentAudioFile, setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
+  // const [drawerPosition, setDrawerPosition] = useState(new Animated.Value(screenHeight));
 
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const MainScreen = ({navigation}) => {
   }, [sound]);
 
   useEffect(() => {
-    Audio.setAudioModeAsync({playsInSilentModeIOS: true});
+    Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
   }, []);
 
   // Handle button press
@@ -49,7 +50,9 @@ const MainScreen = ({navigation}) => {
       sound.setIsMutedAsync(false);
       setIsMuted(false);
     }
-    setMainImage(image);
+
+    setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
+
     if (sound && isSoundLoaded && !isMuted) {
       const status = await sound.getStatusAsync();
       if (isOtherSoundPlaying) {
@@ -63,7 +66,6 @@ const MainScreen = ({navigation}) => {
         await sound.pauseAsync();
         console.log('Current sound paused');
         setActiveColor(null);
-        setMainImage(backgroundImage);
         return;
       } else {
         console.log('Resuming current sound');
@@ -75,21 +77,21 @@ const MainScreen = ({navigation}) => {
     }
 
     console.log('Loading new sound');
-    const {sound: newSound} = await Audio.Sound.createAsync(
-        audioFile,
-        {
-          isLooping: true,
-          isMuted: false,
-          volume: 1.0,
-          rate: 1.0,
-          shouldCorrectPitch: true,
-        },
-        (status) => {
-          if (status.didJustFinish && !status.isLooping) {
-            setLoopCount((prevCount) => prevCount + 1);
-            console.log('Loop count:', loopCount);
-          }
-        },
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      audioFile,
+      {
+        isLooping: true,
+        isMuted: false,
+        volume: 1.0,
+        rate: 1.0,
+        shouldCorrectPitch: true,
+      },
+      (status) => {
+        if (status.didJustFinish && !status.isLooping) {
+          setLoopCount((prevCount) => prevCount + 1);
+          console.log('Loop count:', loopCount);
+        }
+      }
     );
     setSound(newSound);
     setCurrentAudioFile(audioFile);
@@ -100,12 +102,6 @@ const MainScreen = ({navigation}) => {
     await newSound.playAsync();
     console.log('New sound playing');
   };
-
-  // // Handle settings button press
-  // const handleSettingsButtonPress = () => {
-  //   console.log('Settings button pressed');
-  //   navigation.navigate('Settings');
-  // };
 
   // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
@@ -129,46 +125,56 @@ const MainScreen = ({navigation}) => {
   };
 
   // Render a custom button for each color in the color map
-  const renderCustomButton = ([colorName, {name, image, thumbnail, audioFile}]) => {
+  const renderCustomButton = ([colorName, { name, image, thumbnail, audioFile }]) => {
     const onPress = () => handleButtonPress(colorName, image, audioFile);
+    const isButtonActive = activeColor === colorName;
+    const isButtonMuted = isMuted;
+
     return (
-      <View key={colorName}>
+      <View key={colorName} style={styles.buttonWrapper}>
         <CustomButton
           onPress={onPress}
           image={image}
           thumbnail={thumbnail}
-          isActive={activeColor === colorName}
-          isMuted={isMuted}
+          isActive={isButtonActive}
+          isMuted={isButtonMuted}
         />
       </View>
     );
   };
 
-  // Sort the color map by color name
-  const sortedColorMap = Array.from(colorMap).sort(([colorA], [colorB]) =>
-    colorA.localeCompare(colorB),
-  );
+  // Select a random background color
+  const backgroundColor = mainColor || '#ffffff'; // Default to white if no color is selected
 
-  // Render the main screen
-  return (
-    <ImageBackground source={mainImage} style={styles.backgroundImage}>
+// Render the main screen
+return (
+  <View style={styles.container}>
+    <View style={styles.topBarContainer}>
+      <TouchableOpacity style={styles.speakerButton} onPress={handleSpeakerButtonPress}>
+        <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
+      </TouchableOpacity>
+      {/* Add other elements for the top bar */}
+    </View>
 
-      <View style={styles.topButtonsBar}>
-        <TouchableOpacity onPress={handleSpeakerButtonPress}>
-          <Icon
-            name={isMuted ? 'volume-off' : 'volume-up'}
-            size={24}
-            color={isMuted ? 'red' : 'white'}
-          />
-        </TouchableOpacity>
-        {/* <SettingsButton onPress={handleSettingsButtonPress} /> */}
-      </View>
 
-      <View style={styles.buttonContainer}>
-        {sortedColorMap.map(renderCustomButton)}
-      </View>
-    </ImageBackground>
-  );
+
+    <LinearGradient
+      colors={['black', backgroundColor, 'black']}
+      start={{ x: 0, y: 0.1 }} // Adjust the start position of the gradient
+      end={{ x: 0, y: 0.9 }} // Adjust the end position of the gradient
+      style={[styles.mainContainer, { height: 200 }]} // Adjust the height of the gradient
+    >
+      {/* Content for the main container */}
+    </LinearGradient>
+
+    <View style={styles.buttonsContainer}>
+      {/* Buttons for color selection */}
+      {Array.from(colorMap).map(renderCustomButton)}
+    </View>
+  </View>
+);
+
+
 };
 
 export default MainScreen;
