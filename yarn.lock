@@ -272,7 +272,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.13.16", "@babel/parser@^7.14.0", "@babel/parser@^7.20.0", "@babel/parser@^7.22.5", "@babel/parser@^7.7.0":
+"@babel/parser@^7.13.16", "@babel/parser@^7.14.0", "@babel/parser@^7.20.0", "@babel/parser@^7.22.5":
   version "7.22.5"
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.22.5.tgz"
   integrity sha512-DFZMC9LJUG9PLOclRC32G63UXwzqS2koQC8dkx+PLdmt1xSePYpbT/NbsrJy8Q/muXz7o/h/d4A7Fuyixm559Q==
@@ -1140,7 +1140,7 @@
     "@babel/parser" "^7.22.5"
     "@babel/types" "^7.22.5"
 
-"@babel/traverse@^7.20.0", "@babel/traverse@^7.22.5", "@babel/traverse@^7.7.0", "@babel/traverse@^7.7.4":
+"@babel/traverse@^7.20.0", "@babel/traverse@^7.22.5", "@babel/traverse@^7.7.4":
   version "7.22.5"
   resolved "https://registry.npmjs.org/@babel/traverse/-/traverse-7.22.5.tgz"
   integrity sha512-7DuIjPgERaNo6r+PZwItpjCZEa5vyw4eJGufeLxrPdBXBoLcCJCIasvK6pK/9DVNrLZTLFhUGqaC6X/PA007TQ==
@@ -1156,7 +1156,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/types@^7.20.0", "@babel/types@^7.22.5", "@babel/types@^7.4.4", "@babel/types@^7.7.0":
+"@babel/types@^7.20.0", "@babel/types@^7.22.5", "@babel/types@^7.4.4":
   version "7.22.5"
   resolved "https://registry.npmjs.org/@babel/types/-/types-7.22.5.tgz"
   integrity sha512-zo3MIHGOkPOfoRXitsgHLjEXmlDaD/5KU1Uzuc9GNiZPhSqVxVRtxuPaSBZDsYZ9qV88AjtMtWW7ww98loJ9KA==
@@ -2850,18 +2850,6 @@ babel-core@^7.0.0-bridge.0:
   resolved "https://registry.npmjs.org/babel-core/-/babel-core-7.0.0-bridge.0.tgz"
   integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
 
-babel-eslint@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-10.1.0.tgz#6968e568a910b78fb3779cdd8b6ac2f479943232"
-  integrity sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@babel/parser" "^7.7.0"
-    "@babel/traverse" "^7.7.0"
-    "@babel/types" "^7.7.0"
-    eslint-visitor-keys "^1.0.0"
-    resolve "^1.12.0"
-
 babel-loader@^8.3.0:
   version "8.3.0"
   resolved "https://registry.npmjs.org/babel-loader/-/babel-loader-8.3.0.tgz"
@@ -3106,13 +3094,6 @@ brace-expansion@^1.1.7:
   dependencies:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
-
-brace-expansion@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/brace-expansion/-/brace-expansion-2.0.1.tgz"
-  integrity sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==
-  dependencies:
-    balanced-match "^1.0.0"
 
 braces@^2.3.1:
   version "2.3.2"
@@ -3551,7 +3532,7 @@ commander@^8.3.0:
   resolved "https://registry.npmjs.org/commander/-/commander-8.3.0.tgz"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
 
-commander@^9.0.0, commander@^9.4.1:
+commander@^9.4.1:
   version "9.5.0"
   resolved "https://registry.npmjs.org/commander/-/commander-9.5.0.tgz"
   integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
@@ -4354,11 +4335,6 @@ eslint-scope@^7.2.0:
     esrecurse "^4.3.0"
     estraverse "^5.2.0"
 
-eslint-visitor-keys@^1.0.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
-  integrity sha512-6J72N8UNa462wa/KFODt/PJ3IU60SDpC3QXC1Hjc1BXXpfL2C9R5+AU7jhe0F6GREqVMh4Juu+NY7xn+6dipUQ==
-
 eslint-visitor-keys@^3.3.0, eslint-visitor-keys@^3.4.1:
   version "3.4.1"
   resolved "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.4.1.tgz"
@@ -4555,6 +4531,39 @@ expo-constants@~14.2.0, expo-constants@~14.2.1:
   dependencies:
     "@expo/config" "~8.0.0"
     uuid "^3.3.2"
+
+expo-dev-client@~2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/expo-dev-client/-/expo-dev-client-2.2.1.tgz#3abdb875e9c9ed30e1f6dadc2f80b392d15b1c1e"
+  integrity sha512-BDhKyni82LiT6PypgBns1/FLqo3cGDBluaj4/Pojx9P7x9iwOFcesepO8r6BCWb4LuBjdB+z2yQ1fMXxzNC3qQ==
+  dependencies:
+    expo-dev-launcher "2.2.1"
+    expo-dev-menu "2.2.0"
+    expo-dev-menu-interface "1.1.1"
+    expo-manifests "~0.5.0"
+    expo-updates-interface "~0.9.0"
+
+expo-dev-launcher@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/expo-dev-launcher/-/expo-dev-launcher-2.2.1.tgz#db9eec550487400cdac9c2aeedd3b6791fd49469"
+  integrity sha512-TP9SOrNIKF5Whju7uhtBsJeOvf9idUSg7snhHNVRpm2mA5kReckeD3PFv4HsvBHdnrfoslpeq4spOdS6UUx3XA==
+  dependencies:
+    expo-dev-menu "2.2.0"
+    resolve-from "^5.0.0"
+    semver "^7.3.5"
+
+expo-dev-menu-interface@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/expo-dev-menu-interface/-/expo-dev-menu-interface-1.1.1.tgz#8a0d979f62d9a192696f66a77f75d8fab79e604b"
+  integrity sha512-doT+7WrSBnxCcTGZw9QIEZoL+43U4RywbG8XZwbhkcsFWGsh9scp0y/bv3ieFHxRtIdImxbxOoYh7fy1O6g28w==
+
+expo-dev-menu@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/expo-dev-menu/-/expo-dev-menu-2.2.0.tgz#849ec3601f1dc228ad2858e4a25614a72932a61c"
+  integrity sha512-ImRUD7IVyLme7t3S+pNsOOgCBorkriVNo+ryEmkAjzRTKlpiklhoc1GEdQUU3qvO6e66gUguMbs4wnaP6o4NEw==
+  dependencies:
+    expo-dev-menu-interface "1.1.1"
+    semver "^7.3.5"
 
 expo-eas-client@~0.5.0:
   version "0.5.1"
@@ -5237,17 +5246,6 @@ glob@^7.0.3, glob@^7.1.2, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
     minimatch "^3.1.1"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
-
-glob@^8.0.3:
-  version "8.1.0"
-  resolved "https://registry.npmjs.org/glob/-/glob-8.1.0.tgz"
-  integrity sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==
-  dependencies:
-    fs.realpath "^1.0.0"
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "^5.0.1"
-    once "^1.3.0"
 
 globals@^11.1.0:
   version "11.12.0"
@@ -7078,13 +7076,6 @@ minimalistic-assert@^1.0.0:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimatch@^5.0.1:
-  version "5.1.6"
-  resolved "https://registry.npmjs.org/minimatch/-/minimatch-5.1.6.tgz"
-  integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
-  dependencies:
-    brace-expansion "^2.0.1"
-
 minimist@^1.2.0, minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
@@ -8030,7 +8021,7 @@ postcss-reduce-transforms@^5.1.0:
   dependencies:
     postcss-value-parser "^4.2.0"
 
-postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.5, postcss-selector-parser@^6.0.7, postcss-selector-parser@^6.0.9:
+postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.5, postcss-selector-parser@^6.0.9:
   version "6.0.13"
   resolved "https://registry.npmjs.org/postcss-selector-parser/-/postcss-selector-parser-6.0.13.tgz"
   integrity sha512-EaV1Gl4mUEV4ddhDnv/xtj7sxwrwxdetHdWUGnT4VJQf+4d05v6lHYZr8N573k5Z0BViss7BDhfWtKS3+sfAqQ==
@@ -8058,7 +8049,7 @@ postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   resolved "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.3.5, postcss@^8.4.21, postcss@^8.4.4:
+postcss@^8.3.5, postcss@^8.4.21:
   version "8.4.24"
   resolved "https://registry.npmjs.org/postcss/-/postcss-8.4.24.tgz"
   integrity sha512-M0RzbcI0sO/XJNucsGjvWU9ERWxb/ytp1w6dKtxTKgixdtQDq4rmx/g8W1hnaheq9jgwL/oyEdH5Bc4WwJKMqg==
@@ -8170,16 +8161,6 @@ punycode@^2.1.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.3.0.tgz"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
-
-purgecss@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/purgecss/-/purgecss-5.0.0.tgz"
-  integrity sha512-RAnuxrGuVyLLTr8uMbKaxDRGWMgK5CCYDfRyUNNcaz5P3kGgD2b7ymQGYEyo2ST7Tl/ScwFgf5l3slKMxHSbrw==
-  dependencies:
-    commander "^9.0.0"
-    glob "^8.0.3"
-    postcss "^8.4.4"
-    postcss-selector-parser "^6.0.7"
 
 qrcode-terminal@0.11.0:
   version "0.11.0"
@@ -8301,22 +8282,6 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-dropdown-picker@^5.4.6:
-  version "5.4.6"
-  resolved "https://registry.npmjs.org/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.6.tgz"
-  integrity sha512-T1XBHbE++M6aRU3wFYw3MvcOuabhWZ29RK/Ivdls2r1ZkZ62iEBZknLUPeVLMX3x6iUxj4Zgr3X2DGlEGXeHsA==
-
-react-native-gesture-handler@^2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.12.0.tgz#59ca9d97e4c71f70b9c258f14a1a081f4c689976"
-  integrity sha512-rr+XwVzXAVpY8co25ukvyI38fKCxTQjz7WajeZktl8qUPdh1twnSExgpT47DqDi4n+m+OiJPAnHfZOkqqAQMOg==
-  dependencies:
-    "@egjs/hammerjs" "^2.0.17"
-    hoist-non-react-statics "^3.3.0"
-    invariant "^2.2.4"
-    lodash "^4.17.21"
-    prop-types "^15.7.2"
-
 react-native-gesture-handler@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.9.0.tgz#2f63812e523c646f25b9ad660fc6f75948e51241"
@@ -8359,11 +8324,6 @@ react-native-screens@^3.20.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
-
-react-native-sound@^0.11.2:
-  version "0.11.2"
-  resolved "https://registry.npmjs.org/react-native-sound/-/react-native-sound-0.11.2.tgz"
-  integrity sha512-LmGc8lgOK3qecYMVQpyHvww/C+wgT6sWeMpVbOe4NCRGC2yKd4fo4U0KBUo9PO7AqKESO3I/2GZg1/C0+bwiiA==
 
 react-native-web@~0.18.10:
   version "0.18.12"
@@ -8642,7 +8602,7 @@ resolve-url@^0.2.1:
   resolved "https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz"
   integrity sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==
 
-resolve@^1.12.0, resolve@^1.13.1, resolve@^1.14.2:
+resolve@^1.13.1, resolve@^1.14.2:
   version "1.22.2"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.2.tgz"
   integrity sha512-Sb+mjNHOULsBv818T40qSPeRiuWLyaGMa5ewydRLFimneixmVy2zdivRl+AF6jaYPC8ERxGDmFSiqui6SfPd+g==
@@ -9079,33 +9039,6 @@ sockjs@^0.3.24:
     faye-websocket "^0.11.3"
     uuid "^8.3.2"
     websocket-driver "^0.7.4"
-
-soundwaves@./:
-  version "1.0.0"
-  dependencies:
-    "@expo/webpack-config" "^18.0.1"
-    "@react-navigation/native" "^6.1.6"
-    "@react-navigation/stack" "^6.3.16"
-    babel-eslint "^10.1.0"
-    expo "^48.0.19"
-    expo-app-loading "^2.1.1"
-    expo-av "^13.2.1"
-    expo-font "~11.1.1"
-    expo-keep-awake "~12.0.1"
-    expo-linear-gradient "^12.1.2"
-    expo-updates "~0.16.4"
-    react "18.2.0"
-    react-dom "18.2.0"
-    react-native "0.71.8"
-    react-native-dropdown-picker "^5.4.6"
-    react-native-gesture-handler "~2.9.0"
-    react-native-multi-select "^0.1.1"
-    react-native-safe-area-context "4.5.0"
-    react-native-safe-area-view "^1.1.1"
-    react-native-screens "^3.20.0"
-    react-native-sound "^0.11.2"
-    react-native-web "~0.18.10"
-    soundwaves "./"
 
 source-list-map@^2.0.1:
   version "2.0.1"
