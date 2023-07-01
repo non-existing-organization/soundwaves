@@ -1,8 +1,5 @@
 // styles.jsw
-import {StyleSheet, Dimensions} from 'react-native';
-
-const screenWidth = Dimensions.get('window').width;
-const screenHeight = Dimensions.get('window').height;
+import {StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 
@@ -110,7 +107,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    // paddingHorizontal: screenWidth > 480 ? screenWidth * 0.3 : 0,
   },
   topBarContainer: {
     height: 50,
@@ -134,36 +130,20 @@ const styles = StyleSheet.create({
   gradient: {
     flex: 1,
   },
-  // buttonsContainer: {
-  //   paddingBottom: 30,
-  //   width: '100%',
-  //   flexDirection: 'row',
-  //   flexWrap: 'wrap',
-  //   justifyContent: 'center',
-  //   alignItems: 'flex-start', // Align buttons to the top
-  // },
-  // buttonWrapper: {
-  //   width: '50%', // Adjust as needed for the desired button distribution
-  //   paddingHorizontal: 10, // Add some horizontal spacing between buttons
-  //   marginBottom: 30, // Add vertical spacing between rows of buttons
-  // },
   buttonsContainer: {
     paddingBottom: 30,
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    // alignItems: 'center',
-    // justifyContent: 'flex-start', // Align buttons to the left
-    alignItems: 'flex-start', // Align buttons to the top
+    alignItems: 'flex-start',
   },
   buttonWrapper: {
     paddingHorizontal: 10,
     marginVertical: 10,
-    width: '20%', // Adjust as needed for the desired button distribution
+    width: '20%',
     alignItems: 'center',
   },
-
 });
 
 
