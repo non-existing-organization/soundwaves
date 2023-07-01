@@ -31,7 +31,6 @@ const colorMap = new Map([
     },
   ],
 
-
 ]);
 
 export default colorMap;
