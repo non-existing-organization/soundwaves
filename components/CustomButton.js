@@ -21,8 +21,7 @@ const CustomButton = ({onPress, thumbnail, isActive, isMuted}) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={buttonStyle}>
-      {/* //FIXME store the style in a variable */}
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.buttonViewStyle} >
         <Image source={thumbnail} style={styles.buttonImage} />
       </View>
     </TouchableOpacity>
