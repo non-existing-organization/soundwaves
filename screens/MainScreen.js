@@ -19,7 +19,7 @@ const MainScreen = ({ navigation }) => {
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
-  // const [drawerPosition, setDrawerPosition] = useState(new Animated.Value(screenHeight));
+  const backgroundColorDefault = '#202020'; // TODO add it on the settnigs as a variable to select the default color
 
 
   useEffect(() => {
@@ -63,6 +63,7 @@ const MainScreen = ({ navigation }) => {
         setActiveColor(null);
       } else if (status.isPlaying) {
         console.log('Pausing current sound');
+        setMainColor(backgroundColorDefault);
         await sound.pauseAsync();
         console.log('Current sound paused');
         setActiveColor(null);
@@ -144,7 +145,7 @@ const MainScreen = ({ navigation }) => {
   };
 
   // Select a random background color
-  const backgroundColor = mainColor || '#ffffff'; // Default to white if no color is selected
+  const backgroundColor = mainColor || backgroundColorDefault ; // Default to white if no color is selected
 
 // Render the main screen
 return (

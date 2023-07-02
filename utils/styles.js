@@ -1,148 +1,160 @@
 // styles.jsw
 import {StyleSheet } from 'react-native';
 
+
+const whiteColor = '#ffffff';
+const blackColor = '#000000';
+const redColor = '#ff0000';
+const greenColor = '#00ff00';
+
+
 const styles = StyleSheet.create({
 
-  aboutText: {
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 20,
-    fontSize: 16,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 30,
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    padding: 10,
-  },
   aboutButton: {
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 60,
     height: 60,
+    justifyContent: 'center',
     margin: 10,
+    width: 60,
   },
   aboutButtonText: {
-    color: '#fff',
+    color: whiteColor,
     fontSize: 16,
+  },
+  aboutText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  activeButton: {
+    borderColor: greenColor,
+    borderWidth: 2,
+  },
+  button: {
+    alignItems: 'center',
+    borderRadius: 15,
+    borderWidth: 2,
+    height: 70,
+    justifyContent: 'center',
+    margin: 10,
+    width: 70,
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    bottom: 30,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: 10,
+    position: 'absolute',
+    width: '100%',
+  },
+  buttonImage: {
+    borderRadius: 10,
+    height: 40,
+    margin: 0,
+    width: 40,
+  },
+  buttonViewStyle : {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonWrapper: {
+    alignItems: 'center',
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    width: '20%',
+  },
+  buttonsContainer: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    paddingBottom: 30,
+    width: '100%',
+  },
+  container: {
+    backgroundColor: blackColor,
+    flex: 1,
   },
   fadedButton: {
     opacity: 0.5,
   },
-  subButtonContainer: {
-    position: 'absolute',
-    top: -60,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+  gradient: {
+    flex: 1,
   },
-  subButton: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginVertical: 5,
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderRadius: 15,
-    width: 70,
-    height: 70,
-    margin: 10,
+  icon: {
+    color: whiteColor,
   },
   inactiveButton: {
-    borderColor: 'white',
+    borderColor: whiteColor,
   },
-  activeButton: {
-    borderColor: 'green',
-    borderWidth: 2,
+  mainContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    width: '100%',
   },
   muteButton: {
-    borderColor: 'red',
-    borderWidth: 4,
+    borderColor: redColor,
+    borderWidth: 8,
+  },
+  noiseItem: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 6,
+  },
+
+  noiseText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  noiseTextContainer: {
+    flex: 1,
+  },
+  segmentTitle: {
+    color: whiteColor,
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  speakerButton: {
+    padding: 10,
+  },
+  subButton: {
+    borderRadius: 15,
+    height: 30,
+    marginVertical: 5,
+    width: 30,
+  },
+  subButtonContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: -60,
+  },
+  topBarContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: 50,
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    marginTop: 50,
+    paddingHorizontal: 16,
+    width: '100%',
   },
   topButton: {
     padding: 10,
   },
   topButtonsBar: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 54,
-  },
-  icon: {
-    color: '#fff',
-  },
-  buttonImage: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    margin: 0,
-  },
-  noiseItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  noiseTextContainer: {
-    flex: 1,
-  },
-  noiseText: {
-    color: '#ffffff',
-    fontSize: 16,
-    marginLeft: 10,
-  },
-  segmentTitle: {
-    color: '#ffffff',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-  },
-  topBarContainer: {
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    marginBottom: 10,
-    marginTop: 50,
-    width: '100%',
-  },
-  mainContainer: {
-    flex: 1,
-    alignItems: 'center',
-    width: '100%',
-    justifyContent: 'center',
-  },
-  speakerButton: {
-    padding: 10,
-  },
-  gradient: {
-    flex: 1,
-  },
-  buttonsContainer: {
-    paddingBottom: 30,
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-  },
-  buttonWrapper: {
-    paddingHorizontal: 10,
-    marginVertical: 10,
-    width: '20%',
-    alignItems: 'center',
   },
 });
 

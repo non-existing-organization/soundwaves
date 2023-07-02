@@ -1,7 +1,8 @@
 {
   "cli": {
     "version": ">= 3.13.3",
-    "requireCommit": true
+    "requireCommit": false,
+    "promptToConfigurePushNotifications": false
   },
   "build": {
     "development": {
