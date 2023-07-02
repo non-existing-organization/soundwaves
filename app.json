@@ -3,7 +3,7 @@
     "name": "SoundWaves",
     "slug": "soundwaves",
     "description": "Experience the therapeutic power of soundwaves, finely tuned to promote focus, relaxation, and a restful sleep",
-    "version": "0.1.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
