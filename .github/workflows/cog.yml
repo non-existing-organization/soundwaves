@@ -13,15 +13,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-  
+
       - name: SemVer release
         id: release
         uses: cocogitto/cocogitto-action@v3
         with:
           check-latest-tag-only: true
           release: true
-          git-user: 'stiliajohny'
-          git-user-email: 'stilia.johny@gmail.com'
+          git-user: "stiliajohny"
+          git-user-email: "stilia.johny@gmail.com"
 
       - name: Generate Changelog
         run: cog changelog --at ${{ steps.release.outputs.version }} -t full_hash > GITHUB_CHANGELOG.md
