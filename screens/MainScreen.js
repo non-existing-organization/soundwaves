@@ -38,154 +38,6 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
 
-  // // Handle button press
-  // const handleButtonPress = async (colorName, image, audioFile) => {
-  //   console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
-
-  //   const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
-  //   const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
-
-  //   console.log('isMuted:', isMuted);
-
-  //   if (isMuted) {
-  //     console.log('Stoping and unloading previous sound');
-  //     await sound.stopAsync();
-  //     sound.setIsMutedAsync(false);
-  //     setIsMuted(false);
-  //   }
-
-  //   setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
-
-  //   if (sound && isSoundLoaded && !isMuted) {
-  //     const status = await sound.getStatusAsync();
-  //     if (isOtherSoundPlaying) {
-  //       console.log('Stopping and unloading previous sound');
-  //       await sound.stopAsync();
-  //       await sound.unloadAsync();
-  //       console.log('Previous sound unloaded');
-  //       setActiveColor(null);
-  //     } else if (status.isPlaying) {
-  //       console.log('Pausing current sound');
-  //       setMainColor(backgroundColorDefault);
-  //       await sound.pauseAsync();
-  //       console.log('Current sound paused');
-  //       setActiveColor(null);
-  //       return;
-  //     } else {
-  //       console.log('Resuming current sound');
-  //       await sound.playAsync();
-  //       console.log('Current sound resumed');
-  //       setActiveColor(colorName);
-  //       return;
-  //     }
-  //   }
-
-  //   console.log('Loading new sound');
-  //   const newSound = new Audio.Sound();
-  //   await newSound.loadAsync(
-  //     { uri: audioFile },
-  //     {
-  //       isLooping: true,
-  //       isMuted: false,
-  //       volume: 1.0,
-  //       rate: 1.0,
-  //       shouldCorrectPitch: true,
-  //     },
-  //     (status) => {
-  //       if (status.didJustFinish && !status.isLooping) {
-  //         setLoopCount((prevCount) => prevCount + 1);
-  //         console.log('Loop count:', loopCount);
-  //       }
-  //     }
-  //   );
-  //   setSound(newSound);
-  //   setCurrentAudioFile(audioFile);
-  //   setActiveColor(colorName);
-  //   console.log('New sound loaded');
-
-  //   console.log('Playing new sound');
-  //   await newSound.playAsync();
-  //   console.log('New sound playing');
-  // };
-
-  // // Handle button press
-  // const handleButtonPress = async (colorName, image, audioFile) => {
-  //   console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
-
-  //   const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
-  //   const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
-
-  //   console.log('isMuted:', isMuted);
-
-  //   if (isMuted) {
-  //     console.log('Stopping and unloading previous sound');
-  //     await sound.stopAsync();
-  //     sound.setIsMutedAsync(false);
-  //     setIsMuted(false);
-  //   }
-
-  //   setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
-
-  //   if (sound && isSoundLoaded && !isMuted) {
-  //     const status = await sound.getStatusAsync();
-  //     if (isOtherSoundPlaying) {
-  //       console.log('Stopping previous sound');
-  //       await sound.stopAsync();
-  //       console.log('Previous sound stopped');
-  //       setActiveColor(null);
-  //     } else if (status.isPlaying) {
-  //       console.log('Pausing current sound');
-  //       setMainColor(backgroundColorDefault);
-  //       await sound.pauseAsync();
-  //       console.log('Current sound paused');
-  //       setActiveColor(null);
-  //       return;
-  //     } else {
-  //       console.log('Resuming current sound');
-  //       await sound.playAsync();
-  //       console.log('Current sound resumed');
-  //       setActiveColor(colorName);
-  //       return;
-  //     }
-  //   }
-
-  //   let newSound;
-  //   if (soundsCache.has(audioFile)) {
-  //     console.log('Loading sound from cache');
-  //     newSound = soundsCache.get(audioFile);
-  //   } else {
-  //     console.log('Loading new sound');
-  //     newSound = new Audio.Sound();
-  //     await newSound.loadAsync(
-  //       { uri: audioFile },
-  //       {
-  //         isLooping: true,
-  //         isMuted: false,
-  //         volume: 1.0,
-  //         rate: 1.0,
-  //         shouldCorrectPitch: true,
-  //       },
-  //       (status) => {
-  //         if (status.didJustFinish && !status.isLooping) {
-  //           setLoopCount((prevCount) => prevCount + 1);
-  //           console.log('Loop count:', loopCount);
-  //         }
-  //       }
-  //     );
-
-  //     setSoundsCache(soundsCache.set(audioFile, newSound));
-  //     console.log('New sound loaded');
-  //   }
-
-  //   setSound(newSound);
-  //   setCurrentAudioFile(audioFile);
-  //   setActiveColor(colorName);
-
-  //   console.log('Playing new sound');
-  //   await newSound.playAsync();
-  //   console.log('New sound playing');
-  // };
-
   // Handle button press
   const handleButtonPress = async (colorName, image, audioFile) => {
     console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
@@ -281,7 +133,6 @@ const MainScreen = ({ navigation }) => {
     }
   };
 
-
   // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
     if (sound) {
@@ -325,33 +176,33 @@ const MainScreen = ({ navigation }) => {
   // Select a random background color
   const backgroundColor = mainColor || backgroundColorDefault ; // Default to white if no color is selected
 
-// Render the main screen
-return (
-  <View style={styles.container}>
-    <View style={styles.topBarContainer}>
-      <TouchableOpacity style={styles.speakerButton} onPress={handleSpeakerButtonPress}>
-        <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
-      </TouchableOpacity>
-      {/* Add other elements for the top bar */}
+  // Render the main screen
+  return (
+    <View style={styles.container}>
+      <View style={styles.topBarContainer}>
+        <TouchableOpacity style={styles.speakerButton} onPress={handleSpeakerButtonPress}>
+          <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
+        </TouchableOpacity>
+        {/* Add other elements for the top bar */}
+      </View>
+
+
+
+      <LinearGradient
+        colors={['black', backgroundColor, 'black']}
+        start={{ x: 0, y: 0.1 }} // Adjust the start position of the gradient
+        end={{ x: 0, y: 0.9 }} // Adjust the end position of the gradient
+        style={[styles.mainContainer, { height: 200 }]} // Adjust the height of the gradient
+      >
+        {/* Content for the main container */}
+      </LinearGradient>
+
+      <View style={styles.buttonsContainer}>
+        {/* Buttons for color selection */}
+        {Array.from(colorMap).map(renderCustomButton)}
+      </View>
     </View>
-
-
-
-    <LinearGradient
-      colors={['black', backgroundColor, 'black']}
-      start={{ x: 0, y: 0.1 }} // Adjust the start position of the gradient
-      end={{ x: 0, y: 0.9 }} // Adjust the end position of the gradient
-      style={[styles.mainContainer, { height: 200 }]} // Adjust the height of the gradient
-    >
-      {/* Content for the main container */}
-    </LinearGradient>
-
-    <View style={styles.buttonsContainer}>
-      {/* Buttons for color selection */}
-      {Array.from(colorMap).map(renderCustomButton)}
-    </View>
-  </View>
-);
+  );
 
 
 };
