@@ -20,6 +20,8 @@ const MainScreen = ({ navigation }) => {
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
   const backgroundColorDefault = '#202020'; // TODO add it on the settnigs as a variable to select the default color
+  const [soundsCache, setSoundsCache] = useState(new Map());
+
 
 
   useEffect(() => {
@@ -35,19 +37,174 @@ const MainScreen = ({ navigation }) => {
     Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
   }, []);
 
+
+  // // Handle button press
+  // const handleButtonPress = async (colorName, image, audioFile) => {
+  //   console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
+
+  //   const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
+  //   const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
+
+  //   console.log('isMuted:', isMuted);
+
+  //   if (isMuted) {
+  //     console.log('Stoping and unloading previous sound');
+  //     await sound.stopAsync();
+  //     sound.setIsMutedAsync(false);
+  //     setIsMuted(false);
+  //   }
+
+  //   setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
+
+  //   if (sound && isSoundLoaded && !isMuted) {
+  //     const status = await sound.getStatusAsync();
+  //     if (isOtherSoundPlaying) {
+  //       console.log('Stopping and unloading previous sound');
+  //       await sound.stopAsync();
+  //       await sound.unloadAsync();
+  //       console.log('Previous sound unloaded');
+  //       setActiveColor(null);
+  //     } else if (status.isPlaying) {
+  //       console.log('Pausing current sound');
+  //       setMainColor(backgroundColorDefault);
+  //       await sound.pauseAsync();
+  //       console.log('Current sound paused');
+  //       setActiveColor(null);
+  //       return;
+  //     } else {
+  //       console.log('Resuming current sound');
+  //       await sound.playAsync();
+  //       console.log('Current sound resumed');
+  //       setActiveColor(colorName);
+  //       return;
+  //     }
+  //   }
+
+  //   console.log('Loading new sound');
+  //   const newSound = new Audio.Sound();
+  //   await newSound.loadAsync(
+  //     { uri: audioFile },
+  //     {
+  //       isLooping: true,
+  //       isMuted: false,
+  //       volume: 1.0,
+  //       rate: 1.0,
+  //       shouldCorrectPitch: true,
+  //     },
+  //     (status) => {
+  //       if (status.didJustFinish && !status.isLooping) {
+  //         setLoopCount((prevCount) => prevCount + 1);
+  //         console.log('Loop count:', loopCount);
+  //       }
+  //     }
+  //   );
+  //   setSound(newSound);
+  //   setCurrentAudioFile(audioFile);
+  //   setActiveColor(colorName);
+  //   console.log('New sound loaded');
+
+  //   console.log('Playing new sound');
+  //   await newSound.playAsync();
+  //   console.log('New sound playing');
+  // };
+
+  // // Handle button press
+  // const handleButtonPress = async (colorName, image, audioFile) => {
+  //   console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
+
+  //   const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
+  //   const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
+
+  //   console.log('isMuted:', isMuted);
+
+  //   if (isMuted) {
+  //     console.log('Stopping and unloading previous sound');
+  //     await sound.stopAsync();
+  //     sound.setIsMutedAsync(false);
+  //     setIsMuted(false);
+  //   }
+
+  //   setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
+
+  //   if (sound && isSoundLoaded && !isMuted) {
+  //     const status = await sound.getStatusAsync();
+  //     if (isOtherSoundPlaying) {
+  //       console.log('Stopping previous sound');
+  //       await sound.stopAsync();
+  //       console.log('Previous sound stopped');
+  //       setActiveColor(null);
+  //     } else if (status.isPlaying) {
+  //       console.log('Pausing current sound');
+  //       setMainColor(backgroundColorDefault);
+  //       await sound.pauseAsync();
+  //       console.log('Current sound paused');
+  //       setActiveColor(null);
+  //       return;
+  //     } else {
+  //       console.log('Resuming current sound');
+  //       await sound.playAsync();
+  //       console.log('Current sound resumed');
+  //       setActiveColor(colorName);
+  //       return;
+  //     }
+  //   }
+
+  //   let newSound;
+  //   if (soundsCache.has(audioFile)) {
+  //     console.log('Loading sound from cache');
+  //     newSound = soundsCache.get(audioFile);
+  //   } else {
+  //     console.log('Loading new sound');
+  //     newSound = new Audio.Sound();
+  //     await newSound.loadAsync(
+  //       { uri: audioFile },
+  //       {
+  //         isLooping: true,
+  //         isMuted: false,
+  //         volume: 1.0,
+  //         rate: 1.0,
+  //         shouldCorrectPitch: true,
+  //       },
+  //       (status) => {
+  //         if (status.didJustFinish && !status.isLooping) {
+  //           setLoopCount((prevCount) => prevCount + 1);
+  //           console.log('Loop count:', loopCount);
+  //         }
+  //       }
+  //     );
+
+  //     setSoundsCache(soundsCache.set(audioFile, newSound));
+  //     console.log('New sound loaded');
+  //   }
+
+  //   setSound(newSound);
+  //   setCurrentAudioFile(audioFile);
+  //   setActiveColor(colorName);
+
+  //   console.log('Playing new sound');
+  //   await newSound.playAsync();
+  //   console.log('New sound playing');
+  // };
+
   // Handle button press
   const handleButtonPress = async (colorName, image, audioFile) => {
     console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
 
     const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
-    const isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
+    let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
 
     console.log('isMuted:', isMuted);
 
     if (isMuted) {
       console.log('Stoping and unloading previous sound');
-      await sound.stopAsync();
-      sound.setIsMutedAsync(false);
+      if (isSoundLoaded) {
+        try {
+          await sound.stopAsync();
+          await sound.setIsMutedAsync(false);
+        } catch (e) {
+          console.error('Error stopping or unmuting sound:', e);
+        }
+      }
       setIsMuted(false);
     }
 
@@ -57,20 +214,32 @@ const MainScreen = ({ navigation }) => {
       const status = await sound.getStatusAsync();
       if (isOtherSoundPlaying) {
         console.log('Stopping and unloading previous sound');
-        await sound.stopAsync();
-        await sound.unloadAsync();
+        try {
+          await sound.stopAsync();
+          await sound.unloadAsync();
+        } catch (e) {
+          console.error('Error stopping or unloading sound:', e);
+        }
         console.log('Previous sound unloaded');
         setActiveColor(null);
       } else if (status.isPlaying) {
         console.log('Pausing current sound');
         setMainColor(backgroundColorDefault);
-        await sound.pauseAsync();
+        try {
+          await sound.pauseAsync();
+        } catch (e) {
+          console.error('Error pausing sound:', e);
+        }
         console.log('Current sound paused');
         setActiveColor(null);
         return;
       } else {
         console.log('Resuming current sound');
-        await sound.playAsync();
+        try {
+          await sound.playAsync();
+        } catch (e) {
+          console.error('Error playing sound:', e);
+        }
         console.log('Current sound resumed');
         setActiveColor(colorName);
         return;
@@ -78,31 +247,40 @@ const MainScreen = ({ navigation }) => {
     }
 
     console.log('Loading new sound');
-    const { sound: newSound } = await Audio.Sound.createAsync(
-      audioFile,
-      {
-        isLooping: true,
-        isMuted: false,
-        volume: 1.0,
-        rate: 1.0,
-        shouldCorrectPitch: true,
-      },
-      (status) => {
-        if (status.didJustFinish && !status.isLooping) {
-          setLoopCount((prevCount) => prevCount + 1);
-          console.log('Loop count:', loopCount);
+    try {
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: audioFile },
+        {
+          isLooping: true,
+          isMuted: false,
+          volume: 1.0,
+          rate: 1.0,
+          shouldCorrectPitch: true,
+        },
+        (status) => {
+          if (status.didJustFinish && !status.isLooping) {
+            setLoopCount((prevCount) => prevCount + 1);
+            console.log('Loop count:', loopCount);
+          }
         }
-      }
-    );
-    setSound(newSound);
-    setCurrentAudioFile(audioFile);
-    setActiveColor(colorName);
-    console.log('New sound loaded');
+      );
+      setSound(newSound);
+      setCurrentAudioFile(audioFile);
+      setActiveColor(colorName);
+      console.log('New sound loaded');
 
-    console.log('Playing new sound');
-    await newSound.playAsync();
-    console.log('New sound playing');
+      console.log('Playing new sound');
+      try {
+        await newSound.playAsync();
+      } catch (e) {
+        console.error('Error playing new sound:', e);
+      }
+      console.log('New sound playing');
+    } catch (e) {
+      console.error('Error loading or playing new sound:', e);
+    }
   };
+
 
   // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
