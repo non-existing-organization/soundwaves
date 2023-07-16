@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as FileSystem from 'expo-file-system';
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
@@ -23,7 +25,6 @@ const MainScreen = ({ navigation }) => {
   const [soundsCache, setSoundsCache] = useState(new Map());
 
 
-
   useEffect(() => {
     return () => {
       if (sound) {
@@ -38,11 +39,48 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
 
-  // Handle button press
-  const handleButtonPress = async (colorName, image, audioFile) => {
-    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFile}`);
+  // Download audio file
+  const downloadAudioFile = async (audioFileUrl, audioFileName) => {
+    console.log('Starting downloadAudioFile', { audioFileUrl, audioFileName });
 
-    const isOtherSoundPlaying = sound && audioFile !== currentAudioFile;
+    const uriArray = audioFileUrl.split('/');
+    const audioFile = uriArray[uriArray.length - 1];
+
+    // Define the path of the new file
+    const path = `${FileSystem.documentDirectory}${audioFile}`;
+
+    // Check if the file already exists
+    const fileInfo = await FileSystem.getInfoAsync(path);
+    if (fileInfo.exists) {
+      console.log(`File already exists at path: ${path}`);
+      return path;
+    } else {
+      console.log(`File does not exist, downloading new file at path: ${path}`);
+      // If it doesn't exist, download the file
+      try {
+        const result = await FileSystem.downloadAsync(audioFileUrl, path);
+        console.log('Download result:', result);
+        return result.uri;
+      } catch (e) {
+        console.error('Error downloading file:', e);
+        return null;
+      }
+    }
+  };
+
+
+  // Handle button press
+  const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
+    console.log(`👉 Button press detected[handleButtonPress]: colorName: ${colorName}, image:${image}, audioFileUrl:${audioFileUrl}, audioFileName:${audioFileName}`);
+
+    // Download the audio file or get the URI of the local file
+    const localAudioFileUri = await downloadAudioFile(audioFileUrl, audioFileName);
+    if (!localAudioFileUri) {
+      console.log('Error downloading sound');
+      return;
+    }
+
+    const isOtherSoundPlaying = sound && audioFileName !== currentAudioFile;
     let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
 
     console.log('isMuted:', isMuted);
@@ -101,7 +139,7 @@ const MainScreen = ({ navigation }) => {
     console.log('Loading new sound');
     try {
       const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: audioFile },
+        { uri: localAudioFileUri },
         {
           isLooping: true,
           isMuted: false,
@@ -117,7 +155,7 @@ const MainScreen = ({ navigation }) => {
         }
       );
       setSound(newSound);
-      setCurrentAudioFile(audioFile);
+      setCurrentAudioFile(audioFileName || audioFileUrl); // use audioFileName if available, otherwise use audioFileUrl
       setActiveColor(colorName);
       console.log('New sound loaded');
 
@@ -132,6 +170,8 @@ const MainScreen = ({ navigation }) => {
       console.error('Error loading or playing new sound:', e);
     }
   };
+
+
 
   // Handle speaker button press
   const handleSpeakerButtonPress = async () => {
