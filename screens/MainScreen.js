@@ -69,9 +69,111 @@ const MainScreen = ({ navigation }) => {
   };
 
 
+  // // Handle button press
+  // const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
+  //   console.log(`👉 Button press detected[handleButtonPress]: colorName: ${colorName}, image:${image}, audioFileUrl:${audioFileUrl}, audioFileName:${audioFileName}`);
+
+  //   // Download the audio file or get the URI of the local file
+  //   const localAudioFileUri = await downloadAudioFile(audioFileUrl, audioFileName);
+  //   if (!localAudioFileUri) {
+  //     console.log('Error downloading sound');
+  //     return;
+  //   }
+
+  //   const isOtherSoundPlaying = sound && audioFileName !== currentAudioFile;
+  //   let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
+
+  //   console.log('isMuted:', isMuted);
+
+  //   if (isMuted) {
+  //     console.log('Stoping and unloading previous sound');
+  //     if (isSoundLoaded) {
+  //       try {
+  //         await sound.stopAsync();
+  //         await sound.setIsMutedAsync(false);
+  //       } catch (e) {
+  //         console.error('Error stopping or unmuting sound:', e);
+  //       }
+  //     }
+  //     setIsMuted(false);
+  //   }
+
+  //   setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
+
+  //   if (sound && isSoundLoaded && !isMuted) {
+  //     const status = await sound.getStatusAsync();
+  //     if (isOtherSoundPlaying) {
+  //       console.log('Stopping and unloading previous sound');
+  //       try {
+  //         await sound.stopAsync();
+  //         await sound.unloadAsync();
+  //       } catch (e) {
+  //         console.error('Error stopping or unloading sound:', e);
+  //       }
+  //       console.log('Previous sound unloaded');
+  //       setActiveColor(null);
+  //     } else if (status.isPlaying) {
+  //       console.log('Pausing current sound');
+  //       setMainColor(backgroundColorDefault);
+  //       try {
+  //         await sound.pauseAsync();
+  //       } catch (e) {
+  //         console.error('Error pausing sound:', e);
+  //       }
+  //       console.log('Current sound paused');
+  //       setActiveColor(null);
+  //       return;
+  //     } else {
+  //       console.log('Resuming current sound');
+  //       try {
+  //         await sound.playAsync();
+  //       } catch (e) {
+  //         console.error('Error playing sound:', e);
+  //       }
+  //       console.log('Current sound resumed');
+  //       setActiveColor(colorName);
+  //       return;
+  //     }
+  //   }
+
+  //   console.log('Loading new sound');
+  //   try {
+  //     const { sound: newSound } = await Audio.Sound.createAsync(
+  //       { uri: localAudioFileUri },
+  //       {
+  //         isLooping: true,
+  //         isMuted: false,
+  //         volume: 1.0,
+  //         rate: 1.0,
+  //         shouldCorrectPitch: true,
+  //       },
+  //       (status) => {
+  //         if (status.didJustFinish && !status.isLooping) {
+  //           setLoopCount((prevCount) => prevCount + 1);
+  //           console.log('Loop count:', loopCount);
+  //         }
+  //       }
+  //     );
+  //     setSound(newSound);
+  //     setCurrentAudioFile(audioFileName || audioFileUrl); // use audioFileName if available, otherwise use audioFileUrl
+  //     setActiveColor(colorName);
+  //     console.log('New sound loaded');
+
+  //     console.log('Playing new sound');
+  //     try {
+  //       await newSound.playAsync();
+  //     } catch (e) {
+  //       console.error('Error playing new sound:', e);
+  //     }
+  //     console.log('New sound playing');
+  //   } catch (e) {
+  //     console.error('Error loading or playing new sound:', e);
+  //   }
+  // };
+
   // Handle button press
   const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
-    console.log(`👉 Button press detected[handleButtonPress]: colorName: ${colorName}, image:${image}, audioFileUrl:${audioFileUrl}, audioFileName:${audioFileName}`);
+    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
 
     // Download the audio file or get the URI of the local file
     const localAudioFileUri = await downloadAudioFile(audioFileUrl, audioFileName);
@@ -86,13 +188,13 @@ const MainScreen = ({ navigation }) => {
     console.log('isMuted:', isMuted);
 
     if (isMuted) {
-      console.log('Stoping and unloading previous sound');
+      console.log('Stopping and unloading previous sound');
       if (isSoundLoaded) {
         try {
           await sound.stopAsync();
-          await sound.setIsMutedAsync(false);
+          await sound.unloadAsync();
         } catch (e) {
-          console.error('Error stopping or unmuting sound:', e);
+          console.error('Error stopping or unloading sound:', e);
         }
       }
       setIsMuted(false);
@@ -102,8 +204,8 @@ const MainScreen = ({ navigation }) => {
 
     if (sound && isSoundLoaded && !isMuted) {
       const status = await sound.getStatusAsync();
-      if (isOtherSoundPlaying) {
-        console.log('Stopping and unloading previous sound');
+      if (isOtherSoundPlaying || status.isPlaying) {
+        console.log('Stopping and unloading current sound');
         try {
           await sound.stopAsync();
           await sound.unloadAsync();
@@ -112,16 +214,9 @@ const MainScreen = ({ navigation }) => {
         }
         console.log('Previous sound unloaded');
         setActiveColor(null);
-      } else if (status.isPlaying) {
-        console.log('Pausing current sound');
-        setMainColor(backgroundColorDefault);
-        try {
-          await sound.pauseAsync();
-        } catch (e) {
-          console.error('Error pausing sound:', e);
+        if (isOtherSoundPlaying) {
+          loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
         }
-        console.log('Current sound paused');
-        setActiveColor(null);
         return;
       } else {
         console.log('Resuming current sound');
@@ -136,10 +231,14 @@ const MainScreen = ({ navigation }) => {
       }
     }
 
+    loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
+  };
+
+  const loadAndPlayNewSound = async (audioFile, colorName, audioFileName) => {
     console.log('Loading new sound');
     try {
       const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: localAudioFileUri },
+        { uri: audioFile },
         {
           isLooping: true,
           isMuted: false,
@@ -155,16 +254,12 @@ const MainScreen = ({ navigation }) => {
         }
       );
       setSound(newSound);
-      setCurrentAudioFile(audioFileName || audioFileUrl); // use audioFileName if available, otherwise use audioFileUrl
+      setCurrentAudioFile(audioFileName);
       setActiveColor(colorName);
       console.log('New sound loaded');
 
       console.log('Playing new sound');
-      try {
-        await newSound.playAsync();
-      } catch (e) {
-        console.error('Error playing new sound:', e);
-      }
+      await newSound.playAsync();
       console.log('New sound playing');
     } catch (e) {
       console.error('Error loading or playing new sound:', e);
