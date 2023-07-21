@@ -41,9 +41,8 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
 
-   // Download audio file
-   const downloadAudioFile = async (audioFileUrl) => {
-
+  // Download audio file
+  const downloadAudioFile = async (audioFileUrl) => {
     const uriArray = audioFileUrl.split('/');
     const audioFile = uriArray[uriArray.length - 1];
 
@@ -114,6 +113,8 @@ const MainScreen = ({ navigation }) => {
         try {
           await sound.stopAsync();
           await sound.unloadAsync();
+          setMainColor(backgroundColorDefault);
+
         } catch (e) {
           console.error('Error stopping or unloading sound:', e);
         }
@@ -166,6 +167,7 @@ const MainScreen = ({ navigation }) => {
       console.log('Playing new sound');
       await newSound.playAsync();
       console.log('New sound playing');
+
     } catch (e) {
       console.error('Error loading or playing new sound:', e);
     }
