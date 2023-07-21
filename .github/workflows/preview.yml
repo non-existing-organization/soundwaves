@@ -1,4 +1,4 @@
-name: EXPO Preview
+name: expo preview
 on: pull_request
 
 jobs:
