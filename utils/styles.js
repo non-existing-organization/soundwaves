@@ -96,16 +96,42 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'transparent',
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: whiteColor,
+    paddingHorizontal: 20,
+    paddingVertical: 50,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  loadingText: {
+    color: whiteColor,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  spinnerContainer: {
+    marginTop: 70,
+  },
+
   muteButton: {
     borderColor: redColor,
     borderWidth: 8,
   },
+
   noiseItem: {
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 6,
   },
-
   noiseText: {
     color: whiteColor,
     fontSize: 16,
@@ -156,6 +182,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 54,
   },
+
 });
 
 

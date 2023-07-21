@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Modal, Text } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
+import Spinner from 'react-native-loading-spinner-overlay';
+
+
 
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,8 +25,8 @@ const MainScreen = ({ navigation }) => {
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
   const backgroundColorDefault = '#202020'; // TODO add it on the settnigs as a variable to select the default color
-  const [soundsCache, setSoundsCache] = useState(new Map());
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -40,8 +43,7 @@ const MainScreen = ({ navigation }) => {
 
 
   // Download audio file
-  const downloadAudioFile = async (audioFileUrl, audioFileName) => {
-    console.log('Starting downloadAudioFile', { audioFileUrl, audioFileName });
+  const downloadAudioFile = async (audioFileUrl) => {
 
     const uriArray = audioFileUrl.split('/');
     const audioFile = uriArray[uriArray.length - 1];
@@ -52,41 +54,56 @@ const MainScreen = ({ navigation }) => {
     // Check if the file already exists
     const fileInfo = await FileSystem.getInfoAsync(path);
     if (fileInfo.exists) {
-      console.log(`File already exists at path: ${path}`);
+      // console.log(`File already exists at path: ${path}`);
+      console.log(`✅ File already exists`);
       return path;
     } else {
-      console.log(`File does not exist, downloading new file at path: ${path}`);
+      console.log(`🛜 File does not exist, downloading new file`);
       // If it doesn't exist, download the file
       try {
+        // show a modal with a spinner
+        setIsLoading(true);
+        setModalVisible(true);
         const result = await FileSystem.downloadAsync(audioFileUrl, path);
-        console.log('Download result:', result);
+        console.log('📊 Download result:', result.status);
+        setIsLoading(false);
+        setModalVisible(false);
         return result.uri;
       } catch (e) {
-        console.error('Error downloading file:', e);
+        console.error('❌ Error downloading file:', e);
         return null;
       }
     }
   };
 
+  const printDeleteFiles = async () => {
+    const files = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory);
+    console.log('📁 Files in FileSystem.documentDirectory:', files);
+    // delete each of the files
+    files.forEach(async (file) => {
+      console.log('🗑 Deleting file:', file);
+      await FileSystem.deleteAsync(`${FileSystem.documentDirectory}${file}`);
+    }
+    );
+  };
 
-  // Handle button press
+  // Handle button press not working
   const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
-    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
+    console.log('👉 Button Pressed');
+    // printDeleteFiles();
 
-    // Download the audio file or get the URI of the local file
-    const localAudioFileUri = await downloadAudioFile(audioFileUrl, audioFileName);
+    const localAudioFileUri = await downloadAudioFile(audioFileUrl);
     if (!localAudioFileUri) {
       console.log('Error downloading sound');
       return;
     }
 
-    const isOtherSoundPlaying = sound && audioFileName !== currentAudioFile;
+    const isOtherSoundPlaying = sound && (await sound.getStatusAsync()).isPlaying;
     let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
-
-    console.log('isMuted:', isMuted);
+    const isSameSound = currentAudioFile === localAudioFileUri;
 
     if (isMuted) {
-      console.log('Stopping and unloading previous sound');
+      console.log('⏹️ Stopping and unloading previous sound');
       if (isSoundLoaded) {
         try {
           await sound.stopAsync();
@@ -100,69 +117,28 @@ const MainScreen = ({ navigation }) => {
 
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
 
-    if (sound && isSoundLoaded && !isMuted) {
-      const status = await sound.getStatusAsync();
-      if (isOtherSoundPlaying || status.isPlaying) {
-        console.log('Stopping and unloading current sound');
+    console.log('🔈 isSoundLoaded:', isSoundLoaded);
+    console.log('🔈 isOtherSoundPlaying:', isOtherSoundPlaying);
+    console.log('🔈 isSameSound:', isSameSound);
+    console.log('🔈 isMuted:', isMuted);
+
+    // unload all sounds and stop all sounds
+    if (isOtherSoundPlaying) {
+      console.log('⏹️ Stopping and unloading previous sound');
+      if (isSoundLoaded) {
         try {
           await sound.stopAsync();
           await sound.unloadAsync();
         } catch (e) {
           console.error('Error stopping or unloading sound:', e);
         }
-        console.log('Previous sound unloaded');
-        setActiveColor(null);
-        if (isOtherSoundPlaying) {
-          loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
-        }
-        return;
-      } else {
-        console.log('Resuming current sound');
-        try {
-          await sound.playAsync();
-        } catch (e) {
-          console.error('Error playing sound:', e);
-        }
-        console.log('Current sound resumed');
-        setActiveColor(colorName);
-        return;
       }
     }
 
-    loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
+
   };
 
-  const loadAndPlayNewSound = async (audioFile, colorName, audioFileName) => {
-    console.log('Loading new sound');
-    try {
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri: audioFile },
-        {
-          isLooping: true,
-          isMuted: false,
-          volume: 1.0,
-          rate: 1.0,
-          shouldCorrectPitch: true,
-        },
-        (status) => {
-          if (status.didJustFinish && !status.isLooping) {
-            setLoopCount((prevCount) => prevCount + 1);
-            console.log('Loop count:', loopCount);
-          }
-        }
-      );
-      setSound(newSound);
-      setCurrentAudioFile(audioFileName);
-      setActiveColor(colorName);
-      console.log('New sound loaded');
 
-      console.log('Playing new sound');
-      await newSound.playAsync();
-      console.log('New sound playing');
-    } catch (e) {
-      console.error('Error loading or playing new sound:', e);
-    }
-  };
 
 
 
@@ -219,7 +195,23 @@ const MainScreen = ({ navigation }) => {
         {/* Add other elements for the top bar */}
       </View>
 
-
+      <View style={styles.modal}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {}}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.loadingText}>Downloading new sound...</Text>
+          </View>
+          <View style={styles.spinnerContainer}>
+            <Spinner visible={isLoading} />
+          </View>
+        </View>
+      </Modal>
+      </View>
 
       <LinearGradient
         colors={['black', backgroundColor, 'black']}
