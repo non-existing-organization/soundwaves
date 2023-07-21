@@ -96,6 +96,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  muteButton: {
+    borderColor: redColor,
+    borderWidth: 8,
+  },
+  noiseItem: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 6,
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -120,17 +129,6 @@ const styles = StyleSheet.create({
   },
   spinnerContainer: {
     marginTop: 70,
-  },
-
-  muteButton: {
-    borderColor: redColor,
-    borderWidth: 8,
-  },
-
-  noiseItem: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginBottom: 6,
   },
   noiseText: {
     color: whiteColor,
@@ -182,7 +180,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 54,
   },
-
 });
 
 

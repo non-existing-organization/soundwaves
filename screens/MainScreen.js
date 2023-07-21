@@ -7,9 +7,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-
-
-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
@@ -25,8 +22,10 @@ const MainScreen = ({ navigation }) => {
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
   const backgroundColorDefault = '#202020'; // TODO add it on the settnigs as a variable to select the default color
-  const [isLoading, setIsLoading] = useState(false);
+  const [soundsCache, setSoundsCache] = useState(new Map());
   const [modalVisible, setModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     return () => {
@@ -42,8 +41,8 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
 
-  // Download audio file
-  const downloadAudioFile = async (audioFileUrl) => {
+   // Download audio file
+   const downloadAudioFile = async (audioFileUrl) => {
 
     const uriArray = audioFileUrl.split('/');
     const audioFile = uriArray[uriArray.length - 1];
@@ -76,34 +75,25 @@ const MainScreen = ({ navigation }) => {
     }
   };
 
-  const printDeleteFiles = async () => {
-    const files = await FileSystem.readDirectoryAsync(FileSystem.documentDirectory);
-    console.log('📁 Files in FileSystem.documentDirectory:', files);
-    // delete each of the files
-    files.forEach(async (file) => {
-      console.log('🗑 Deleting file:', file);
-      await FileSystem.deleteAsync(`${FileSystem.documentDirectory}${file}`);
-    }
-    );
-  };
 
-  // Handle button press not working
+  // Handle button press
   const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
-    console.log('👉 Button Pressed');
-    // printDeleteFiles();
+    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
 
-    const localAudioFileUri = await downloadAudioFile(audioFileUrl);
+    // Download the audio file or get the URI of the local file
+    const localAudioFileUri = await downloadAudioFile(audioFileUrl, audioFileName);
     if (!localAudioFileUri) {
       console.log('Error downloading sound');
       return;
     }
 
-    const isOtherSoundPlaying = sound && (await sound.getStatusAsync()).isPlaying;
+    const isOtherSoundPlaying = sound && audioFileName !== currentAudioFile;
     let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
-    const isSameSound = currentAudioFile === localAudioFileUri;
+
+    console.log('isMuted:', isMuted);
 
     if (isMuted) {
-      console.log('⏹️ Stopping and unloading previous sound');
+      console.log('Stopping and unloading previous sound');
       if (isSoundLoaded) {
         try {
           await sound.stopAsync();
@@ -117,28 +107,69 @@ const MainScreen = ({ navigation }) => {
 
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
 
-    console.log('🔈 isSoundLoaded:', isSoundLoaded);
-    console.log('🔈 isOtherSoundPlaying:', isOtherSoundPlaying);
-    console.log('🔈 isSameSound:', isSameSound);
-    console.log('🔈 isMuted:', isMuted);
-
-    // unload all sounds and stop all sounds
-    if (isOtherSoundPlaying) {
-      console.log('⏹️ Stopping and unloading previous sound');
-      if (isSoundLoaded) {
+    if (sound && isSoundLoaded && !isMuted) {
+      const status = await sound.getStatusAsync();
+      if (isOtherSoundPlaying || status.isPlaying) {
+        console.log('Stopping and unloading current sound');
         try {
           await sound.stopAsync();
           await sound.unloadAsync();
         } catch (e) {
           console.error('Error stopping or unloading sound:', e);
         }
+        console.log('Previous sound unloaded');
+        setActiveColor(null);
+        if (isOtherSoundPlaying) {
+          loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
+        }
+        return;
+      } else {
+        console.log('Resuming current sound');
+        try {
+          await sound.playAsync();
+        } catch (e) {
+          console.error('Error playing sound:', e);
+        }
+        console.log('Current sound resumed');
+        setActiveColor(colorName);
+        return;
       }
     }
 
-
+    loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
   };
 
+  const loadAndPlayNewSound = async (audioFile, colorName, audioFileName) => {
+    console.log('Loading new sound');
+    try {
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: audioFile },
+        {
+          isLooping: true,
+          isMuted: false,
+          volume: 1.0,
+          rate: 1.0,
+          shouldCorrectPitch: true,
+        },
+        (status) => {
+          if (status.didJustFinish && !status.isLooping) {
+            setLoopCount((prevCount) => prevCount + 1);
+            console.log('Loop count:', loopCount);
+          }
+        }
+      );
+      setSound(newSound);
+      setCurrentAudioFile(audioFileName);
+      setActiveColor(colorName);
+      console.log('New sound loaded');
 
+      console.log('Playing new sound');
+      await newSound.playAsync();
+      console.log('New sound playing');
+    } catch (e) {
+      console.error('Error loading or playing new sound:', e);
+    }
+  };
 
 
 
@@ -212,6 +243,7 @@ const MainScreen = ({ navigation }) => {
         </View>
       </Modal>
       </View>
+
 
       <LinearGradient
         colors={['black', backgroundColor, 'black']}
