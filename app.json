@@ -3,7 +3,7 @@
     "name": "SoundWaves",
     "slug": "soundwaves",
     "description": "Experience the therapeutic power of soundwaves, finely tuned to promote focus, relaxation, and a restful sleep",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.non-existing-organization.soundwaves",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "icon": "./assets/icon.png",
       "config": {
         "usesNonExemptEncryption": false
