@@ -2,6 +2,8 @@ pre_bump_hooks = [
     "echo {{version}}",
 ]
 
+ignore_merge_commits = true
+
 
 post_bump_hooks = [
     "git push -f",
