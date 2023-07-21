@@ -6,6 +6,8 @@ const whiteColor = '#ffffff';
 const blackColor = '#000000';
 const redColor = '#ff0000';
 const greenColor = '#00ff00';
+const transparentColor = 'transparent';
+const semiTransparentColor = 'rgba(0, 0, 0, 0.5)';
 
 
 const styles = StyleSheet.create({
@@ -90,11 +92,33 @@ const styles = StyleSheet.create({
   inactiveButton: {
     borderColor: whiteColor,
   },
+  loadingText: {
+    color: whiteColor,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
   mainContainer: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
     width: '100%',
+  },
+  modalContainer: {
+    alignItems: 'center',
+    backgroundColor: semiTransparentColor,
+    flex: 1,
+    justifyContent: 'center',
+  },
+  modalContent: {
+    alignItems: 'center',
+    backgroundColor: transparentColor,
+    borderColor: whiteColor,
+    borderRadius: 15,
+    borderWidth: 2,
+    flexDirection: 'column',
+    paddingHorizontal: 20,
+    paddingVertical: 50,
   },
   muteButton: {
     borderColor: redColor,
@@ -104,31 +128,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 6,
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: 'transparent',
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: whiteColor,
-    paddingHorizontal: 20,
-    paddingVertical: 50,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  loadingText: {
-    color: whiteColor,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  spinnerContainer: {
-    marginTop: 70,
   },
   noiseText: {
     color: whiteColor,
@@ -146,6 +145,9 @@ const styles = StyleSheet.create({
   },
   speakerButton: {
     padding: 10,
+  },
+  spinnerContainer: {
+    marginTop: 70,
   },
   subButton: {
     borderRadius: 15,
