@@ -1,13 +1,8 @@
 {
 	"folders": [
 		{
-			"path": ".",
-			"name": "soundwaves"
-		},
-		{
-			"path": "./assets",
-			"name": "assets"
-		},
+			"path": "."
+		}
 	],
 	"settings": {
 		"deepscan.enable": true,
