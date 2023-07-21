@@ -1,8 +1,12 @@
+# A list of glob patterns describing branches on which semver bump are allowed
+branch_whitelist = ["main"]
+
+# Ignore merge commits from conventional commit checks
+ignore_merge_commits = true
+
 pre_bump_hooks = [
     "echo {{version}}",
 ]
-
-ignore_merge_commits = true
 
 
 post_bump_hooks = [
@@ -19,3 +23,9 @@ owner = "stiliajohny"
 authors = [
   { username = "stiliajohny", signature = "John Stilia"}
 ]
+
+
+# An optional list of additional allowed commit type
+# `cog commit {commit_type}` commit command will be generated at runtime
+[commit_types]
+ex = { changelog_title = "This is the markdown title for `ex` commit type" }
