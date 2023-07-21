@@ -1,5 +1,17 @@
 name: expo preview
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - "**/assets/**"
+      - "**/components/**"
+      - "**/screens/**"
+      - "**/utils/**"
+      - "**/App.js"
+      - "**/app.json"
+      - "**/eas.json"
+      - "**/package.json"
+      - "**/package-lock.json"
+      - "**/yarn.lock"
 
 jobs:
   update:
