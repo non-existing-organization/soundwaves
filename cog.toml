@@ -1,5 +1,5 @@
 # A list of glob patterns describing branches on which semver bump are allowed
-branch_whitelist = ["main"]
+branch_whitelist = ["master"]
 
 # Ignore merge commits from conventional commit checks
 ignore_merge_commits = true
