@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## [2.2.0](https://github.com/stiliajohny/soundwaves/compare/2.1.0..2.2.0) - 2023-07-21
+#### Features
+- **(cog.toml)** Add branch whitelist and ignore merge commits - ([e2acb78](https://github.com/stiliajohny/soundwaves/commit/e2acb78af24ee7f9542af4a7df41490eb38ac785)) - [@stiliajohny](https://github.com/stiliajohny)
+#### Style
+- update branch whitelist pattern - ([51907f4](https://github.com/stiliajohny/soundwaves/commit/51907f49587c66c771a1dc39def4741a94a377e2)) - [@stiliajohny](https://github.com/stiliajohny)
+
+- - -
+
 ## [0.1.0](https://github.com/stiliajohny/soundwaves/compare/0.0.1..0.1.0) - 2023-06-17
 #### Bug Fixes
 - remove backbutton - ([ddfbdcd](https://github.com/stiliajohny/soundwaves/commit/ddfbdcd508e9ccce6dd903ad5367e6ddbd22db1a)) - [@stiliajohny](https://github.com/stiliajohny)
