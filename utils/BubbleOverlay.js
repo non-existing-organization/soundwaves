@@ -38,16 +38,15 @@ const BubbleOverlay = ({ bubbleCount = 100, minRadius = 10, maxRadius = 100, bub
             key={index}
             animation={{
               from: {
-                top: `${generateRandomValue()}%`,
-                left: `${generateRandomValue()}%`,
+                top: '100%', // Start from the bottom
+                left: '50%', // Start from the horizontal center
               },
               to: {
-                top: `${generateRandomValue()}%`,
-                left: `${generateRandomValue()}%`,
+                top: `${generateRandomValue()}%`, // Move upwards
+                left: `${generateRandomValue()}%`, // Random horizontal position
               },
             }}
             iterationCount="infinite"
-            // Adjust the speed of the motion in random
             duration={Math.random() * 10000 + 5000}
             easing="linear"
             style={[
@@ -60,6 +59,7 @@ const BubbleOverlay = ({ bubbleCount = 100, minRadius = 10, maxRadius = 100, bub
             ]}
           />
         );
+
       })}
     </View>
   );
