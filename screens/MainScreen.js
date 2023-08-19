@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Modal, Text } from 'react-native';
+import { View, TouchableOpacity, Modal, Text, Animated } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
@@ -27,6 +27,8 @@ const MainScreen = ({ navigation }) => {
   const [soundsCache, setSoundsCache] = useState(new Map());
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
+
 
 
   useEffect(() => {
@@ -88,62 +90,57 @@ const MainScreen = ({ navigation }) => {
       return;
     }
 
+    // Check if another sound is playing
     const isOtherSoundPlaying = sound && audioFileName !== currentAudioFile;
-    let isSoundLoaded = sound && (await sound.getStatusAsync()).isLoaded;
 
-    console.log('isMuted:', isMuted);
-
+    // Muted Sound Handling
     if (isMuted) {
-      console.log('Stopping and unloading previous sound');
-      if (isSoundLoaded) {
-        try {
-          await sound.stopAsync();
-          await sound.unloadAsync();
-        } catch (e) {
-          console.error('Error stopping or unloading sound:', e);
-        }
-      }
+      console.log('Unmuting sound');
+      await sound.setIsMutedAsync(false);
       setIsMuted(false);
+      previousColorRef.current = null;
+
+      // Fade in the BubbleOverlay
+      Animated.timing(opacityValue, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }).start();
     }
 
+    // Handling Already Playing Sound
+    if (sound && (await sound.getStatusAsync()).isLoaded) {
+      console.log('Stopping and unloading current sound');
+      try {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+        setMainColor(backgroundColorDefault);
+      } catch (e) {
+        console.error('Error stopping or unloading sound:', e);
+      }
+      console.log('Previous sound unloaded');
+      setActiveColor(null);
+      if (isOtherSoundPlaying) {
+        loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
+      }
+      return;
+    }
+
+    // Updating Main Color
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
 
-    if (sound && isSoundLoaded && !isMuted) {
-      const status = await sound.getStatusAsync();
-      if (isOtherSoundPlaying || status.isPlaying) {
-        console.log('Stopping and unloading current sound');
-        try {
-          await sound.stopAsync();
-          await sound.unloadAsync();
-          setMainColor(backgroundColorDefault);
-
-        } catch (e) {
-          console.error('Error stopping or unloading sound:', e);
-        }
-        console.log('Previous sound unloaded');
-        setActiveColor(null);
-        if (isOtherSoundPlaying) {
-          loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
-        }
-        return;
-      } else {
-        console.log('Resuming current sound');
-        try {
-          await sound.playAsync();
-        } catch (e) {
-          console.error('Error playing sound:', e);
-        }
-        console.log('Current sound resumed');
-        setActiveColor(colorName);
-        return;
-      }
-    }
-
+    // Setting Up Sound Parameters
     loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
   };
 
   const loadAndPlayNewSound = async (audioFile, colorName, audioFileName) => {
     console.log('Loading new sound');
+    // Fade in the BubbleOverlay
+    Animated.timing(opacityValue, {
+      toValue: 1,
+      duration: 1000, // Adjust duration as needed
+      useNativeDriver: true,
+    }).start();
     try {
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: audioFile },
@@ -187,6 +184,14 @@ const MainScreen = ({ navigation }) => {
         setActiveColor(previousColorRef.current || null);
         previousColorRef.current = null;
         console.log('Sound unmuted');
+
+        // Fade in the BubbleOverlay
+        Animated.timing(opacityValue, {
+          toValue: 1,
+          duration: 1000, // Adjust duration as needed
+          useNativeDriver: true,
+      }).start();
+
       } else {
         console.log('Muting sound');
         await sound.setIsMutedAsync(true);
@@ -194,6 +199,14 @@ const MainScreen = ({ navigation }) => {
         previousColorRef.current = activeColor;
         setActiveColor('red');
         console.log('Sound muted');
+
+        // Fade out the BubbleOverlay
+        Animated.timing(opacityValue, {
+          toValue: 0,
+          duration: 1000, // Adjust duration as needed
+          useNativeDriver: true,
+        }).start();
+
       }
     }
   };
@@ -254,8 +267,11 @@ const MainScreen = ({ navigation }) => {
         end={{ x: 0, y: 0.9 }}
         style={[styles.mainContainer, { height: 200 }]}
       >
-        {activeColor && <BubbleOverlay />}
+        <Animated.View style={{ ...styles.overlay, opacity: opacityValue }}>
+          {activeColor && <BubbleOverlay />}
+        </Animated.View>
       </LinearGradient>
+
 
       <View style={styles.buttonsContainer}>
         {/* Buttons for color selection */}
