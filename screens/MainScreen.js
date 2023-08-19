@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
 import CustomButton from '../components/CustomButton';
+import BubbleOverlay from '../utils/BubbleOverlay';
+
 
 
 const MainScreen = ({ navigation }) => {
@@ -229,31 +231,30 @@ const MainScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.modal}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {}}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.loadingText}>Downloading new sound...</Text>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {}}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Text style={styles.loadingText}>Downloading new sound...</Text>
+            </View>
+            <View style={styles.spinnerContainer}>
+              <Spinner visible={isLoading} />
+            </View>
           </View>
-          <View style={styles.spinnerContainer}>
-            <Spinner visible={isLoading} />
-          </View>
-        </View>
-      </Modal>
+        </Modal>
       </View>
-
 
       <LinearGradient
         colors={['black', backgroundColor, 'black']}
-        start={{ x: 0, y: 0.1 }} // Adjust the start position of the gradient
-        end={{ x: 0, y: 0.9 }} // Adjust the end position of the gradient
-        style={[styles.mainContainer, { height: 200 }]} // Adjust the height of the gradient
+        start={{ x: 0, y: 0.1 }}
+        end={{ x: 0, y: 0.9 }}
+        style={[styles.mainContainer, { height: 200 }]}
       >
-        {/* Content for the main container */}
+        {activeColor && <BubbleOverlay />}
       </LinearGradient>
 
       <View style={styles.buttonsContainer}>
@@ -262,7 +263,6 @@ const MainScreen = ({ navigation }) => {
       </View>
     </View>
   );
-
 
 };
 
