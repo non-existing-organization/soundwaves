@@ -11,7 +11,16 @@ const semiTransparentColor = 'rgba(0, 0, 0, 0.5)';
 
 
 const styles = StyleSheet.create({
-
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bubble: {
+    borderRadius: 50, // Ensure round shape
+    position: 'absolute',
+    transform: [{ scale: 0.4 }], // Scale to create a reflection-like effect
+  },
   aboutButton: {
     alignItems: 'center',
     height: 60,
