@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import styles from './styles';
+
 
 const BubbleOverlay = ({ bubbleCount = 100, minRadius = 10, maxRadius = 100, bubbleColor = 'rgba(255, 255, 255, 0.3)' }) => {
   const [bubbles] = useState(Array.from({ length: bubbleCount }));
@@ -63,17 +65,5 @@ const BubbleOverlay = ({ bubbleCount = 100, minRadius = 10, maxRadius = 100, bub
   );
 };
 
-const styles = StyleSheet.create({
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bubble: {
-    borderRadius: 50, // Ensure round shape
-    position: 'absolute',
-    transform: [{ scale: 0.4 }], // Scale to create a reflection-like effect
-  },
-});
 
 export default BubbleOverlay;
