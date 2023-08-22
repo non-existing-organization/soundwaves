@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   muteButton: {
     borderColor: redColor,
-    borderWidth: 8,
+    borderWidth: 4,
   },
   noiseItem: {
     alignItems: 'center',
@@ -191,7 +191,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 54,
   },
+  aboutInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  aboutLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+  aboutValue: {
+    fontSize: 16,
+  },
+  separator: {
+    backgroundColor: whiteColor,
+    height: 2,
+    marginVertical: 20,
+    width: '100%',
+  },
+  settingsText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginBottom: 20,
+  },
+  horizontalLine: {
+    borderBottomColor: whiteColor,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    width: '100%',
+  },
 });
+
+
 
 
 export default styles;
