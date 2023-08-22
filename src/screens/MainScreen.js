@@ -70,22 +70,22 @@ const MainScreen = ({ navigation }) => {
     const fileInfo = await FileSystem.getInfoAsync(path);
     if (fileInfo.exists) {
       // console.log(`File already exists at path: ${path}`);
-      console.log(`✅ File already exists`);
+      console.log(`File already exists`);
       return path;
     } else {
-      console.log(`🛜 File does not exist, downloading new file`);
+      console.log(`File does not exist, downloading new file`);
       // If it doesn't exist, download the file
       try {
         // show a modal with a spinner
         setIsLoading(true);
         setModalVisible(true);
         const result = await FileSystem.downloadAsync(audioFileUrl, path);
-        console.log('📊 Download result:', result.status);
+        console.log('Download result:', result.status);
         setIsLoading(false);
         setModalVisible(false);
         return result.uri;
       } catch (e) {
-        console.error('❌ Error downloading file:', e);
+        console.error('Error downloading file:', e);
         return null;
       }
     }
@@ -287,6 +287,11 @@ const MainScreen = ({ navigation }) => {
     }
   };
 
+  // Handle settings button press
+  const handleSettingsPress = () => {
+    navigation.navigate('Settings'); // Navigate to the SettingsScreen
+  };
+
   /**
    * Renders a custom button component based on the provided color data.
    *
@@ -347,6 +352,9 @@ const MainScreen = ({ navigation }) => {
           <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
         </TouchableOpacity>
         {/* Add other elements for the top bar */}
+        <TouchableOpacity style={styles.topButton} onPress={handleSettingsPress}>
+          <Icon name="gear" size={24} color="white" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.modal}>
