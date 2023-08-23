@@ -11,16 +11,6 @@ const semiTransparentColor = 'rgba(0, 0, 0, 0.5)';
 
 
 const styles = StyleSheet.create({
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  bubble: {
-    borderRadius: 50, // Ensure round shape
-    position: 'absolute',
-    transform: [{ scale: 0.4 }], // Scale to create a reflection-like effect
-  },
   aboutButton: {
     alignItems: 'center',
     height: 60,
@@ -32,15 +22,33 @@ const styles = StyleSheet.create({
     color: whiteColor,
     fontSize: 16,
   },
+  aboutInfo: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
+  aboutLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
   aboutText: {
     color: whiteColor,
     fontSize: 16,
     marginBottom: 20,
     textAlign: 'center',
   },
+  aboutValue: {
+    fontSize: 16,
+  },
   activeButton: {
     borderColor: greenColor,
     borderWidth: 2,
+  },
+  bubble: {
+    borderRadius: 50, // Ensure round shape
+    position: 'absolute',
+    transform: [{ scale: 0.4 }], // Scale to create a reflection-like effect
   },
   button: {
     alignItems: 'center',
@@ -85,6 +93,21 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     width: '100%',
   },
+  checkBox: {
+    alignItems: 'center',
+    borderColor: '#808080',
+    borderRadius: 9,
+    borderWidth: 2,
+    height: 18,
+    justifyContent: 'center',
+    width: 18,
+  },
+  checkboxContainer: {
+    alignItems: 'center',
+    height: 24,
+    justifyContent: 'center',
+    width: 24,
+  },
   container: {
     backgroundColor: blackColor,
     flex: 1,
@@ -94,6 +117,12 @@ const styles = StyleSheet.create({
   },
   gradient: {
     flex: 1,
+  },
+  horizontalLine: {
+    borderBottomColor: whiteColor,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    width: '100%',
   },
   icon: {
     color: whiteColor,
@@ -146,10 +175,25 @@ const styles = StyleSheet.create({
   noiseTextContainer: {
     flex: 1,
   },
+  overlay: Object.assign({}, StyleSheet.absoluteFillObject, {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }),
   segmentTitle: {
     color: whiteColor,
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  separator: {
+    backgroundColor: whiteColor,
+    height: 2,
+    marginVertical: 20,
+    width: '100%',
+  },
+  settingsText: {
+    color: whiteColor,
+    fontSize: 16,
     marginBottom: 20,
   },
   speakerButton: {
@@ -190,36 +234,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 54,
-  },
-  aboutInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  aboutLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginRight: 8,
-  },
-  aboutValue: {
-    fontSize: 16,
-  },
-  separator: {
-    backgroundColor: whiteColor,
-    height: 2,
-    marginVertical: 20,
-    width: '100%',
-  },
-  settingsText: {
-    color: whiteColor,
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  horizontalLine: {
-    borderBottomColor: whiteColor,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    width: '100%',
   },
 });
 
