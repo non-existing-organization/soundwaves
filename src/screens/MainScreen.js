@@ -121,7 +121,7 @@ const MainScreen = ({ navigation }) => {
    *
    * @throws Will throw an error if there's an issue stopping or unloading a sound.
    */
-  const handleButtonPress = async (colorName, image, audioFileUrl, audioFileName) => {
+  const handleButtonPress = async (colorName, image, audioFileUrl) => {
     console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
 
     // If the same sound/colorName is selected
@@ -168,7 +168,7 @@ const MainScreen = ({ navigation }) => {
     }
 
     // Play the new sound
-    loadAndPlayNewSound(localAudioFileUri, colorName, audioFileName);
+    loadAndPlayNewSound(localAudioFileUri, colorName);
 
     // Update the main color
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
