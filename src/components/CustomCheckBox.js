@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+/* eslint-disable react/prop-types */
+import React, {  } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from '../utils/styles';
 
 const CustomCheckBox = ({ checked, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.checkboxContainer}>
       <View style={styles.checkBox}>
         {checked && <Icon name="check" size={16} color="white" />}
       </View>
@@ -12,22 +14,6 @@ const CustomCheckBox = ({ checked, onPress }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 24,
-    height: 24,
-  },
-  checkBox: {
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    borderWidth: 2,
-    borderColor: 'gray',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
 
 export default CustomCheckBox;
