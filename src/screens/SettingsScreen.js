@@ -74,7 +74,7 @@ const SettingsScreen = ({ navigation }) => {
           <View style={styles.modalContent}>
             {/* Display app information */}
             <Text style={styles.aboutText}>App Name: {Constants.manifest.name}</Text>
-            <Text style={styles.aboutText}>Author: {Constants.manifest.author} </Text>
+            <Text style={styles.aboutText}>Developer: {Constants.manifest.author} </Text>
             <View style={styles.horizontalLine} />
             <Text style={styles.aboutText}>Support Email: {Constants.manifest.email}</Text>
             <Text style={styles.aboutText}>Support Website: {Constants.manifest.website}</Text>
