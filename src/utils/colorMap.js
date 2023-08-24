@@ -40,26 +40,7 @@ const colorMap = new Map([
       description: 'Rain',
     }
   ],
-  // [
-  //   'fire',
-  //   {
-  //     name: 'Fire',
-  //     colors: ['#6B0000', '#820000', '#990000', '#B00000', '#C80000'],
-  //     thumbnail: require('../../assets/thumbnails/fire.png'),
-  //     audioFile: '',
-  //     description: 'Fire',
-  //   }
-  // ],
-  // [
-  //   'wind',
-  //   {
-  //     name: 'Wind',
-  //     colors: ['#D0EFFF', '#A9D4F5', '#7FB9EB', '#558CDB', '#2F5FA9'],
-  //     thumbnail: require('../../assets/thumbnails/wind.png'),
-  //     audioFile: '',
-  //     description: 'Wind',
-  //   }
-  // ]
+
 
 ]);
 
