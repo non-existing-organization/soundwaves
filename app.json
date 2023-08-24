@@ -8,7 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "owner": "non-existing-organization",
-    "githubUrl": "https://github.com/stiliajohny/soundwaves",
+    "githubUrl": "https://github.com/non-existing-organization/soundwaves",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,7 +20,6 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.non-existing-organization.soundwaves",
-      "buildNumber": "1.0.1",
       "icon": "./assets/icon.png",
       "config": {
         "usesNonExemptEncryption": false
