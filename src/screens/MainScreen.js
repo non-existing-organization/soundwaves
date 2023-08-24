@@ -5,13 +5,14 @@ import { View, TouchableOpacity, Modal, Text, Animated } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
-import Spinner from 'react-native-loading-spinner-overlay';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
 import CustomButton from '../components/CustomButton';
 import BubbleOverlay from '../utils/BubbleOverlay';
+import InfoModal from '../components/InfoModal';
+
 
 
 
@@ -23,10 +24,11 @@ const MainScreen = ({ navigation }) => {
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
-  const backgroundColorDefault = '#202020'; // TODO add it on the settnigs as a variable to select the default color
-  const [modalVisible, setModalVisible] = useState(false);
+  const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
+  const backgroundColorDefault = '#202020';
+
 
 
 
@@ -78,11 +80,11 @@ const MainScreen = ({ navigation }) => {
       try {
         // show a modal with a spinner
         setIsLoading(true);
-        setModalVisible(true);
+        setDownloadModalVisible(true);
         const result = await FileSystem.downloadAsync(audioFileUrl, path);
         console.log('Download result:', result.status);
         setIsLoading(false);
-        setModalVisible(false);
+        setDownloadModalVisible(false);
         return result.uri;
       } catch (e) {
         console.error('Error downloading file:', e);
@@ -122,6 +124,7 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue stopping or unloading a sound.
    */
   const handleButtonPress = async (colorName, image, audioFileUrl) => {
+    setDownloadModalVisible(true);
     console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
 
     // If the same sound/colorName is selected
@@ -172,6 +175,7 @@ const MainScreen = ({ navigation }) => {
 
     // Update the main color
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
+    setDownloadModalVisible(false);
   };
 
   /**
@@ -358,21 +362,13 @@ const MainScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.modal}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
+        <InfoModal
+          visible={downloadModalVisible}
           onRequestClose={() => {}}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.loadingText}>Downloading new sound...</Text>
-            </View>
-            <View style={styles.spinnerContainer}>
-              <Spinner visible={isLoading} />
-            </View>
-          </View>
-        </Modal>
+          content={[
+            { label: "Downloading new sound..." },
+          ]}
+        />
       </View>
 
       <LinearGradient

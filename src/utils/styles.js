@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   bubble: {
-    borderRadius: 50, // Ensure round shape
+    borderRadius: 50,
     position: 'absolute',
-    transform: [{ scale: 0.4 }], // Scale to create a reflection-like effect
+    transform: [{ scale: 0.2 }],
   },
   button: {
     alignItems: 'center',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     alignItems: 'center',
-    borderColor: '#808080',
+    borderColor: whiteColor,
     borderRadius: 9,
     borderWidth: 2,
     height: 18,
@@ -107,6 +107,72 @@ const styles = StyleSheet.create({
     height: 24,
     justifyContent: 'center',
     width: 24,
+  },
+  colorModalConfirmButton: {
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+    borderRadius: 5,
+    marginTop: 20,
+    padding: 15
+  },
+  colorModalConfirmButtonText: {
+    color: 'white',
+    fontSize: 18
+  },
+  colorModalContainer: {
+    backgroundColor: 'black',
+    flex: 1,
+    padding: 20
+  },
+  colorModalPicker: {
+    flex: 1
+  },
+  colorModalPickerTitle: {
+    color: 'white',
+    fontSize: 20,
+    marginBottom: 20
+  },
+  colorModalSlider: {
+    height: 40
+  },
+  colorModalSliderContainer: {
+    marginVertical: 10
+  },
+  colorModalSliderLabel: {
+    color: 'white',
+    fontSize: 16,
+    marginBottom: 5
+  },
+  colorPickerModalContainer: {
+    backgroundColor: blackColor,
+    flex: 1,
+    padding: 20
+  },
+  colorPickerModalLabel: {
+    color: whiteColor,
+    fontSize: 16,
+    marginBottom: 5,
+    marginTop: 10
+  },
+  colorPickerModalSlider: {
+    height: 40,
+    marginTop: 10
+  },
+  componentContainer: {
+    flex: 0.5,
+    justifyContent: 'center',
+  },
+  confirmColorButton: {
+      alignItems: 'center',
+      backgroundColor: 'white',
+      borderRadius: 8,
+      justifyContent: 'center',
+      marginTop: 20,
+      padding: 10,
+  },
+  confirmColorButtonText: {
+      color: 'black',
+      fontWeight: 'bold',
   },
   container: {
     backgroundColor: blackColor,
@@ -129,6 +195,20 @@ const styles = StyleSheet.create({
   },
   inactiveButton: {
     borderColor: whiteColor,
+  },
+  input: {
+    borderColor: whiteColor,
+    borderRadius: 5,
+    borderWidth: 1,
+    color: whiteColor,
+    marginBottom: 10,
+    marginTop: 5,
+    padding: 10,
+    textAlign: 'center',
+  },
+  labelContainer: {
+    flex: 0.5,
+    justifyContent: 'center',
   },
   loadingText: {
     color: whiteColor,
@@ -179,6 +259,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   }),
+  scrollContentContainer: {
+    flexGrow: 1,
+  },
   segmentTitle: {
     color: whiteColor,
     fontSize: 24,
@@ -191,23 +274,32 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: '100%',
   },
+  settingRow: {
+    flexDirection: 'row',
+    padding: 16,
+  },
   settingsText: {
     color: whiteColor,
     fontSize: 16,
+    fontWeight: '500',
     marginBottom: 20,
   },
+
   speakerButton: {
     padding: 10,
   },
+
   spinnerContainer: {
     marginTop: 70,
   },
+
   subButton: {
     borderRadius: 15,
     height: 30,
     marginVertical: 5,
     width: 30,
   },
+
   subButtonContainer: {
     alignItems: 'center',
     flexDirection: 'column',
@@ -215,6 +307,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -60,
   },
+
   topBarContainer: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -225,16 +318,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     width: '100%',
   },
+
   topButton: {
     padding: 10,
   },
+
   topButtonsBar: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 54,
-  },
+  }
+
+
 });
 
 
