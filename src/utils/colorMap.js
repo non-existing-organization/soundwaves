@@ -30,7 +30,36 @@ const colorMap = new Map([
       description: 'Pink noise, often compared to the steady rustle of leaves in the wind, has equal energy per octave, providing a balanced mix of high and low frequency sounds that can help improve sleep and focus.',
     },
   ],
-
+  [
+    'storm',
+    {
+      name: 'storm',
+      colors: ['#1E3A60', '#253C6E', '#2C3F7C', '#34428A', '#3A4598'],
+      thumbnail: require('../../assets/thumbnails/storm.png'),
+      audioFile: 'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/storm.mp3',
+      description: 'Rain',
+    }
+  ],
+  // [
+  //   'fire',
+  //   {
+  //     name: 'Fire',
+  //     colors: ['#6B0000', '#820000', '#990000', '#B00000', '#C80000'],
+  //     thumbnail: require('../../assets/thumbnails/fire.png'),
+  //     audioFile: '',
+  //     description: 'Fire',
+  //   }
+  // ],
+  // [
+  //   'wind',
+  //   {
+  //     name: 'Wind',
+  //     colors: ['#D0EFFF', '#A9D4F5', '#7FB9EB', '#558CDB', '#2F5FA9'],
+  //     thumbnail: require('../../assets/thumbnails/wind.png'),
+  //     audioFile: '',
+  //     description: 'Wind',
+  //   }
+  // ]
 
 ]);
 
