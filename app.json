@@ -9,9 +9,6 @@
     "userInterfaceStyle": "light",
     "owner": "non-existing-organization",
     "githubUrl": "https://github.com/non-existing-organization/soundwaves",
-    "website": "https://github.com/non-existing-organization/soundwaves",
-    "email": "non.existing.organization@gmail.com",
-    "author": "ChatGPT",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
