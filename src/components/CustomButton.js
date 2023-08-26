@@ -5,8 +5,9 @@
  */
 
 /* eslint-disable react/prop-types */
-import React, {useState, useEffect} from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, Image } from 'react-native';
+
 import styles from '../utils/styles';
 
 /**
@@ -28,7 +29,7 @@ import styles from '../utils/styles';
  *   isMuted={false}
  * />
  */
-const CustomButton = ({onPress, thumbnail, isActive, isMuted}) => {
+const CustomButton = ({ onPress, thumbnail, isActive, isMuted }) => {
   const [buttonStyle, setButtonStyle] = useState(styles.button);
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const CustomButton = ({onPress, thumbnail, isActive, isMuted}) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={buttonStyle}>
-      <View style={styles.buttonViewStyle} >
+      <View style={styles.buttonViewStyle}>
         <Image source={thumbnail} style={styles.buttonImage} />
       </View>
     </TouchableOpacity>
