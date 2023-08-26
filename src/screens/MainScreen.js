@@ -1,36 +1,30 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Modal, Text, Animated } from 'react-native';
 import { Audio } from 'expo-av';
-import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
-
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TouchableOpacity, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import CustomButton from '../components/CustomButton';
+import InfoModal from '../components/InfoModal';
+import BubbleOverlay from '../utils/BubbleOverlay';
 import colorMap from '../utils/colorMap';
 import styles from '../utils/styles';
-import CustomButton from '../components/CustomButton';
-import BubbleOverlay from '../utils/BubbleOverlay';
-import InfoModal from '../components/InfoModal';
-
-
-
 
 const MainScreen = ({ navigation }) => {
   const [mainColor, setMainColor] = useState(null);
   const [sound, setSound] = useState(null);
-  const [currentAudioFile, setCurrentAudioFile] = useState(null);
+  const [setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
   const backgroundColorDefault = '#202020';
-
-
-
 
   useEffect(() => {
     return () => {
@@ -125,7 +119,9 @@ const MainScreen = ({ navigation }) => {
    */
   const handleButtonPress = async (colorName, image, audioFileUrl) => {
     setDownloadModalVisible(true);
-    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
+    console.log(
+      `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`
+    );
 
     // If the same sound/colorName is selected
     if (activeColor === colorName) {
@@ -137,12 +133,12 @@ const MainScreen = ({ navigation }) => {
             await sound.stopAsync();
             await sound.unloadAsync();
             setMainColor(backgroundColorDefault);
-            setActiveColor(null);  // Reset active color
+            setActiveColor(null); // Reset active color
           }
         } catch (e) {
           console.error('Error stopping or unloading sound:', e);
         }
-        return;  // Exit the function after stopping the sound
+        return; // Exit the function after stopping the sound
       }
     }
 
@@ -228,7 +224,6 @@ const MainScreen = ({ navigation }) => {
       console.log('Playing new sound');
       await newSound.playAsync();
       console.log('New sound playing');
-
     } catch (e) {
       console.error('Error loading or playing new sound:', e);
     }
@@ -270,8 +265,7 @@ const MainScreen = ({ navigation }) => {
           toValue: 1,
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
-      }).start();
-
+        }).start();
       } else {
         console.log('Muting sound');
         await sound.setIsMutedAsync(true);
@@ -286,7 +280,6 @@ const MainScreen = ({ navigation }) => {
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
         }).start();
-
       }
     }
   };
@@ -338,22 +331,26 @@ const MainScreen = ({ navigation }) => {
    *
    * @type {string} - The selected background color.
    */
-  const backgroundColor = mainColor || backgroundColorDefault ; // Default to white if no color is selected
+  const backgroundColor = mainColor || backgroundColorDefault; // Default to white if no color is selected
 
   /**
- * Main screen rendering which consists of:
- * - A top bar with a volume toggle button.
- * - A modal to show downloading status.
- * - A gradient background container that holds an overlay for visual effects.
- * - A container at the bottom with custom color buttons for selection.
- *
- * @returns {JSX.Element} - The rendered main screen component.
- */
+   * Main screen rendering which consists of:
+   * - A top bar with a volume toggle button.
+   * - A modal to show downloading status.
+   * - A gradient background container that holds an overlay for visual effects.
+   * - A container at the bottom with custom color buttons for selection.
+   *
+   * @returns {JSX.Element} - The rendered main screen component.
+   */
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
         <TouchableOpacity style={styles.speakerButton} onPress={handleSpeakerButtonPress}>
-          <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
+          <Icon
+            name={isMuted ? 'volume-off' : 'volume-up'}
+            size={24}
+            color={isMuted ? 'red' : 'white'}
+          />
         </TouchableOpacity>
         {/* Add other elements for the top bar */}
         <TouchableOpacity style={styles.topButton} onPress={handleSettingsPress}>
@@ -365,9 +362,7 @@ const MainScreen = ({ navigation }) => {
         <InfoModal
           visible={downloadModalVisible}
           onRequestClose={() => {}}
-          content={[
-            { label: "Downloading new sound..." },
-          ]}
+          content={[{ label: 'Downloading new sound...' }]}
         />
       </View>
 
@@ -375,13 +370,11 @@ const MainScreen = ({ navigation }) => {
         colors={['black', backgroundColor, 'black']}
         start={{ x: 0, y: 0.1 }}
         end={{ x: 0, y: 0.9 }}
-        style={[styles.mainContainer, { height: 200 }]}
-      >
+        style={[styles.mainContainer, { height: 200 }]}>
         <Animated.View style={{ ...styles.overlay, opacity: opacityValue }}>
           {activeColor && <BubbleOverlay />}
         </Animated.View>
       </LinearGradient>
-
 
       <View style={styles.buttonsContainer}>
         {/* Buttons for color selection */}
@@ -389,7 +382,6 @@ const MainScreen = ({ navigation }) => {
       </View>
     </View>
   );
-
 };
 
 export default MainScreen;
