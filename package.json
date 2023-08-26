@@ -31,6 +31,7 @@
     "expo-app-loading": "^2.1.1",
     "expo-av": "~13.4.1",
     "expo-dev-client": "~2.4.8",
+    "expo-device": "~5.4.0",
     "expo-file-system": "~15.4.3",
     "expo-font": "~11.4.0",
     "expo-keep-awake": "~12.3.0",
