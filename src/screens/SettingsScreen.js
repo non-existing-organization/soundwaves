@@ -1,33 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Constants from 'expo-constants';
-import Slider from '@react-native-community/slider';
-import { getSettings, updateSetting } from '../utils/settingsStorage';
-import styles from '../utils/styles';
-import InfoModal from '../components/InfoModal';
-import { ColorPicker, fromHsv } from 'react-native-color-picker';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  Switch,
+  TextInput,
+  Modal,
+} from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Constants from "expo-constants";
+import { getSettings, updateSetting } from "../utils/settingsStorage";
+import styles from "../utils/styles";
+import InfoModal from "../components/InfoModal";
+import ColorPicker from "react-native-wheel-color-picker";
 
 const SettingsScreen = ({ navigation }) => {
+  const pickerRef = useRef(null);
+
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
-  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
-  const [name, setName] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] =
+    useState(false);
+  const [name, setName] = useState("");
+  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
-  const [hue, setHue] = useState(0);
-  const [saturation, setSaturation] = useState(0);
-  const [value, setValue] = useState(1);
-  const [brightness, setBrightness] = useState(1); // Default brightness is full (1)
-const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
-
-
+  const [selectedColor, setSelectedColor] = useState("#FFFFFF"); // Default selected color is white
 
   useEffect(() => {
     const loadSettings = async () => {
       const settings = await getSettings();
       setPlaytimeAnimationEnabled(settings.playtimeAnimationEnabled || false);
-      setName(settings.name || '');
-      setBackgroundColor(settings.backgroundColor || '#FFFFFF');
+      setName(settings.name || "");
+      setBackgroundColor(settings.backgroundColor || "#FFFFFF");
     };
 
     loadSettings();
@@ -35,9 +39,9 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
 
   useEffect(() => {
     const saveSettings = async () => {
-      await updateSetting('playtimeAnimationEnabled', playtimeAnimationEnabled);
-      await updateSetting('name', name);
-      await updateSetting('backgroundColor', backgroundColor);
+      await updateSetting("playtimeAnimationEnabled", playtimeAnimationEnabled);
+      await updateSetting("name", name);
+      await updateSetting("backgroundColor", backgroundColor);
     };
 
     saveSettings();
@@ -55,11 +59,14 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
     setAboutModalVisible(false);
   };
 
+  const handleColorChange = (color) => {
+    setSelectedColor(color);
+  };
 
   const handleColorConfirm = () => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
-};
+  };
 
   return (
     <View style={styles.container}>
@@ -99,7 +106,9 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
           <View style={styles.componentContainer}>
             <Switch
               value={playtimeAnimationEnabled}
-              onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}
+              onValueChange={(newValue) =>
+                setPlaytimeAnimationEnabled(newValue)
+              }
             />
           </View>
         </View>
@@ -111,44 +120,51 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
           </View>
           <View style={styles.componentContainer}>
             <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>Pick Color</Text>
+              <Text
+                style={{ ...styles.settingsText, backgroundColor, padding: 10 }}
+              >
+                Pick Color
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* Add other settings as needed below */}
-
       </ScrollView>
 
       {/* Color Picker Modal */}
       {colorPickerVisible && (
         <Modal
           animationType="slide"
-          transparent={false}
+          transparent={true}
           visible={colorPickerVisible}
           onRequestClose={() => setColorPickerVisible(false)}
         >
-          <View style={styles.colorPickerModalContainer}>
-            <Text style={styles.colorPickerModalLabel}>Color Picker:</Text>
-            <ColorPicker
-              color={selectedColor}
-              onColorChange={color => setSelectedColor(fromHsv(color))}
-              style={{ flex: 1 }}
-            />
-
-            <Text style={styles.colorPickerModalLabel}>Brightness:</Text>
-            <Slider
-              style={styles.colorPickerModalSlider}
-              value={brightness}
-              onValueChange={value => {
-                  setBrightness(value);
-                  setSelectedColor(prevColor => fromHsv({ ...prevColor, v: value }));
-              }}
-            />
-
-            <TouchableOpacity onPress={handleColorConfirm} style={styles.confirmColorButton}>
-                <Text style={styles.confirmColorButtonText}>Confirm Color</Text>
-            </TouchableOpacity>
+          <View style={styles.modalBackground}>
+            <View style={styles.colorPickerWrapper}>
+              <ColorPicker
+                ref={pickerRef}
+                color={selectedColor}
+                onColorChange={handleColorChange}
+                thumbSize={40}
+                sliderSize={40}
+                noSnap={true}
+                row={false}
+              />
+              <View style={styles.buttonGap} />
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={handleColorConfirm}
+                  style={styles.confirmColorButton}
+                >
+                  <Text style={styles.confirmColorButtonText}>Confirm</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setColorPickerVisible(false)}
+                  style={styles.cancelColorButton}
+                >
+                  <Text style={styles.cancelColorButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </Modal>
       )}
@@ -157,17 +173,30 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
         visible={aboutModalVisible}
         onRequestClose={closeAboutModal}
         content={[
-          { label: 'App Name', value: Constants.manifest.name },
-          { label: 'Developer', value: "ChatGPT 4" },
-          { label: 'Version', value: Constants.manifest.version },
-          { label: 'Support Email:', value: "non.existing.organization@gmail.com" },
-          { label: 'Support Website:', value: "https://github.com/non-existing-organization/soundwaves" },
+          {
+            label: "App Name: ",
+            value: Constants.expoConfig.name,
+          },
+          {
+            label: "Developer: ",
+            value: "ChatGPT 4",
+          },
+          {
+            label: "Version:",
+            value: Constants.expoConfig.version,
+          },
+          {
+            label: "Support Email:",
+            value: "non.existing.organization@gmail.com",
+          },
+          {
+            label: "Support Website:",
+            value: "https://github.com/non-existing-organization/soundwaves",
+          },
         ]}
       />
     </View>
-);
-
-
+  );
 };
 
 export default SettingsScreen;
