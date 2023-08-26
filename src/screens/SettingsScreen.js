@@ -1,12 +1,13 @@
+import Slider from '@react-native-community/slider';
+import Constants from 'expo-constants';
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
+import { ColorPicker, fromHsv } from 'react-native-color-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Constants from 'expo-constants';
-import Slider from '@react-native-community/slider';
+
+import InfoModal from '../components/InfoModal';
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
-import InfoModal from '../components/InfoModal';
-import { ColorPicker, fromHsv } from 'react-native-color-picker';
 
 const SettingsScreen = ({ navigation }) => {
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
@@ -18,9 +19,7 @@ const SettingsScreen = ({ navigation }) => {
   const [saturation, setSaturation] = useState(0);
   const [value, setValue] = useState(1);
   const [brightness, setBrightness] = useState(1); // Default brightness is full (1)
-const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
-
-
+  const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -55,11 +54,10 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
     setAboutModalVisible(false);
   };
 
-
   const handleColorConfirm = () => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
-};
+  };
 
   return (
     <View style={styles.container}>
@@ -74,8 +72,7 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
 
       <ScrollView
         contentContainerStyle={styles.scrollContentContainer}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Name Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
@@ -111,13 +108,14 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
           </View>
           <View style={styles.componentContainer}>
             <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>Pick Color</Text>
+              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>
+                Pick Color
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         {/* Add other settings as needed below */}
-
       </ScrollView>
 
       {/* Color Picker Modal */}
@@ -126,13 +124,12 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
           animationType="slide"
           transparent={false}
           visible={colorPickerVisible}
-          onRequestClose={() => setColorPickerVisible(false)}
-        >
+          onRequestClose={() => setColorPickerVisible(false)}>
           <View style={styles.colorPickerModalContainer}>
             <Text style={styles.colorPickerModalLabel}>Color Picker:</Text>
             <ColorPicker
               color={selectedColor}
-              onColorChange={color => setSelectedColor(fromHsv(color))}
+              onColorChange={(color) => setSelectedColor(fromHsv(color))}
               style={{ flex: 1 }}
             />
 
@@ -140,14 +137,14 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
             <Slider
               style={styles.colorPickerModalSlider}
               value={brightness}
-              onValueChange={value => {
-                  setBrightness(value);
-                  setSelectedColor(prevColor => fromHsv({ ...prevColor, v: value }));
+              onValueChange={(value) => {
+                setBrightness(value);
+                setSelectedColor((prevColor) => fromHsv({ ...prevColor, v: value }));
               }}
             />
 
             <TouchableOpacity onPress={handleColorConfirm} style={styles.confirmColorButton}>
-                <Text style={styles.confirmColorButtonText}>Confirm Color</Text>
+              <Text style={styles.confirmColorButtonText}>Confirm Color</Text>
             </TouchableOpacity>
           </View>
         </Modal>
@@ -158,16 +155,17 @@ const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default select
         onRequestClose={closeAboutModal}
         content={[
           { label: 'App Name', value: Constants.manifest.name },
-          { label: 'Developer', value: "ChatGPT 4" },
+          { label: 'Developer', value: 'ChatGPT 4' },
           { label: 'Version', value: Constants.manifest.version },
-          { label: 'Support Email:', value: "non.existing.organization@gmail.com" },
-          { label: 'Support Website:', value: "https://github.com/non-existing-organization/soundwaves" },
+          { label: 'Support Email:', value: 'non.existing.organization@gmail.com' },
+          {
+            label: 'Support Website:',
+            value: 'https://github.com/non-existing-organization/soundwaves',
+          },
         ]}
       />
     </View>
-);
-
-
+  );
 };
 
 export default SettingsScreen;
