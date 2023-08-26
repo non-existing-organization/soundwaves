@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 /**
  * InfoModal Component.
  *
  * @module src/components/InfoModal
  */
 
-import React from 'react';
-import { TouchableOpacity, View, Text, Modal } from 'react-native';
-import styles from '../utils/styles';
+import React from "react";
+import { TouchableOpacity, View, Text, Modal } from "react-native";
+import styles from "../utils/styles";
 
 /**
  * Represents a modal to display information content.
@@ -40,7 +41,9 @@ const InfoModal = ({ visible, onRequestClose, content }) => {
       >
         <View style={styles.modalContent}>
           {content.map((item, index) => (
-            <Text key={index} style={styles.aboutText}>{item.label} {item.value}</Text>
+            <Text key={index} style={styles.aboutText}>
+              {item.label} {item.value}
+            </Text>
           ))}
         </View>
       </TouchableOpacity>
