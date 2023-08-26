@@ -1,14 +1,13 @@
 // styles.jsw
-import {StyleSheet } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 
 const whiteColor = '#ffffff';
 const blackColor = '#000000';
 const redColor = '#ff0000';
 const greenColor = '#00ff00';
+const brightBlueColor = '#2196F3';
 const transparentColor = 'transparent';
 const semiTransparentColor = 'rgba(0, 0, 0, 0.5)';
-
 
 const styles = StyleSheet.create({
   aboutButton: {
@@ -75,9 +74,9 @@ const styles = StyleSheet.create({
     margin: 0,
     width: 40,
   },
-  buttonViewStyle : {
+  buttonViewStyle: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonWrapper: {
     alignItems: 'center',
@@ -110,69 +109,69 @@ const styles = StyleSheet.create({
   },
   colorModalConfirmButton: {
     alignItems: 'center',
-    backgroundColor: '#2196F3',
+    backgroundColor: brightBlueColor,
     borderRadius: 5,
     marginTop: 20,
-    padding: 15
+    padding: 15,
   },
   colorModalConfirmButtonText: {
-    color: 'white',
-    fontSize: 18
+    color: whiteColor,
+    fontSize: 18,
   },
   colorModalContainer: {
-    backgroundColor: 'black',
+    backgroundColor: blackColor,
     flex: 1,
-    padding: 20
+    padding: 20,
   },
   colorModalPicker: {
-    flex: 1
+    flex: 1,
   },
   colorModalPickerTitle: {
-    color: 'white',
+    color: whiteColor,
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   colorModalSlider: {
-    height: 40
+    height: 40,
   },
   colorModalSliderContainer: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   colorModalSliderLabel: {
-    color: 'white',
+    color: whiteColor,
     fontSize: 16,
-    marginBottom: 5
+    marginBottom: 5,
   },
   colorPickerModalContainer: {
     backgroundColor: blackColor,
     flex: 1,
-    padding: 20
+    padding: 20,
   },
   colorPickerModalLabel: {
     color: whiteColor,
     fontSize: 16,
     marginBottom: 5,
-    marginTop: 10
+    marginTop: 10,
   },
   colorPickerModalSlider: {
     height: 40,
-    marginTop: 10
+    marginTop: 10,
   },
   componentContainer: {
     flex: 0.5,
     justifyContent: 'center',
   },
   confirmColorButton: {
-      alignItems: 'center',
-      backgroundColor: 'white',
-      borderRadius: 8,
-      justifyContent: 'center',
-      marginTop: 20,
-      padding: 10,
+    alignItems: 'center',
+    backgroundColor: whiteColor,
+    borderRadius: 8,
+    justifyContent: 'center',
+    marginTop: 20,
+    padding: 10,
   },
   confirmColorButtonText: {
-      color: 'black',
-      fontWeight: 'bold',
+    color: blackColor,
+    fontWeight: 'bold',
   },
   container: {
     backgroundColor: blackColor,
@@ -329,12 +328,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 54,
-  }
-
-
+  },
 });
-
-
-
 
 export default styles;
