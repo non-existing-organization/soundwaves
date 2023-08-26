@@ -18,5 +18,25 @@
 			"**/node_modules": true
 		},
 		"liveServer.settings.multiRootWorkspaceName": "soundwaves",
+		"workbench.colorCustomizations": {
+			"activityBar.activeBackground": "#2c019f",
+			"activityBar.background": "#2c019f",
+			"activityBar.foreground": "#e7e7e7",
+			"activityBar.inactiveForeground": "#e7e7e799",
+			"activityBarBadge.background": "#be3501",
+			"activityBarBadge.foreground": "#e7e7e7",
+			"commandCenter.border": "#e7e7e799",
+			"sash.hoverBorder": "#2c019f",
+			"statusBar.background": "#1e016d",
+			"statusBar.foreground": "#e7e7e7",
+			"statusBarItem.hoverBackground": "#2c019f",
+			"statusBarItem.remoteBackground": "#1e016d",
+			"statusBarItem.remoteForeground": "#e7e7e7",
+			"titleBar.activeBackground": "#1e016d",
+			"titleBar.activeForeground": "#e7e7e7",
+			"titleBar.inactiveBackground": "#1e016d99",
+			"titleBar.inactiveForeground": "#e7e7e799"
+		},
+		"peacock.color": "#1e016d",
 	}
 }
