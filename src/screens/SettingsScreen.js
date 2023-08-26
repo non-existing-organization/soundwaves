@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
-import * as Device from 'expo-device';
 
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
@@ -86,12 +85,6 @@ const SettingsScreen = ({ navigation }) => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
   };
-
-  if (Device.isDevice) {
-    console.log('Running on a real device');
-  } else {
-    console.log('Running on an emulator/simulator');
-  }
 
   return (
     <View style={styles.container}>
