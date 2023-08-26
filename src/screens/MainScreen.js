@@ -1,20 +1,17 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Modal, Text, Animated } from 'react-native';
-import { Audio } from 'expo-av';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as FileSystem from 'expo-file-system';
+import React, { useState, useEffect, useRef } from "react";
+import { View, TouchableOpacity, Modal, Text, Animated } from "react-native";
+import { Audio } from "expo-av";
+import { LinearGradient } from "expo-linear-gradient";
+import * as FileSystem from "expo-file-system";
 
-import Icon from 'react-native-vector-icons/FontAwesome';
-import colorMap from '../utils/colorMap';
-import styles from '../utils/styles';
-import CustomButton from '../components/CustomButton';
-import BubbleOverlay from '../utils/BubbleOverlay';
-import InfoModal from '../components/InfoModal';
-
-
-
+import Icon from "react-native-vector-icons/FontAwesome";
+import colorMap from "../utils/colorMap";
+import styles from "../utils/styles";
+import CustomButton from "../components/CustomButton";
+import BubbleOverlay from "../utils/BubbleOverlay";
+import InfoModal from "../components/InfoModal";
 
 const MainScreen = ({ navigation }) => {
   const [mainColor, setMainColor] = useState(null);
@@ -27,15 +24,12 @@ const MainScreen = ({ navigation }) => {
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
-  const backgroundColorDefault = '#202020';
-
-
-
+  const backgroundColorDefault = "#202020";
 
   useEffect(() => {
     return () => {
       if (sound) {
-        console.log('Unloading Sound on component unmount');
+        console.log("Unloading Sound on component unmount");
         sound.unloadAsync();
       }
     };
@@ -62,7 +56,7 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue downloading the file.
    */
   const downloadAudioFile = async (audioFileUrl) => {
-    const uriArray = audioFileUrl.split('/');
+    const uriArray = audioFileUrl.split("/");
     const audioFile = uriArray[uriArray.length - 1];
 
     // Define the path of the new file
@@ -82,12 +76,12 @@ const MainScreen = ({ navigation }) => {
         setIsLoading(true);
         setDownloadModalVisible(true);
         const result = await FileSystem.downloadAsync(audioFileUrl, path);
-        console.log('Download result:', result.status);
+        console.log("Download result:", result.status);
         setIsLoading(false);
         setDownloadModalVisible(false);
         return result.uri;
       } catch (e) {
-        console.error('Error downloading file:', e);
+        console.error("Error downloading file:", e);
         return null;
       }
     }
@@ -124,31 +118,34 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue stopping or unloading a sound.
    */
   const handleButtonPress = async (colorName, image, audioFileUrl) => {
-    setDownloadModalVisible(true);
-    console.log(`Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`);
+    console.log(
+      `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`
+    );
 
     // If the same sound/colorName is selected
     if (activeColor === colorName) {
       if (sound) {
-        console.log('Same sound selected, stopping and unloading current sound');
+        console.log(
+          "Same sound selected, stopping and unloading current sound"
+        );
         try {
           // Check if the sound is loaded before attempting to stop or unload
           if (await isSoundLoaded()) {
             await sound.stopAsync();
             await sound.unloadAsync();
             setMainColor(backgroundColorDefault);
-            setActiveColor(null);  // Reset active color
+            setActiveColor(null); // Reset active color
           }
         } catch (e) {
-          console.error('Error stopping or unloading sound:', e);
+          console.error("Error stopping or unloading sound:", e);
         }
-        return;  // Exit the function after stopping the sound
+        return; // Exit the function after stopping the sound
       }
     }
 
     // Stop the currently playing sound, if any other sound is playing
     if (sound) {
-      console.log('Stopping and unloading current sound');
+      console.log("Stopping and unloading current sound");
       try {
         // Check if the sound is loaded before attempting to stop or unload
         if (await isSoundLoaded()) {
@@ -156,7 +153,7 @@ const MainScreen = ({ navigation }) => {
           await sound.unloadAsync();
         }
       } catch (e) {
-        console.error('Error stopping or unloading sound:', e);
+        console.error("Error stopping or unloading sound:", e);
       }
     }
 
@@ -166,7 +163,7 @@ const MainScreen = ({ navigation }) => {
     // Download the new audio file and play the sound
     const localAudioFileUri = await downloadAudioFile(audioFileUrl);
     if (!localAudioFileUri) {
-      console.log('Error downloading sound');
+      console.log("Error downloading sound");
       return;
     }
 
@@ -175,7 +172,6 @@ const MainScreen = ({ navigation }) => {
 
     // Update the main color
     setMainColor(colorMap.get(colorName).colors[Math.floor(Math.random() * 5)]);
-    setDownloadModalVisible(false);
   };
 
   /**
@@ -196,7 +192,7 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue loading or playing the sound.
    */
   const loadAndPlayNewSound = async (audioFile, colorName) => {
-    console.log('Loading new sound');
+    console.log("Loading new sound");
     // Fade in the BubbleOverlay
     Animated.timing(opacityValue, {
       toValue: 1,
@@ -216,21 +212,20 @@ const MainScreen = ({ navigation }) => {
         (status) => {
           if (status.didJustFinish && !status.isLooping) {
             setLoopCount((prevCount) => prevCount + 1);
-            console.log('Loop count:', loopCount);
+            console.log("Loop count:", loopCount);
           }
         }
       );
       setSound(newSound);
       setCurrentAudioFile(colorName);
       setActiveColor(colorName);
-      console.log('New sound loaded');
+      console.log("New sound loaded");
 
-      console.log('Playing new sound');
+      console.log("Playing new sound");
       await newSound.playAsync();
-      console.log('New sound playing');
-
+      console.log("New sound playing");
     } catch (e) {
-      console.error('Error loading or playing new sound:', e);
+      console.error("Error loading or playing new sound:", e);
     }
   };
 
@@ -258,27 +253,26 @@ const MainScreen = ({ navigation }) => {
   const handleSpeakerButtonPress = async () => {
     if (sound) {
       if (isMuted) {
-        console.log('Unmuting sound');
+        console.log("Unmuting sound");
         await sound.setIsMutedAsync(false);
         setIsMuted(false);
         setActiveColor(previousColorRef.current || null);
         previousColorRef.current = null;
-        console.log('Sound unmuted');
+        console.log("Sound unmuted");
 
         // Fade in the BubbleOverlay
         Animated.timing(opacityValue, {
           toValue: 1,
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
-      }).start();
-
+        }).start();
       } else {
-        console.log('Muting sound');
+        console.log("Muting sound");
         await sound.setIsMutedAsync(true);
         setIsMuted(true);
         previousColorRef.current = activeColor;
-        setActiveColor('red');
-        console.log('Sound muted');
+        setActiveColor("red");
+        console.log("Sound muted");
 
         // Fade out the BubbleOverlay
         Animated.timing(opacityValue, {
@@ -286,14 +280,13 @@ const MainScreen = ({ navigation }) => {
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
         }).start();
-
       }
     }
   };
 
   // Handle settings button press
   const handleSettingsPress = () => {
-    navigation.navigate('Settings'); // Navigate to the SettingsScreen
+    navigation.navigate("Settings"); // Navigate to the SettingsScreen
   };
 
   /**
@@ -314,7 +307,10 @@ const MainScreen = ({ navigation }) => {
    * - For each color, a button is rendered with its respective image, thumbnail, and active/muted states.
    * - On press of the button, the handleButtonPress function is called with the color's properties.
    */
-  const renderCustomButton = ([colorName, { name, image, thumbnail, audioFile }]) => {
+  const renderCustomButton = ([
+    colorName,
+    { name, image, thumbnail, audioFile },
+  ]) => {
     const onPress = () => handleButtonPress(colorName, image, audioFile);
     const isButtonActive = activeColor === colorName;
     const isButtonMuted = isMuted;
@@ -338,25 +334,35 @@ const MainScreen = ({ navigation }) => {
    *
    * @type {string} - The selected background color.
    */
-  const backgroundColor = mainColor || backgroundColorDefault ; // Default to white if no color is selected
+  const backgroundColor = mainColor || backgroundColorDefault; // Default to white if no color is selected
 
   /**
- * Main screen rendering which consists of:
- * - A top bar with a volume toggle button.
- * - A modal to show downloading status.
- * - A gradient background container that holds an overlay for visual effects.
- * - A container at the bottom with custom color buttons for selection.
- *
- * @returns {JSX.Element} - The rendered main screen component.
- */
+   * Main screen rendering which consists of:
+   * - A top bar with a volume toggle button.
+   * - A modal to show downloading status.
+   * - A gradient background container that holds an overlay for visual effects.
+   * - A container at the bottom with custom color buttons for selection.
+   *
+   * @returns {JSX.Element} - The rendered main screen component.
+   */
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
-        <TouchableOpacity style={styles.speakerButton} onPress={handleSpeakerButtonPress}>
-          <Icon name={isMuted ? 'volume-off' : 'volume-up'} size={24} color={isMuted ? 'red' : 'white'} />
+        <TouchableOpacity
+          style={styles.speakerButton}
+          onPress={handleSpeakerButtonPress}
+        >
+          <Icon
+            name={isMuted ? "volume-off" : "volume-up"}
+            size={24}
+            color={isMuted ? "red" : "white"}
+          />
         </TouchableOpacity>
         {/* Add other elements for the top bar */}
-        <TouchableOpacity style={styles.topButton} onPress={handleSettingsPress}>
+        <TouchableOpacity
+          style={styles.topButton}
+          onPress={handleSettingsPress}
+        >
           <Icon name="gear" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -365,14 +371,12 @@ const MainScreen = ({ navigation }) => {
         <InfoModal
           visible={downloadModalVisible}
           onRequestClose={() => {}}
-          content={[
-            { label: "Downloading new sound..." },
-          ]}
+          content={[{ label: "Downloading new sound..." }]}
         />
       </View>
 
       <LinearGradient
-        colors={['black', backgroundColor, 'black']}
+        colors={["black", backgroundColor, "black"]}
         start={{ x: 0, y: 0.1 }}
         end={{ x: 0, y: 0.9 }}
         style={[styles.mainContainer, { height: 200 }]}
@@ -382,14 +386,12 @@ const MainScreen = ({ navigation }) => {
         </Animated.View>
       </LinearGradient>
 
-
       <View style={styles.buttonsContainer}>
         {/* Buttons for color selection */}
         {Array.from(colorMap).map(renderCustomButton)}
       </View>
     </View>
   );
-
 };
 
 export default MainScreen;
