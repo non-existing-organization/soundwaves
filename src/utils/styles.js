@@ -1,20 +1,27 @@
 // styles.jsw
-import {StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-
-const whiteColor = '#ffffff';
-const blackColor = '#000000';
-const redColor = '#ff0000';
-const greenColor = '#00ff00';
-const transparentColor = 'transparent';
-const semiTransparentColor = 'rgba(0, 0, 0, 0.5)';
-
+const whiteColor = "#ffffff";
+const blackColor = "#000000";
+const greyLightColor = "#cccccc";
+const greyDarkColor = "#333333";
+const redColor = "#ff0000";
+const redLightColor = "#ffcccc";
+const redDarkColor = "#800000";
+const greenColor = "#00ff00";
+const greenLightColor = "#ccffcc";
+const greenDarkColor = "#008000";
+const blueColor = "#0000ff";
+const blueLightColor = "#ccccff";
+const blueDarkColor = "#000080";
+const transparentColor = "transparent";
+const semiTransparentColor = "rgba(0, 0, 0, 0.9)";
 
 const styles = StyleSheet.create({
   aboutButton: {
-    alignItems: 'center',
+    alignItems: "center",
     height: 60,
-    justifyContent: 'center',
+    justifyContent: "center",
     margin: 10,
     width: 60,
   },
@@ -23,51 +30,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   aboutInfo: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 8,
   },
   aboutLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginRight: 8,
   },
   aboutText: {
     color: whiteColor,
     fontSize: 16,
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   aboutValue: {
     fontSize: 16,
   },
   activeButton: {
-    borderColor: greenColor,
+    borderColor: greenLightColor,
     borderWidth: 2,
   },
   bubble: {
     borderRadius: 50,
-    position: 'absolute',
+    position: "absolute",
     transform: [{ scale: 0.2 }],
   },
   button: {
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 15,
     borderWidth: 2,
     height: 70,
-    justifyContent: 'center',
+    justifyContent: "center",
     margin: 10,
     width: 70,
-  },
-  buttonContainer: {
-    alignItems: 'center',
-    bottom: 30,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    padding: 10,
-    position: 'absolute',
-    width: '100%',
   },
   buttonImage: {
     borderRadius: 10,
@@ -75,104 +72,94 @@ const styles = StyleSheet.create({
     margin: 0,
     width: 40,
   },
-  buttonViewStyle : {
-    alignItems: 'center',
-    justifyContent: 'center'
+  buttonViewStyle: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonWrapper: {
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 10,
     paddingHorizontal: 10,
-    width: '20%',
+    width: "20%",
   },
+
   buttonsContainer: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    alignItems: "flex-start",
+    flexDirection: "row",
+    flexWrap: "flow",
+    justifyContent: "center",
     paddingBottom: 30,
-    width: '100%',
+    width: "100%",
   },
   checkBox: {
-    alignItems: 'center',
+    alignItems: "center",
     borderColor: whiteColor,
     borderRadius: 9,
     borderWidth: 2,
     height: 18,
-    justifyContent: 'center',
+    justifyContent: "center",
     width: 18,
   },
   checkboxContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     height: 24,
-    justifyContent: 'center',
+    justifyContent: "center",
     width: 24,
   },
   colorModalConfirmButton: {
-    alignItems: 'center',
-    backgroundColor: '#2196F3',
+    alignItems: "center",
+    backgroundColor: blueLightColor,
     borderRadius: 5,
     marginTop: 20,
-    padding: 15
+    padding: 15,
   },
   colorModalConfirmButtonText: {
-    color: 'white',
-    fontSize: 18
+    color: whiteColor,
+    fontSize: 18,
   },
   colorModalContainer: {
-    backgroundColor: 'black',
+    backgroundColor: blackColor,
     flex: 1,
-    padding: 20
+    padding: 20,
   },
   colorModalPicker: {
-    flex: 1
+    flex: 1,
   },
   colorModalPickerTitle: {
-    color: 'white',
+    color: whiteColor,
     fontSize: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   colorModalSlider: {
-    height: 40
+    height: 40,
   },
   colorModalSliderContainer: {
-    marginVertical: 10
+    marginVertical: 10,
   },
   colorModalSliderLabel: {
-    color: 'white',
+    color: whiteColor,
     fontSize: 16,
-    marginBottom: 5
+    marginBottom: 5,
   },
   colorPickerModalContainer: {
     backgroundColor: blackColor,
     flex: 1,
-    padding: 20
+    justifyContent: "space-between",
+    padding: 10,
   },
   colorPickerModalLabel: {
     color: whiteColor,
     fontSize: 16,
     marginBottom: 5,
-    marginTop: 10
+    marginTop: 10,
   },
   colorPickerModalSlider: {
     height: 40,
-    marginTop: 10
+    marginTop: 10,
   },
   componentContainer: {
     flex: 0.5,
-    justifyContent: 'center',
-  },
-  confirmColorButton: {
-      alignItems: 'center',
-      backgroundColor: 'white',
-      borderRadius: 8,
-      justifyContent: 'center',
-      marginTop: 20,
-      padding: 10,
-  },
-  confirmColorButtonText: {
-      color: 'black',
-      fontWeight: 'bold',
+    justifyContent: "center",
   },
   container: {
     backgroundColor: blackColor,
@@ -188,7 +175,7 @@ const styles = StyleSheet.create({
     borderBottomColor: whiteColor,
     borderBottomWidth: 1,
     marginBottom: 20,
-    width: '100%',
+    width: "100%",
   },
   icon: {
     color: whiteColor,
@@ -204,37 +191,37 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 5,
     padding: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   labelContainer: {
     flex: 0.5,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   loadingText: {
     color: whiteColor,
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   mainContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     flex: 1,
-    justifyContent: 'center',
-    width: '100%',
+    justifyContent: "center",
+    width: "100%",
   },
   modalContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: semiTransparentColor,
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   modalContent: {
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: transparentColor,
     borderColor: whiteColor,
     borderRadius: 15,
     borderWidth: 2,
-    flexDirection: 'column',
+    flexDirection: "column",
     paddingHorizontal: 20,
     paddingVertical: 50,
   },
@@ -243,8 +230,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
   noiseItem: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 6,
   },
   noiseText: {
@@ -256,8 +243,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   overlay: Object.assign({}, StyleSheet.absoluteFillObject, {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   }),
   scrollContentContainer: {
     flexGrow: 1,
@@ -265,26 +252,25 @@ const styles = StyleSheet.create({
   segmentTitle: {
     color: whiteColor,
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   separator: {
     backgroundColor: whiteColor,
     height: 2,
     marginVertical: 20,
-    width: '100%',
+    width: "100%",
   },
   settingRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: 16,
   },
   settingsText: {
     color: whiteColor,
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
     marginBottom: 20,
   },
-
   speakerButton: {
     padding: 10,
   },
@@ -292,49 +278,89 @@ const styles = StyleSheet.create({
   spinnerContainer: {
     marginTop: 70,
   },
-
   subButton: {
     borderRadius: 15,
     height: 30,
     marginVertical: 5,
     width: 30,
   },
-
   subButtonContainer: {
-    alignItems: 'center',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    top: -60,
+    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    margin: 10,
+    padding: 10,
   },
-
   topBarContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     height: 50,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginBottom: 10,
     marginTop: 50,
     paddingHorizontal: 16,
-    width: '100%',
+    width: "100%",
   },
-
   topButton: {
     padding: 10,
   },
-
   topButtonsBar: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingTop: 54,
-  }
+  },
 
-
+  modalBackground: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: blackColor,
+  },
+  colorPickerWrapper: {
+    margin: 20,
+    padding: 20,
+    backgroundColor: blackColor,
+    borderRadius: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  buttonGap: {
+    height: 20,
+  },
+  confirmColorButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: greenDarkColor,
+    padding: 15,
+    borderRadius: 20,
+    marginRight: 10,
+    borderWidth: 1,
+    borderColor: whiteColor,
+  },
+  cancelColorButton: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: redDarkColor,
+    padding: 15,
+    borderRadius: 20,
+    marginLeft: 10,
+    borderWidth: 1,
+    borderColor: whiteColor,
+  },
+  confirmColorButtonText: {
+    color: whiteColor,
+    fontWeight: "bold",
+  },
+  cancelColorButtonText: {
+    color: whiteColor,
+    fontWeight: "bold",
+  },
 });
-
-
-
 
 export default styles;
