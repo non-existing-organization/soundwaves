@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   activeButton: {
-    borderColor: greenLightColor,
+    borderColor: greenColor,
     borderWidth: 2,
   },
   bubble: {
