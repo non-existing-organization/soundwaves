@@ -66,6 +66,13 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 70,
   },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  buttonGap: {
+    height: 20,
+  },
   buttonImage: {
     borderRadius: 10,
     height: 40,
@@ -82,7 +89,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: "20%",
   },
-
   buttonsContainer: {
     alignItems: "flex-start",
     flexDirection: "row",
@@ -90,6 +96,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 30,
     width: "100%",
+  },
+  cancelColorButton: {
+    alignItems: "center",
+    backgroundColor: redDarkColor,
+    borderColor: whiteColor,
+    borderRadius: 20,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: "center",
+    marginLeft: 10,
+    padding: 15,
+  },
+  cancelColorButtonText: {
+    color: whiteColor,
+    fontWeight: "bold",
   },
   checkBox: {
     alignItems: "center",
@@ -157,9 +178,30 @@ const styles = StyleSheet.create({
     height: 40,
     marginTop: 10,
   },
+  colorPickerWrapper: {
+    backgroundColor: blackColor,
+    borderRadius: 10,
+    margin: 20,
+    padding: 20,
+  },
   componentContainer: {
     flex: 0.5,
     justifyContent: "center",
+  },
+  confirmColorButton: {
+    alignItems: "center",
+    backgroundColor: greenDarkColor,
+    borderColor: whiteColor,
+    borderRadius: 20,
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: "center",
+    marginRight: 10,
+    padding: 15,
+  },
+  confirmColorButtonText: {
+    color: whiteColor,
+    fontWeight: "bold",
   },
   container: {
     backgroundColor: blackColor,
@@ -208,6 +250,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     width: "100%",
+  },
+  modalBackground: {
+    alignItems: "center",
+    backgroundColor: blackColor,
+    flex: 1,
+    justifyContent: "center",
   },
   modalContainer: {
     alignItems: "center",
@@ -274,7 +322,6 @@ const styles = StyleSheet.create({
   speakerButton: {
     padding: 10,
   },
-
   spinnerContainer: {
     marginTop: 70,
   },
@@ -310,56 +357,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingTop: 54,
-  },
-
-  modalBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: blackColor,
-  },
-  colorPickerWrapper: {
-    margin: 20,
-    padding: 20,
-    backgroundColor: blackColor,
-    borderRadius: 10,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  buttonGap: {
-    height: 20,
-  },
-  confirmColorButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: greenDarkColor,
-    padding: 15,
-    borderRadius: 20,
-    marginRight: 10,
-    borderWidth: 1,
-    borderColor: whiteColor,
-  },
-  cancelColorButton: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: redDarkColor,
-    padding: 15,
-    borderRadius: 20,
-    marginLeft: 10,
-    borderWidth: 1,
-    borderColor: whiteColor,
-  },
-  confirmColorButtonText: {
-    color: whiteColor,
-    fontWeight: "bold",
-  },
-  cancelColorButtonText: {
-    color: whiteColor,
-    fontWeight: "bold",
   },
 });
 
