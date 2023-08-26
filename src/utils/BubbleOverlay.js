@@ -2,10 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+
 import styles from './styles';
 
-
-const BubbleOverlay = ({ bubbleCount = 150, minRadius = 5, maxRadius = 100, bubbleColor = 'rgba(255, 255, 255, 0.1)' }) => {
+const BubbleOverlay = ({
+  bubbleCount = 150,
+  minRadius = 5,
+  maxRadius = 100,
+  bubbleColor = 'rgba(255, 255, 255, 0.1)',
+}) => {
   const [bubbles] = useState(Array.from({ length: bubbleCount }));
 
   // Generate random values for bubbles' motion
@@ -28,7 +33,6 @@ const BubbleOverlay = ({ bubbleCount = 150, minRadius = 5, maxRadius = 100, bubb
       clearInterval(bubbleTimer); // Clear the timer on component unmount
     };
   }, []);
-
 
   return (
     <View style={styles.overlay}>
@@ -61,11 +65,9 @@ const BubbleOverlay = ({ bubbleCount = 150, minRadius = 5, maxRadius = 100, bubb
             ]}
           />
         );
-
       })}
     </View>
   );
 };
-
 
 export default BubbleOverlay;
