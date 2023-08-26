@@ -1,72 +1,97 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  Switch,
-  TextInput,
-  Modal,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Constants from "expo-constants";
-import { getSettings, updateSetting } from "../utils/settingsStorage";
-import styles from "../utils/styles";
-import InfoModal from "../components/InfoModal";
-import ColorPicker from "react-native-wheel-color-picker";
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 
+import { getSettings, updateSetting } from '../utils/settingsStorage';
+import styles from '../utils/styles';
+import InfoModal from '../components/InfoModal';
+import ColorPicker from 'react-native-wheel-color-picker';
+
+/**
+ * The settings screen where users can modify their application settings.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const SettingsScreen = ({ navigation }) => {
   const pickerRef = useRef(null);
 
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
-  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] =
-    useState(false);
-  const [name, setName] = useState("");
-  const [backgroundColor, setBackgroundColor] = useState("#FFFFFF");
+  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
+  const [name, setName] = useState('');
+  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("#FFFFFF"); // Default selected color is white
+  const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
 
+  /**
+   * Load application settings from storage.
+   */
   useEffect(() => {
     const loadSettings = async () => {
       const settings = await getSettings();
       setPlaytimeAnimationEnabled(settings.playtimeAnimationEnabled || false);
-      setName(settings.name || "");
-      setBackgroundColor(settings.backgroundColor || "#FFFFFF");
+      setName(settings.name || '');
+      setBackgroundColor(settings.backgroundColor || '#FFFFFF');
     };
-
     loadSettings();
   }, []);
 
+  /**
+   * Save any changes made to application settings.
+   */
   useEffect(() => {
     const saveSettings = async () => {
-      await updateSetting("playtimeAnimationEnabled", playtimeAnimationEnabled);
-      await updateSetting("name", name);
-      await updateSetting("backgroundColor", backgroundColor);
+      await updateSetting('playtimeAnimationEnabled', playtimeAnimationEnabled);
+      await updateSetting('name', name);
+      await updateSetting('backgroundColor', backgroundColor);
     };
 
     saveSettings();
   }, [playtimeAnimationEnabled, name, backgroundColor]);
 
+  /**
+   * Navigate back to the previous screen.
+   */
   const handleBackPress = () => {
     navigation.goBack();
   };
 
+  /**
+   * Open the about modal.
+   */
   const handleAboutPress = () => {
     setAboutModalVisible(true);
   };
 
+  /**
+   * Close the about modal.
+   */
   const closeAboutModal = () => {
     setAboutModalVisible(false);
   };
 
+  /**
+   * Handle color change event from the color picker.
+   * @param {string} color The selected color.
+   */
   const handleColorChange = (color) => {
     setSelectedColor(color);
   };
 
+  /**
+   * Handle color confirm event from the color picker.
+   */
   const handleColorConfirm = () => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
   };
+
+  if (Device.isDevice) {
+    console.log('Running on a real device');
+  } else {
+    console.log('Running on an emulator/simulator');
+  }
 
   return (
     <View style={styles.container}>
@@ -81,8 +106,7 @@ const SettingsScreen = ({ navigation }) => {
 
       <ScrollView
         contentContainerStyle={styles.scrollContentContainer}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Name Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
@@ -106,9 +130,7 @@ const SettingsScreen = ({ navigation }) => {
           <View style={styles.componentContainer}>
             <Switch
               value={playtimeAnimationEnabled}
-              onValueChange={(newValue) =>
-                setPlaytimeAnimationEnabled(newValue)
-              }
+              onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}
             />
           </View>
         </View>
@@ -120,9 +142,7 @@ const SettingsScreen = ({ navigation }) => {
           </View>
           <View style={styles.componentContainer}>
             <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <Text
-                style={{ ...styles.settingsText, backgroundColor, padding: 10 }}
-              >
+              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>
                 Pick Color
               </Text>
             </TouchableOpacity>
@@ -136,8 +156,7 @@ const SettingsScreen = ({ navigation }) => {
           animationType="slide"
           transparent={true}
           visible={colorPickerVisible}
-          onRequestClose={() => setColorPickerVisible(false)}
-        >
+          onRequestClose={() => setColorPickerVisible(false)}>
           <View style={styles.modalBackground}>
             <View style={styles.colorPickerWrapper}>
               <ColorPicker
@@ -151,16 +170,12 @@ const SettingsScreen = ({ navigation }) => {
               />
               <View style={styles.buttonGap} />
               <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                  onPress={handleColorConfirm}
-                  style={styles.confirmColorButton}
-                >
+                <TouchableOpacity onPress={handleColorConfirm} style={styles.confirmColorButton}>
                   <Text style={styles.confirmColorButtonText}>Confirm</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => setColorPickerVisible(false)}
-                  style={styles.cancelColorButton}
-                >
+                  style={styles.cancelColorButton}>
                   <Text style={styles.cancelColorButtonText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
@@ -174,24 +189,24 @@ const SettingsScreen = ({ navigation }) => {
         onRequestClose={closeAboutModal}
         content={[
           {
-            label: "App Name: ",
+            label: 'App Name: ',
             value: Constants.expoConfig.name,
           },
           {
-            label: "Developer: ",
-            value: "ChatGPT 4",
+            label: 'Developer: ',
+            value: 'ChatGPT 4',
           },
           {
-            label: "Version:",
+            label: 'Version:',
             value: Constants.expoConfig.version,
           },
           {
-            label: "Support Email:",
-            value: "non.existing.organization@gmail.com",
+            label: 'Support Email:',
+            value: 'non.existing.organization@gmail.com',
           },
           {
-            label: "Support Website:",
-            value: "https://github.com/non-existing-organization/soundwaves",
+            label: 'Support Website:',
+            value: 'https://github.com/non-existing-organization/soundwaves',
           },
         ]}
       />
