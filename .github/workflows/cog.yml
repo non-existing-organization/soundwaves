@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   cog_check_job:
@@ -20,8 +23,8 @@ jobs:
         with:
           check-latest-tag-only: true
           release: true
-          git-user: "stiliajohny"
-          git-user-email: "stilia.johny@gmail.com"
+          git-user: 'stiliajohny'
+          git-user-email: 'stilia.johny@gmail.com'
 
       - name: Generate Changelog
         run: cog changelog --at ${{ steps.release.outputs.version }} -t full_hash > GITHUB_CHANGELOG.md
