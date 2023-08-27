@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
+import ColorPicker from 'react-native-wheel-color-picker';
+import Slider from '@react-native-community/slider'; // Import the slider component
 
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
 import InfoModal from '../components/InfoModal';
-import ColorPicker from 'react-native-wheel-color-picker';
 
 /**
  * The settings screen where users can modify their application settings.
@@ -22,6 +23,7 @@ const SettingsScreen = ({ navigation }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
+  const [startVolume, setStartVolume] = useState(50); // Initial value of the start volume
 
   /**
    * Load application settings from storage.
@@ -86,6 +88,34 @@ const SettingsScreen = ({ navigation }) => {
     setColorPickerVisible(false);
   };
 
+  /**
+   * Handle start volume change event from the slider.
+   * @param {number} volume The selected volume.
+   */
+  const handleStartVolumeChange = (volume) => {
+    setStartVolume(volume);
+  };
+
+  // add JSDOcs
+
+  /**
+   * Get the contrast text color based on the background color.
+   * @date 27/08/2023 - 22:18:58
+   *
+   * @param {*} backgroundColor
+   * @returns {*}
+   */
+  const getContrastTextColor = (backgroundColor) => {
+    // Convert background color to a luminance value
+    const r = parseInt(backgroundColor.substr(1, 2), 16);
+    const g = parseInt(backgroundColor.substr(3, 2), 16);
+    const b = parseInt(backgroundColor.substr(5, 2), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Return white or black based on luminance
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
@@ -128,17 +158,44 @@ const SettingsScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Background Color Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
             <Text style={styles.settingsText}>Background Color</Text>
           </View>
           <View style={styles.componentContainer}>
             <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>
-                Pick Color
-              </Text>
+              <View
+                style={{
+                  ...styles.pickColorBox, // A new style for the wrapping View
+                  backgroundColor: backgroundColor,
+                  // borderColor: getContrastTextColor(backgroundColor), // Use contrasting text color as border color
+                }}>
+                <Text
+                  style={{
+                    ...styles.pickColorText,
+                    color: getContrastTextColor(backgroundColor), // Calculate inverted text color
+                  }}>
+                  Pick Color
+                </Text>
+              </View>
             </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Start Volume Setting */}
+        <View style={styles.settingRow}>
+          <View style={styles.labelContainer}>
+            <Text style={styles.settingsText}>Start Volume</Text>
+          </View>
+          <View style={styles.componentContainer}>
+            <Slider
+              style={styles.slider}
+              minimumValue={1}
+              maximumValue={100}
+              value={startVolume}
+              onValueChange={handleStartVolumeChange}
+            />
+            <Text style={styles.sliderValueText}>{startVolume}</Text>
           </View>
         </View>
       </ScrollView>
