@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Constants from 'expo-constants';
+import ColorPicker from 'react-native-wheel-color-picker';
+import Slider from '@react-native-community/slider'; // Import the slider component
 
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
 import InfoModal from '../components/InfoModal';
-import ColorPicker from 'react-native-wheel-color-picker';
 
 /**
  * The settings screen where users can modify their application settings.
@@ -22,6 +23,7 @@ const SettingsScreen = ({ navigation }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
+  const [startVolume, setStartVolume] = useState(50); // Initial value of the start volume
 
   /**
    * Load application settings from storage.
@@ -86,6 +88,14 @@ const SettingsScreen = ({ navigation }) => {
     setColorPickerVisible(false);
   };
 
+  /**
+   * Handle start volume change event from the slider.
+   * @param {number} volume The selected volume.
+   */
+  const handleStartVolumeChange = (volume) => {
+    setStartVolume(volume);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
@@ -139,6 +149,23 @@ const SettingsScreen = ({ navigation }) => {
                 Pick Color
               </Text>
             </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Start Volume Setting */}
+        <View style={styles.settingRow}>
+          <View style={styles.labelContainer}>
+            <Text style={styles.settingsText}>Start Volume</Text>
+          </View>
+          <View style={styles.componentContainer}>
+            <Slider
+              style={styles.slider}
+              minimumValue={1}
+              maximumValue={100}
+              value={startVolume}
+              onValueChange={handleStartVolumeChange}
+            />
+            <Text style={styles.sliderValueText}>{startVolume}</Text>
           </View>
         </View>
       </ScrollView>

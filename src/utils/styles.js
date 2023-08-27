@@ -1,27 +1,27 @@
 // styles.jsw
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-const whiteColor = "#ffffff";
-const blackColor = "#000000";
-const greyLightColor = "#cccccc";
-const greyDarkColor = "#333333";
-const redColor = "#ff0000";
-const redLightColor = "#ffcccc";
-const redDarkColor = "#800000";
-const greenColor = "#00ff00";
-const greenLightColor = "#ccffcc";
-const greenDarkColor = "#008000";
-const blueColor = "#0000ff";
-const blueLightColor = "#ccccff";
-const blueDarkColor = "#000080";
-const transparentColor = "transparent";
-const semiTransparentColor = "rgba(0, 0, 0, 0.9)";
+const whiteColor = '#ffffff';
+const blackColor = '#000000';
+const greyLightColor = '#cccccc';
+const greyDarkColor = '#333333';
+const redColor = '#ff0000';
+const redLightColor = '#ffcccc';
+const redDarkColor = '#800000';
+const greenColor = '#00ff00';
+const greenLightColor = '#ccffcc';
+const greenDarkColor = '#008000';
+const blueColor = '#0000ff';
+const blueLightColor = '#ccccff';
+const blueDarkColor = '#000080';
+const transparentColor = 'transparent';
+const semiTransparentColor = 'rgba(0, 0, 0, 0.9)';
 
 const styles = StyleSheet.create({
   aboutButton: {
-    alignItems: "center",
+    alignItems: 'center',
     height: 60,
-    justifyContent: "center",
+    justifyContent: 'center',
     margin: 10,
     width: 60,
   },
@@ -30,20 +30,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   aboutInfo: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     marginBottom: 8,
   },
   aboutLabel: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginRight: 8,
   },
   aboutText: {
     color: whiteColor,
     fontSize: 16,
     marginBottom: 20,
-    textAlign: "center",
+    textAlign: 'center',
   },
   aboutValue: {
     fontSize: 16,
@@ -54,15 +54,15 @@ const styles = StyleSheet.create({
   },
   bubble: {
     borderRadius: 50,
-    position: "absolute",
+    position: 'absolute',
     transform: [{ scale: 0.2 }],
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 15,
     borderWidth: 2,
     height: 70,
-    justifyContent: "center",
+    justifyContent: 'center',
     margin: 10,
     width: 70,
   },
@@ -73,41 +73,41 @@ const styles = StyleSheet.create({
     width: 40,
   },
   buttonViewStyle: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonWrapper: {
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 10,
     paddingHorizontal: 10,
-    width: "20%",
+    width: '20%',
   },
 
   buttonsContainer: {
-    alignItems: "flex-start",
-    flexDirection: "row",
-    flexWrap: "flow",
-    justifyContent: "center",
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'flow',
+    justifyContent: 'center',
     paddingBottom: 30,
-    width: "100%",
+    width: '100%',
   },
   checkBox: {
-    alignItems: "center",
+    alignItems: 'center',
     borderColor: whiteColor,
     borderRadius: 9,
     borderWidth: 2,
     height: 18,
-    justifyContent: "center",
+    justifyContent: 'center',
     width: 18,
   },
   checkboxContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     height: 24,
-    justifyContent: "center",
+    justifyContent: 'center',
     width: 24,
   },
   colorModalConfirmButton: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: blueLightColor,
     borderRadius: 5,
     marginTop: 20,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   colorPickerModalContainer: {
     backgroundColor: blackColor,
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     padding: 10,
   },
   colorPickerModalLabel: {
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
   componentContainer: {
     flex: 0.5,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   container: {
     backgroundColor: blackColor,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     borderBottomColor: whiteColor,
     borderBottomWidth: 1,
     marginBottom: 20,
-    width: "100%",
+    width: '100%',
   },
   icon: {
     color: whiteColor,
@@ -191,37 +191,37 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 5,
     padding: 10,
-    textAlign: "center",
+    textAlign: 'center',
   },
   labelContainer: {
     flex: 0.5,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   loadingText: {
     color: whiteColor,
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 5,
   },
   mainContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
-    justifyContent: "center",
-    width: "100%",
+    justifyContent: 'center',
+    width: '100%',
   },
   modalContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: semiTransparentColor,
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   modalContent: {
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: transparentColor,
     borderColor: whiteColor,
     borderRadius: 15,
     borderWidth: 2,
-    flexDirection: "column",
+    flexDirection: 'column',
     paddingHorizontal: 20,
     paddingVertical: 50,
   },
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
   noiseItem: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     marginBottom: 6,
   },
   noiseText: {
@@ -243,8 +243,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   overlay: Object.assign({}, StyleSheet.absoluteFillObject, {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   }),
   scrollContentContainer: {
     flexGrow: 1,
@@ -252,23 +252,23 @@ const styles = StyleSheet.create({
   segmentTitle: {
     color: whiteColor,
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
   },
   separator: {
     backgroundColor: whiteColor,
     height: 2,
     marginVertical: 20,
-    width: "100%",
+    width: '100%',
   },
   settingRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 16,
   },
   settingsText: {
     color: whiteColor,
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: '500',
     marginBottom: 20,
   },
   speakerButton: {
@@ -285,37 +285,37 @@ const styles = StyleSheet.create({
     width: 30,
   },
   subButtonContainer: {
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     margin: 10,
     padding: 10,
   },
   topBarContainer: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     height: 50,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginBottom: 10,
     marginTop: 50,
     paddingHorizontal: 16,
-    width: "100%",
+    width: '100%',
   },
   topButton: {
     padding: 10,
   },
   topButtonsBar: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 54,
   },
 
   modalBackground: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: blackColor,
   },
   colorPickerWrapper: {
@@ -325,17 +325,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   buttonGap: {
     height: 20,
   },
   confirmColorButton: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: greenDarkColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: blackColor,
     padding: 15,
     borderRadius: 20,
     marginRight: 10,
@@ -344,9 +344,9 @@ const styles = StyleSheet.create({
   },
   cancelColorButton: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: redDarkColor,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: blackColor,
     padding: 15,
     borderRadius: 20,
     marginLeft: 10,
@@ -355,11 +355,11 @@ const styles = StyleSheet.create({
   },
   confirmColorButtonText: {
     color: whiteColor,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   cancelColorButtonText: {
     color: whiteColor,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 
