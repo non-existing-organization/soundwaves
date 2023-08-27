@@ -17,6 +17,9 @@ const blueDarkColor = '#000080';
 const transparentColor = 'transparent';
 const semiTransparentColor = 'rgba(0, 0, 0, 0.9)';
 
+const commonMargin = 10;
+const commonBorderRadius = 10;
+
 const styles = StyleSheet.create({
   aboutButton: {
     alignItems: 'center',
@@ -59,12 +62,13 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    borderRadius: 15,
-    borderWidth: 2,
-    height: 70,
     justifyContent: 'center',
-    margin: 10,
+    margin: commonMargin,
     width: 70,
+    height: 70,
+    borderRadius: commonBorderRadius,
+    backgroundColor: blackColor,
+    borderWidth: 1,
   },
   buttonImage: {
     borderRadius: 10,
@@ -185,13 +189,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: whiteColor,
-    borderRadius: 5,
     borderWidth: 1,
     color: whiteColor,
-    marginBottom: 10,
-    marginTop: 5,
-    padding: 10,
-    textAlign: 'center',
+    paddingHorizontal: commonMargin,
+    paddingVertical: commonMargin / 2,
+    borderRadius: commonBorderRadius,
+    marginBottom: commonMargin,
+    height: 40,
   },
   labelContainer: {
     flex: 0.5,
@@ -227,7 +231,7 @@ const styles = StyleSheet.create({
   },
   muteButton: {
     borderColor: redColor,
-    borderWidth: 4,
+    borderWidth: 3,
   },
   noiseItem: {
     alignItems: 'center',
@@ -261,9 +265,15 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: '100%',
   },
+  // Apply consistent margin and rounded corners to setting rows
   settingRow: {
     flexDirection: 'row',
-    padding: 16,
+    paddingHorizontal: commonMargin,
+    paddingVertical: commonMargin / 2,
+    borderRadius: commonBorderRadius,
+    marginBottom: commonMargin,
+    backgroundColor: blackColor,
+    alignItems: 'center',
   },
   settingsText: {
     color: whiteColor,
@@ -319,10 +329,10 @@ const styles = StyleSheet.create({
     backgroundColor: blackColor,
   },
   colorPickerWrapper: {
-    margin: 20,
-    padding: 20,
+    margin: commonMargin,
+    padding: commonMargin,
     backgroundColor: blackColor,
-    borderRadius: 10,
+    borderRadius: commonBorderRadius,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -336,22 +346,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: blackColor,
-    padding: 15,
-    borderRadius: 20,
-    marginRight: 10,
     borderWidth: 1,
     borderColor: whiteColor,
+    padding: commonMargin,
+    borderRadius: commonBorderRadius,
+    marginRight: commonMargin / 2,
   },
   cancelColorButton: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: blackColor,
-    padding: 15,
-    borderRadius: 20,
-    marginLeft: 10,
     borderWidth: 1,
     borderColor: whiteColor,
+    padding: commonMargin,
+    borderRadius: commonBorderRadius,
+    marginLeft: commonMargin / 2,
   },
   confirmColorButtonText: {
     color: whiteColor,
@@ -360,6 +370,19 @@ const styles = StyleSheet.create({
   cancelColorButtonText: {
     color: whiteColor,
     fontWeight: 'bold',
+  },
+  pickColorText: {
+    fontSize: 16,
+    color: whiteColor,
+    padding: commonMargin / 2,
+    borderRadius: commonBorderRadius,
+  },
+  pickColorBox: {
+    borderRadius: commonBorderRadius,
+    borderWidth: 1,
+    padding: commonMargin / 2,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 

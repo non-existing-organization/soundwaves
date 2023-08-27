@@ -96,6 +96,26 @@ const SettingsScreen = ({ navigation }) => {
     setStartVolume(volume);
   };
 
+  // add JSDOcs
+
+  /**
+   * Get the contrast text color based on the background color.
+   * @date 27/08/2023 - 22:18:58
+   *
+   * @param {*} backgroundColor
+   * @returns {*}
+   */
+  const getContrastTextColor = (backgroundColor) => {
+    // Convert background color to a luminance value
+    const r = parseInt(backgroundColor.substr(1, 2), 16);
+    const g = parseInt(backgroundColor.substr(3, 2), 16);
+    const b = parseInt(backgroundColor.substr(5, 2), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Return white or black based on luminance
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
@@ -138,16 +158,26 @@ const SettingsScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Background Color Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
             <Text style={styles.settingsText}>Background Color</Text>
           </View>
           <View style={styles.componentContainer}>
             <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <Text style={{ ...styles.settingsText, backgroundColor, padding: 10 }}>
-                Pick Color
-              </Text>
+              <View
+                style={{
+                  ...styles.pickColorBox, // A new style for the wrapping View
+                  backgroundColor: backgroundColor,
+                  // borderColor: getContrastTextColor(backgroundColor), // Use contrasting text color as border color
+                }}>
+                <Text
+                  style={{
+                    ...styles.pickColorText,
+                    color: getContrastTextColor(backgroundColor), // Calculate inverted text color
+                  }}>
+                  Pick Color
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
         </View>
