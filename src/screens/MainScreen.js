@@ -5,6 +5,7 @@ import { View, TouchableOpacity, Animated } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
+import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
@@ -12,6 +13,7 @@ import styles from '../utils/styles';
 import CustomButton from '../components/CustomButton';
 import BubbleOverlay from '../utils/BubbleOverlay';
 import InfoModal from '../components/InfoModal';
+import { getSettings } from '../utils/settingsStorage';
 
 const MainScreen = ({ navigation }) => {
   const [mainColor, setMainColor] = useState(null);
@@ -24,7 +26,7 @@ const MainScreen = ({ navigation }) => {
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
-  const backgroundColorDefault = '#202020';
+  const [appSettings, setAppSettings] = useState({}); // State to hold the settings
 
   useEffect(() => {
     return () => {
@@ -38,6 +40,35 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadAndSetSettings();
+      return () => {};
+    }, [])
+  );
+
+  /**
+   * Retrieves the app settings from AsyncStorage and sets the state.
+   * @async
+   * @function
+   * @description
+   * - Retrieves the app settings from AsyncStorage.
+   * - Sets the app settings in state.
+   * - If no settings exist, it defaults to an empty object.
+   * - If an error occurs, it defaults to an empty object.
+   * @throws Will throw an error if there's an issue retrieving the settings.
+   *
+   */
+  const loadAndSetSettings = async () => {
+    try {
+      const loadedSettings = await getSettings();
+      console.log('Loaded settings:', loadedSettings);
+      setAppSettings(loadedSettings); // Set the loaded settings in state
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  };
 
   /**
    * Downloads the given audio file from a URL and saves it locally. If the file already exists locally, it skips the download and returns the local path.
@@ -282,7 +313,12 @@ const MainScreen = ({ navigation }) => {
     }
   };
 
-  // Handle settings button press
+  /**
+   * Handles the settings button press, navigating to the SettingsScreen.
+   * @function
+   * @description
+   * Navigates to the SettingsScreen.
+   */
   const handleSettingsPress = () => {
     navigation.navigate('Settings'); // Navigate to the SettingsScreen
   };
@@ -322,6 +358,16 @@ const MainScreen = ({ navigation }) => {
       </View>
     );
   };
+
+  /**
+   * The default background color to be used if no color is selected.
+   * This value is retrieved from the app settings.
+   * If no settings exist, it defaults to white.
+   *
+   * @type {string} - The default background color.
+   *
+   */
+  const backgroundColorDefault = appSettings.backgroundColor;
 
   /**
    * Determines the background color to be used.
