@@ -384,6 +384,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  firstRunContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 90,
+    backgroundColor: blackColor,
+  },
+  firstRunText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: whiteColor,
+  },
+  nextButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: blackColor,
+    color: whiteColor,
+    borderRadius: 50,
+    padding: 10,
+    margin: 20,
+  },
+  sliderValueText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginLeft: 10,
+  },
 });
 
 export default styles;

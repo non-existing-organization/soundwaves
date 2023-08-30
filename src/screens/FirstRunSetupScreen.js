@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Constants from 'expo-constants';
 import ColorPicker from 'react-native-wheel-color-picker';
-import Slider from '@react-native-community/slider'; // Import the slider component
+import Slider from '@react-native-community/slider';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
-import InfoModal from '../components/InfoModal';
 
 /**
  * The settings screen where users can modify their application settings.
@@ -16,15 +14,37 @@ import InfoModal from '../components/InfoModal';
  */
 const SettingsScreen = ({ navigation }) => {
   const pickerRef = useRef(null);
-
-  const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
   const [name, setName] = useState('');
-  const [firstRun, setIsFirstRun] = useState(true);
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
-  const [colorPickerVisible, setColorPickerVisible] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF'); // Default background color is white
+  const [colorPickerVisible, setColorPickerVisible] = useState(false); // Added state for color picker modal
   const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
   const [startVolume, setStartVolume] = useState(50); // Initial value of the start volume
+  const [showFirstRunMessage, setShowFirstRunMessage] = useState(true); // Added state for first run message
+  const [isFirstRun, setIsFirstRun] = useState(true); // Added state for first run
+  const [message, setMessage] = useState('');
+
+  const messages = [
+    "Welcome to Sound Waves! Let's Get Started",
+    'Hello there! Ready to Set Up Sound Waves?',
+    "Hi! It's Time to Customize Your Sound Waves Experience",
+    'Greetings! Your Sound Waves Adventure Begins Here',
+    "Hey, Welcome! Let's Configure Your Sound Waves App",
+    'Hello and Welcome! Ready to Personalize Sound Waves?',
+    "Hey, New User! Let's Begin the Sound Waves Setup",
+    'Hi, Friend! Time to Set Up Your Sound Waves Journey',
+    "Welcome aboard! Let's Dive into Sound Waves Setup",
+    "Hello, Sound Enthusiast! Let's Shape Your Sound Waves",
+  ];
+
+  /**
+   * Get a random message from the messages array.
+   */
+  useEffect(() => {
+    if (showFirstRunMessage) {
+      setMessage(getRandomMessage());
+    }
+  }, [showFirstRunMessage]);
 
   /**
    * Load application settings from storage.
@@ -36,6 +56,8 @@ const SettingsScreen = ({ navigation }) => {
       setName(settings.name || '');
       setBackgroundColor(settings.backgroundColor || '#FFFFFF');
       setStartVolume(settings.startVolume || 50);
+      setIsFirstRun(settings.isFirstRun);
+      console.log('Load Settings Function', settings);
     };
     loadSettings();
   }, []);
@@ -49,31 +71,23 @@ const SettingsScreen = ({ navigation }) => {
       await updateSetting('name', name);
       await updateSetting('backgroundColor', backgroundColor);
       await updateSetting('startVolume', startVolume);
-      await updateSetting('isFirstRun', firstRun);
+      await updateSetting('isFirstRun', isFirstRun);
     };
 
     saveSettings();
-  }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, firstRun]);
+  }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, isFirstRun]);
 
   /**
-   * Navigate back to the previous screen.
+   * Get a random message from the messages array.
+   * @returns {string} A random message.
+   * @date 27/08/2023 - 22:18:58
+   * @example
+   * getRandomMessage();
+   * // => "Hello there! Ready to Set Up Sound Waves?"
    */
-  const handleBackPress = () => {
-    navigation.goBack();
-  };
-
-  /**
-   * Open the about modal.
-   */
-  const handleAboutPress = () => {
-    setAboutModalVisible(true);
-  };
-
-  /**
-   * Close the about modal.
-   */
-  const closeAboutModal = () => {
-    setAboutModalVisible(false);
+  const getRandomMessage = () => {
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
   };
 
   /**
@@ -101,18 +115,22 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   /**
-   * Handle the next button press.
-   * @date 27/08/2023 - 22:18:58
+   * Handles the press event of the "Next" button.
+   * Updates the 'isFirstRun' setting to true and navigates to the "Main" screen.
    *
-   * @description
-   * When the button si pressed the setting isFirstRun is set to false and the user is redirected to the MainScreen.
-   *
-   *
-   *
+   * @async
+   * @function
+   * @returns {Promise<void>} A promise that resolves once the setting is updated and navigation is performed.
    */
-  const handleNextPress = () => {
-    setIsFirstRun(false);
-    navigation.navigate('Main');
+  const handleNextButtonPress = async () => {
+    try {
+      // Set isFirstRun to false
+      await updateSetting('isFirstRun', false);
+      // Navigate to the Main screen
+      navigation.navigate('Main');
+    } catch (error) {
+      console.error('Error handling next button press:', error);
+    }
   };
 
   /**
@@ -133,17 +151,26 @@ const SettingsScreen = ({ navigation }) => {
     return luminance > 0.5 ? '#000000' : '#ffffff';
   };
 
+  //  log all settings
+  console.log('Settings Screen', {
+    playtimeAnimationEnabled,
+    name,
+    backgroundColor,
+    startVolume,
+    isFirstRun,
+  });
+
   return (
     <View style={styles.container}>
-      <View style={styles.topBarContainer}>
-        <TouchableOpacity style={styles.topButton} onPress={handleBackPress}>
-          <Icon name="arrow-left" size={24} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.topButton} onPress={handleAboutPress}>
-          <Icon name="info" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-
+      {/* Top Bar */}
+      <View style={styles.topBarContainer}></View>
+      {/* First Run Message Container */}
+      {showFirstRunMessage && (
+        <View style={styles.firstRunContainer}>
+          <Text style={styles.firstRunText}>{message}</Text>
+        </View>
+      )}
+      {/* Settings Header */}
       <ScrollView
         contentContainerStyle={styles.scrollContentContainer}
         showsVerticalScrollIndicator={false}>
@@ -198,26 +225,14 @@ const SettingsScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* Start Volume Setting */}
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Start Volume</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <Slider
-              style={styles.slider}
-              minimumValue={1}
-              maximumValue={100}
-              step={1}
-              value={startVolume}
-              onValueChange={handleStartVolumeChange}
-            />
-            <Text style={styles.sliderValueText}>{startVolume}</Text>
-          </View>
-        </View>
       </ScrollView>
-
+      {/* add a button that will move to the next page  */}
+      <View style={styles.nextButton}>
+        <TouchableOpacity onPress={handleNextButtonPress}>
+          {/* add an icon point right */}
+          <Icon name="arrow-right" size={30} style={styles.nextButton} />
+        </TouchableOpacity>
+      </View>
       {/* Color Picker Modal */}
       {colorPickerVisible && (
         <Modal
@@ -251,33 +266,6 @@ const SettingsScreen = ({ navigation }) => {
           </View>
         </Modal>
       )}
-
-      <InfoModal
-        visible={aboutModalVisible}
-        onRequestClose={closeAboutModal}
-        content={[
-          {
-            label: 'App Name: ',
-            value: Constants.expoConfig.name,
-          },
-          {
-            label: 'Developer: ',
-            value: 'ChatGPT 4',
-          },
-          {
-            label: 'Version:',
-            value: Constants.expoConfig.version,
-          },
-          {
-            label: 'Support Email:',
-            value: 'non.existing.organization@gmail.com',
-          },
-          {
-            label: 'Support Website:',
-            value: 'https://github.com/non-existing-organization/soundwaves',
-          },
-        ]}
-      />
     </View>
   );
 };
