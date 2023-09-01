@@ -1,20 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Text,
-  Switch,
-  TextInput,
-  Modal,
-  Dimensions,
-} from 'react-native';
+import { View, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import ColorPicker from 'react-native-wheel-color-picker';
+
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
 import DotsIndicator from '../components/DotsIndicator';
-// Import the new settings components
 import NameSetting from '../components/SettingsComponents/NameSetting';
 import AnimationSetting from '../components/SettingsComponents/AnimationSetting';
 import BackgroundColorSetting from '../components/SettingsComponents/BackgroundColorSetting';
@@ -34,8 +24,8 @@ const SettingsScreen = ({ navigation }) => {
   const [message, setMessage] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
-  const pickerRef = useRef(null);
 
+  // TODO #90 remove message from FirstRunSetupScreen
   const messages = [
     'Hi, welcome to Soundwaves, time to relax',
     'Hello, let Soundwaves soothe your soul',
@@ -89,23 +79,40 @@ const SettingsScreen = ({ navigation }) => {
     saveSettings();
   }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, isFirstRun]);
 
+  /**
+   * Retrieves a random message from the 'messages' array.
+   *
+   * @returns {string} A random message.
+   */
   const getRandomMessage = () => {
     const randomIndex = Math.floor(Math.random() * messages.length);
     return messages[randomIndex];
   };
 
+  /**
+   * Handles the change of color by setting the selected color.
+   *
+   * @param {string} color - The color to set as the selected color.
+   */
   const handleColorChange = (color) => {
     setSelectedColor(color);
   };
 
+  /**
+   * Confirms the color selection by setting the background color and hides the color picker.
+   */
   const handleColorConfirm = () => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
   };
 
-  const handleStartVolumeChange = (volume) => {
-    setStartVolume(volume);
-  };
+  /**
+   * Handles the press event for the "Next" button.
+   * Navigates through the carousel or to the main screen based on the conditions.
+   *
+   * @async
+   * @throws Will throw an error if unable to handle the next button press.
+   */
   const handleNextButtonPress = async () => {
     try {
       const nextIndex = activeIndex + 1;
@@ -130,6 +137,13 @@ const SettingsScreen = ({ navigation }) => {
     }
   };
 
+  /**
+   * Determines the most readable text color (black or white)
+   * based on the given background color.
+   *
+   * @param {string} backgroundColor - The background color in hexadecimal format.
+   * @returns {string} The text color in hexadecimal format (#000000 for black or #ffffff for white).
+   */
   const getContrastTextColor = (backgroundColor) => {
     const r = parseInt(backgroundColor.substr(1, 2), 16);
     const g = parseInt(backgroundColor.substr(3, 2), 16);
@@ -138,6 +152,12 @@ const SettingsScreen = ({ navigation }) => {
     return luminance > 0.5 ? '#000000' : '#ffffff';
   };
 
+  /**
+   * Renders the settings screen based on the specified screen type.
+   *
+   * @param {string} screenType - The type of settings screen to display ('name', 'animation', 'backgroundColor').
+   * @returns {JSX.Element} The rendered settings screen.
+   */
   const renderSettingsScreen = (screenType) => {
     return (
       <ScrollView
@@ -178,6 +198,12 @@ const SettingsScreen = ({ navigation }) => {
       </ScrollView>
     );
   };
+
+  /**
+   * Handles the snap event for the carousel when it snaps to a specific screen.
+   *
+   * @param {number} index - The index of the screen the carousel has snapped to.
+   */
 
   const handleCarouselSnap = (index) => {
     // Handle navigation or other logic when carousel snaps to a specific screen
