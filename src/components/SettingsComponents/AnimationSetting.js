@@ -5,7 +5,7 @@ import styles from '../../utils/styles'; // Adjust the import according to your 
 const AnimationSetting = ({ playtimeAnimationEnabled, setPlaytimeAnimationEnabled }) => (
   <View style={styles.settingRow}>
     <View style={styles.animationContainer}>
-      <Text style={styles.settingsText}>Animation</Text>
+      <Text style={styles.settingsText}>Would you like animations during playback</Text>
       <Switch
         value={playtimeAnimationEnabled}
         onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}

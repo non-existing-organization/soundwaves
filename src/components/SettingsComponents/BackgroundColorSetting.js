@@ -15,7 +15,7 @@ const BackgroundColorSetting = ({
   <>
     <View style={styles.settingRow}>
       <View style={styles.backgroundColorContainer}>
-        <Text style={styles.settingsText}>Background Color</Text>
+        <Text style={styles.settingsText}>What should be the default color?</Text>
         <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
           <View style={{ ...styles.pickColorBox, backgroundColor: backgroundColor }}>
             <Text
