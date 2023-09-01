@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import FirstRunSetup from './src/screens/FirstRunSetupScreen';
 import MainScreen from './src/screens/MainScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
-import { getSettings } from './src/utils/settingsStorage'; // Import the getSettings function
+import { getSettings } from './src/utils/settingsStorage';
 
 const Stack = createStackNavigator();
 
