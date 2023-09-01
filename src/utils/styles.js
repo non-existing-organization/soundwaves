@@ -1,4 +1,3 @@
-// styles.jsw
 import { StyleSheet } from 'react-native';
 
 const whiteColor = '#ffffff';
@@ -16,10 +15,11 @@ const blueLightColor = '#ccccff';
 const blueDarkColor = '#000080';
 const transparentColor = 'transparent';
 const semiTransparentColor = 'rgba(0, 0, 0, 0.9)';
-
 const commonMargin = 10;
 const commonBorderRadius = 10;
 
+// TODO #91 Split styles.js into multiple files
+// TODO #92 Validate all styles are used
 const styles = StyleSheet.create({
   aboutButton: {
     alignItems: 'center',
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     width: '20%',
   },
-
   buttonsContainer: {
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -163,6 +162,8 @@ const styles = StyleSheet.create({
   },
   componentContainer: {
     flex: 0.5,
+    flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   container: {
@@ -199,6 +200,8 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     flex: 0.5,
+    flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   loadingText: {
@@ -265,15 +268,21 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: '100%',
   },
-  // Apply consistent margin and rounded corners to setting rows
   settingRow: {
-    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
     paddingHorizontal: commonMargin,
     paddingVertical: commonMargin / 2,
     borderRadius: commonBorderRadius,
     marginBottom: commonMargin,
     backgroundColor: blackColor,
-    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
   },
   settingsText: {
     color: whiteColor,
@@ -284,7 +293,6 @@ const styles = StyleSheet.create({
   speakerButton: {
     padding: 10,
   },
-
   spinnerContainer: {
     marginTop: 70,
   },
@@ -321,7 +329,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 54,
   },
-
   modalBackground: {
     flex: 1,
     justifyContent: 'center',
@@ -383,6 +390,112 @@ const styles = StyleSheet.create({
     padding: commonMargin / 2,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  firstRunContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 90,
+    backgroundColor: blackColor,
+  },
+  firstRunText: {
+    textAlign: 'center',
+    fontSize: 18,
+    color: whiteColor,
+  },
+  nextButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: blackColor,
+    color: whiteColor,
+    borderRadius: 50,
+    padding: 10,
+    margin: 20,
+  },
+  sliderValueText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  welcomeMessageText: {
+    color: whiteColor,
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  centerContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  settingContainer: {
+    width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: blackColor,
+    borderRadius: 10,
+    padding: 20,
+    marginVertical: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    flexDirection: 'column',
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  paginationContainer: {
+    paddingTop: 8,
+    paddingBottom: 16,
+  },
+  dotcontainer: {
+    alignItems: 'center',
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 4,
+    backgroundColor: whiteColor,
+  },
+  welcomeText: {
+    color: whiteColor,
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  nextButtonText: {
+    color: whiteColor,
+    fontSize: 18,
+  },
+  nextButtonContainer: {
+    marginTop: 20,
+    alignSelf: 'flex-end',
+  },
+  nextButtonBottom: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    marginBottom: 0,
+    paddingBottom: 0,
+    alignSelf: 'center',
+  },
+  animationContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  backgroundColorContainer: {
+    flexDirection: 'column', // Stack items vertically
+    alignItems: 'center', // Center items horizontally
+    justifyContent: 'center', // Center items vertically
+  },
+  welcomeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: blackColor, // Set background color to black
   },
 });
 

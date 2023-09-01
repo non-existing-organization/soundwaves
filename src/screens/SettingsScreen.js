@@ -20,6 +20,7 @@ const SettingsScreen = ({ navigation }) => {
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
   const [name, setName] = useState('');
+  const [firstRun, setIsFirstRun] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
@@ -34,6 +35,7 @@ const SettingsScreen = ({ navigation }) => {
       setPlaytimeAnimationEnabled(settings.playtimeAnimationEnabled || false);
       setName(settings.name || '');
       setBackgroundColor(settings.backgroundColor || '#FFFFFF');
+      setStartVolume(settings.startVolume || 50);
     };
     loadSettings();
   }, []);
@@ -46,10 +48,12 @@ const SettingsScreen = ({ navigation }) => {
       await updateSetting('playtimeAnimationEnabled', playtimeAnimationEnabled);
       await updateSetting('name', name);
       await updateSetting('backgroundColor', backgroundColor);
+      await updateSetting('startVolume', startVolume);
+      await updateSetting('isFirstRun', firstRun);
     };
 
     saveSettings();
-  }, [playtimeAnimationEnabled, name, backgroundColor]);
+  }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, firstRun]);
 
   /**
    * Navigate back to the previous screen.
@@ -96,7 +100,20 @@ const SettingsScreen = ({ navigation }) => {
     setStartVolume(volume);
   };
 
-  // add JSDOcs
+  /**
+   * Handle the next button press.
+   * @date 27/08/2023 - 22:18:58
+   *
+   * @description
+   * When the button si pressed the setting isFirstRun is set to false and the user is redirected to the MainScreen.
+   *
+   *
+   *
+   */
+  const handleNextPress = () => {
+    setIsFirstRun(false);
+    navigation.navigate('Main');
+  };
 
   /**
    * Get the contrast text color based on the background color.
@@ -117,6 +134,8 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   return (
+    // TODO Use reusable Settings components #89
+
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
         <TouchableOpacity style={styles.topButton} onPress={handleBackPress}>
@@ -144,7 +163,6 @@ const SettingsScreen = ({ navigation }) => {
             />
           </View>
         </View>
-
         {/* Playtime Animation Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
@@ -157,7 +175,6 @@ const SettingsScreen = ({ navigation }) => {
             />
           </View>
         </View>
-
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
             <Text style={styles.settingsText}>Background Color</Text>
@@ -179,23 +196,6 @@ const SettingsScreen = ({ navigation }) => {
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Start Volume Setting */}
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Start Volume</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <Slider
-              style={styles.slider}
-              minimumValue={1}
-              maximumValue={100}
-              value={startVolume}
-              onValueChange={handleStartVolumeChange}
-            />
-            <Text style={styles.sliderValueText}>{startVolume}</Text>
           </View>
         </View>
       </ScrollView>

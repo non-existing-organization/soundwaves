@@ -63,7 +63,6 @@ const MainScreen = ({ navigation }) => {
   const loadAndSetSettings = async () => {
     try {
       const loadedSettings = await getSettings();
-      console.log('Loaded settings:', loadedSettings);
       setAppSettings(loadedSettings); // Set the loaded settings in state
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -367,7 +366,7 @@ const MainScreen = ({ navigation }) => {
    * @type {string} - The default background color.
    *
    */
-  const backgroundColorDefault = appSettings.backgroundColor;
+  const backgroundColorDefault = appSettings.backgroundColor || '#505050';
 
   /**
    * Determines the background color to be used.
@@ -377,6 +376,9 @@ const MainScreen = ({ navigation }) => {
    */
   const backgroundColor = mainColor || backgroundColorDefault; // Default to white if no color is selected
 
+  // conso0le log the settings
+
+  console.log('Settings:', appSettings);
   /**
    * Main screen rendering which consists of:
    * - A top bar with a volume toggle button.
