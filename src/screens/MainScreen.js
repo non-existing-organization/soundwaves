@@ -40,11 +40,7 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     Audio.setAudioModeAsync({
       playsInSilentModeIOS: true,
-      staysActiveInBackground: true,
-      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
-      playThroughEarpieceAndroid: true,
+      staysActiveInBackground: true
     });
   }, []);
 
