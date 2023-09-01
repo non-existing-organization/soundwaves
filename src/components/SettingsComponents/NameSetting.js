@@ -5,7 +5,7 @@ import styles from '../../utils/styles'; // Adjust the import according to your 
 const NameSetting = ({ name, setName }) => (
   <View style={styles.settingRow}>
     <View style={styles.labelContainer}>
-      <Text style={styles.settingsText}>Name</Text>
+      <Text style={styles.settingsText}>What is your name?</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
