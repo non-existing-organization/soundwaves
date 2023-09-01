@@ -134,6 +134,8 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   return (
+    // TODO Use reusable Settings components #89
+
     <View style={styles.container}>
       <View style={styles.topBarContainer}>
         <TouchableOpacity style={styles.topButton} onPress={handleBackPress}>
@@ -161,7 +163,6 @@ const SettingsScreen = ({ navigation }) => {
             />
           </View>
         </View>
-
         {/* Playtime Animation Setting */}
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
@@ -174,7 +175,6 @@ const SettingsScreen = ({ navigation }) => {
             />
           </View>
         </View>
-
         <View style={styles.settingRow}>
           <View style={styles.labelContainer}>
             <Text style={styles.settingsText}>Background Color</Text>
@@ -196,24 +196,6 @@ const SettingsScreen = ({ navigation }) => {
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
-        </View>
-
-        {/* Start Volume Setting */}
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Start Volume</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <Slider
-              style={styles.slider}
-              minimumValue={1}
-              maximumValue={100}
-              step={1}
-              value={startVolume}
-              onValueChange={handleStartVolumeChange}
-            />
-            <Text style={styles.sliderValueText}>{startVolume}</Text>
           </View>
         </View>
       </ScrollView>
