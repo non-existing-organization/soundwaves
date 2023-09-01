@@ -1,11 +1,18 @@
 {
   "cli": {
-    "version": ">= 3.13.3",
+    "version": ">= 3.15.0",
     "requireCommit": false,
     "promptToConfigurePushNotifications": false,
     "appVersionSource": "remote"
   },
   "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
     "production": {
       "autoIncrement": true,
       "releaseChannel": "production"
