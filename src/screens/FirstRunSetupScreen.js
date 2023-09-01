@@ -1,54 +1,70 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  Switch,
+  TextInput,
+  Modal,
+  Dimensions,
+} from 'react-native';
+import Carousel from 'react-native-snap-carousel';
 import ColorPicker from 'react-native-wheel-color-picker';
-import Slider from '@react-native-community/slider';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
+import DotsIndicator from '../components/DotsIndicator';
+// Import the new settings components
+import NameSetting from '../components/SettingsComponents/NameSetting';
+import AnimationSetting from '../components/SettingsComponents/AnimationSetting';
+import BackgroundColorSetting from '../components/SettingsComponents/BackgroundColorSetting';
 
-/**
- * The settings screen where users can modify their application settings.
- *
- * @returns {JSX.Element} The rendered component.
- */
+const { width: screenWidth } = Dimensions.get('window');
+
 const SettingsScreen = ({ navigation }) => {
-  const pickerRef = useRef(null);
-  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
+  const carouselRef = useRef(null);
+
   const [name, setName] = useState('');
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF'); // Default background color is white
-  const [colorPickerVisible, setColorPickerVisible] = useState(false); // Added state for color picker modal
-  const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
-  const [startVolume, setStartVolume] = useState(50); // Initial value of the start volume
-  const [showFirstRunMessage, setShowFirstRunMessage] = useState(true); // Added state for first run message
-  const [isFirstRun, setIsFirstRun] = useState(true); // Added state for first run
+  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+  const [colorPickerVisible, setColorPickerVisible] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('#FFFFFF');
+  const [startVolume, setStartVolume] = useState(50);
+  const [showFirstRunMessage, setShowFirstRunMessage] = useState(true);
+  const [isFirstRun, setIsFirstRun] = useState(true);
   const [message, setMessage] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
+  const pickerRef = useRef(null);
 
   const messages = [
-    "Welcome to Sound Waves! Let's Get Started",
-    'Hello there! Ready to Set Up Sound Waves?',
-    "Hi! It's Time to Customize Your Sound Waves Experience",
-    'Greetings! Your Sound Waves Adventure Begins Here',
-    "Hey, Welcome! Let's Configure Your Sound Waves App",
-    'Hello and Welcome! Ready to Personalize Sound Waves?',
-    "Hey, New User! Let's Begin the Sound Waves Setup",
-    'Hi, Friend! Time to Set Up Your Sound Waves Journey',
-    "Welcome aboard! Let's Dive into Sound Waves Setup",
-    "Hello, Sound Enthusiast! Let's Shape Your Sound Waves",
+    'Hi, welcome to Soundwaves, time to relax',
+    'Hello, let Soundwaves soothe your soul',
+    'Welcome! Unwind with the sounds of Soundwaves',
+    'Hey there, Soundwaves is here to bring you peace',
+    'Step into serenity with Soundwaves',
+    'Soundwaves welcomes you to a world of calm',
+    'Hi! Ready to experience tranquility with Soundwaves?',
+    'Welcome! Let Soundwaves be your sanctuary',
+    'Hello! Your oasis of relaxation starts with Soundwaves',
+    'Greetings! Find your inner calm with Soundwaves',
+    'Hey! Let Soundwaves wash away your stress',
+    'Welcome! Tune into relaxation with Soundwaves',
+    "Hi there! Let's create your perfect ambiance with Soundwaves",
+    'Hello and welcome! Soundwaves is your gateway to peace',
+    "Hi, you've reached Soundwaves. Time for some me-time",
+    'Welcome! Let Soundwaves be your peaceful escape',
+    'Hey! Discover your Zen moment with Soundwaves',
+    'Hello! Soundwaves is your passport to relaxation',
+    'Welcome to Soundwaves, where your calm awaits',
+    'Hey there! Dive into relaxation with Soundwaves',
   ];
 
-  /**
-   * Get a random message from the messages array.
-   */
   useEffect(() => {
     if (showFirstRunMessage) {
       setMessage(getRandomMessage());
     }
   }, [showFirstRunMessage]);
 
-  /**
-   * Load application settings from storage.
-   */
   useEffect(() => {
     const loadSettings = async () => {
       const settings = await getSettings();
@@ -56,15 +72,11 @@ const SettingsScreen = ({ navigation }) => {
       setName(settings.name || '');
       setBackgroundColor(settings.backgroundColor || '#FFFFFF');
       setStartVolume(settings.startVolume || 50);
-      setIsFirstRun(settings.isFirstRun);
-      console.log('Load Settings Function', settings);
+      setIsFirstRun(settings.isFirstRun || true);
     };
     loadSettings();
   }, []);
 
-  /**
-   * Save any changes made to application settings.
-   */
   useEffect(() => {
     const saveSettings = async () => {
       await updateSetting('playtimeAnimationEnabled', playtimeAnimationEnabled);
@@ -77,195 +89,119 @@ const SettingsScreen = ({ navigation }) => {
     saveSettings();
   }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, isFirstRun]);
 
-  /**
-   * Get a random message from the messages array.
-   * @returns {string} A random message.
-   * @date 27/08/2023 - 22:18:58
-   * @example
-   * getRandomMessage();
-   * // => "Hello there! Ready to Set Up Sound Waves?"
-   */
   const getRandomMessage = () => {
     const randomIndex = Math.floor(Math.random() * messages.length);
     return messages[randomIndex];
   };
 
-  /**
-   * Handle color change event from the color picker.
-   * @param {string} color The selected color.
-   */
   const handleColorChange = (color) => {
     setSelectedColor(color);
   };
 
-  /**
-   * Handle color confirm event from the color picker.
-   */
   const handleColorConfirm = () => {
     setBackgroundColor(selectedColor);
     setColorPickerVisible(false);
   };
 
-  /**
-   * Handle start volume change event from the slider.
-   * @param {number} volume The selected volume.
-   */
   const handleStartVolumeChange = (volume) => {
     setStartVolume(volume);
   };
-
-  /**
-   * Handles the press event of the "Next" button.
-   * Updates the 'isFirstRun' setting to true and navigates to the "Main" screen.
-   *
-   * @async
-   * @function
-   * @returns {Promise<void>} A promise that resolves once the setting is updated and navigation is performed.
-   */
   const handleNextButtonPress = async () => {
     try {
-      // Set isFirstRun to false
-      await updateSetting('isFirstRun', false);
-      // Navigate to the Main screen
-      navigation.navigate('Main');
+      const nextIndex = activeIndex + 1;
+
+      if (nextIndex === 1) {
+        if (isFirstRun) {
+          carouselRef.current.snapToItem(nextIndex);
+        } else {
+          navigation.navigate('Main');
+        }
+      } else if (nextIndex < 3) {
+        carouselRef.current.snapToItem(nextIndex);
+      } else if (nextIndex === 3) {
+        carouselRef.current.snapToItem(nextIndex);
+        await updateSetting('isFirstRun', false);
+        navigation.navigate('Main'); // Navigate to Main Screen
+      }
+
+      setActiveIndex(nextIndex);
     } catch (error) {
       console.error('Error handling next button press:', error);
     }
   };
 
-  /**
-   * Get the contrast text color based on the background color.
-   * @date 27/08/2023 - 22:18:58
-   *
-   * @param {*} backgroundColor
-   * @returns {*}
-   */
   const getContrastTextColor = (backgroundColor) => {
-    // Convert background color to a luminance value
     const r = parseInt(backgroundColor.substr(1, 2), 16);
     const g = parseInt(backgroundColor.substr(3, 2), 16);
     const b = parseInt(backgroundColor.substr(5, 2), 16);
     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-
-    // Return white or black based on luminance
     return luminance > 0.5 ? '#000000' : '#ffffff';
   };
 
-  //  log all settings
-  console.log('Settings Screen', {
-    playtimeAnimationEnabled,
-    name,
-    backgroundColor,
-    startVolume,
-    isFirstRun,
-  });
+  const renderSettingsScreen = (screenType) => {
+    return (
+      <ScrollView
+        contentContainerStyle={[styles.scrollContentContainer, styles.centerContent]}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.parentContainer}>
+          {/* Name Setting Screen */}
+          {screenType === 'name' && <NameSetting name={name} setName={setName} />}
+
+          {/* Animation Setting Screen */}
+          {screenType === 'animation' && (
+            <AnimationSetting
+              playtimeAnimationEnabled={playtimeAnimationEnabled}
+              setPlaytimeAnimationEnabled={setPlaytimeAnimationEnabled}
+            />
+          )}
+
+          {/* Background Color Setting Screen */}
+          {screenType === 'backgroundColor' && (
+            <BackgroundColorSetting
+              backgroundColor={backgroundColor}
+              setColorPickerVisible={setColorPickerVisible}
+              colorPickerVisible={colorPickerVisible} // <-- Add this line
+              selectedColor={selectedColor} // <-- Add this line
+              handleColorChange={handleColorChange} // <-- Add this line
+              handleColorConfirm={handleColorConfirm} // <-- Add this line
+              getContrastTextColor={getContrastTextColor}
+            />
+          )}
+        </View>
+        {/* Other components and code */}
+        {/* Next Button at the Bottom */}
+        <TouchableOpacity
+          style={[styles.nextButton, styles.nextButtonBottom]}
+          onPress={handleNextButtonPress}>
+          <Text style={styles.nextButtonText}>Next</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    );
+  };
+
+  const handleCarouselSnap = (index) => {
+    // Handle navigation or other logic when carousel snaps to a specific screen
+    // You can update state or perform actions based on the current index
+  };
 
   return (
     <View style={styles.container}>
-      {/* Top Bar */}
-      <View style={styles.topBarContainer}></View>
-      {/* First Run Message Container */}
-      {showFirstRunMessage && (
-        <View style={styles.firstRunContainer}>
-          <Text style={styles.firstRunText}>{message}</Text>
-        </View>
-      )}
-      {/* Settings Header */}
-      <ScrollView
-        contentContainerStyle={styles.scrollContentContainer}
-        showsVerticalScrollIndicator={false}>
-        {/* Name Setting */}
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Name</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Enter your name"
-              value={name}
-              onChangeText={(newName) => setName(newName)}
-            />
-          </View>
-        </View>
-
-        {/* Playtime Animation Setting */}
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Animation</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <Switch
-              value={playtimeAnimationEnabled}
-              onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}
-            />
-          </View>
-        </View>
-
-        <View style={styles.settingRow}>
-          <View style={styles.labelContainer}>
-            <Text style={styles.settingsText}>Background Color</Text>
-          </View>
-          <View style={styles.componentContainer}>
-            <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-              <View
-                style={{
-                  ...styles.pickColorBox, // A new style for the wrapping View
-                  backgroundColor: backgroundColor,
-                  // borderColor: getContrastTextColor(backgroundColor), // Use contrasting text color as border color
-                }}>
-                <Text
-                  style={{
-                    ...styles.pickColorText,
-                    color: getContrastTextColor(backgroundColor), // Calculate inverted text color
-                  }}>
-                  Pick Color
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-      {/* add a button that will move to the next page  */}
-      <View style={styles.nextButton}>
-        <TouchableOpacity onPress={handleNextButtonPress}>
-          {/* add an icon point right */}
-          <Icon name="arrow-right" size={30} style={styles.nextButton} />
-        </TouchableOpacity>
-      </View>
-      {/* Color Picker Modal */}
-      {colorPickerVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={colorPickerVisible}
-          onRequestClose={() => setColorPickerVisible(false)}>
-          <View style={styles.modalBackground}>
-            <View style={styles.colorPickerWrapper}>
-              <ColorPicker
-                ref={pickerRef}
-                color={selectedColor}
-                onColorChange={handleColorChange}
-                thumbSize={40}
-                sliderSize={40}
-                noSnap={true}
-                row={false}
-              />
-              <View style={styles.buttonGap} />
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handleColorConfirm} style={styles.confirmColorButton}>
-                  <Text style={styles.confirmColorButtonText}>Confirm</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => setColorPickerVisible(false)}
-                  style={styles.cancelColorButton}>
-                  <Text style={styles.cancelColorButtonText}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
-      )}
+      <Carousel
+        ref={carouselRef}
+        data={['name', 'animation', 'backgroundColor']}
+        renderItem={({ item }) => renderSettingsScreen(item)}
+        sliderWidth={screenWidth}
+        itemWidth={screenWidth}
+        onSnapToItem={(index) => {
+          handleCarouselSnap(index);
+          setActiveIndex(index);
+        }}
+        paginationStyle={{ marginBottom: 10, color: '#ff0000', backgroundColor: '#00ff00' }} // Default style for pagination
+        dotStyle={{ width: 10, height: 10, borderRadius: 5, marginHorizontal: 4 }} // Default style for dots
+        inactiveDotOpacity={1}
+        inactiveDotScale={1}
+      />
+      <DotsIndicator activeIndex={activeIndex} length={3} />
     </View>
   );
 };
