@@ -40,7 +40,7 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     Audio.setAudioModeAsync({
       playsInSilentModeIOS: true,
-      staysActiveInBackground: true,
+      staysActiveInBackground: true
     });
   }, []);
 
