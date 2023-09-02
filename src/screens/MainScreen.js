@@ -27,6 +27,7 @@ const MainScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
   const [appSettings, setAppSettings] = useState({}); // State to hold the settings
+  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true); // Default value
 
   useEffect(() => {
     return () => {
@@ -40,8 +41,12 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     Audio.setAudioModeAsync({
       playsInSilentModeIOS: true,
-      staysActiveInBackground: true
+      staysActiveInBackground: true,
     });
+  }, []);
+
+  useEffect(() => {
+    loadAndSetSettings();
   }, []);
 
   useFocusEffect(
@@ -67,6 +72,7 @@ const MainScreen = ({ navigation }) => {
     try {
       const loadedSettings = await getSettings();
       setAppSettings(loadedSettings); // Set the loaded settings in state
+      setPlaytimeAnimationEnabled(loadedSettings.playtimeAnimationEnabled); // Update the state
     } catch (error) {
       console.error('Error loading settings:', error);
     }
@@ -420,9 +426,11 @@ const MainScreen = ({ navigation }) => {
         start={{ x: 0, y: 0.1 }}
         end={{ x: 0, y: 0.9 }}
         style={[styles.mainContainer, { height: 200 }]}>
-        <Animated.View style={{ ...styles.overlay, opacity: opacityValue }}>
-          {activeColor && <BubbleOverlay />}
-        </Animated.View>
+        {playtimeAnimationEnabled && (
+          <Animated.View style={{ ...styles.overlay, opacity: opacityValue }}>
+            {activeColor && <BubbleOverlay />}
+          </Animated.View>
+        )}
       </LinearGradient>
 
       <View style={styles.buttonsContainer}>
