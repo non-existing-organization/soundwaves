@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Animated } from 'react-native';
+
 import { getSettings } from '../utils/settingsStorage';
 import styles from '../utils/styles';
 
