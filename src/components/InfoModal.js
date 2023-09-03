@@ -5,9 +5,10 @@
  * @module src/components/InfoModal
  */
 
-import React from "react";
-import { TouchableOpacity, View, Text, Modal } from "react-native";
-import styles from "../utils/styles";
+import React from 'react';
+import { TouchableOpacity, View, Text, Modal } from 'react-native';
+
+import styles from '../utils/styles';
 
 /**
  * Represents a modal to display information content.
@@ -28,17 +29,8 @@ import styles from "../utils/styles";
  */
 const InfoModal = ({ visible, onRequestClose, content }) => {
   return (
-    <Modal
-      visible={visible}
-      transparent={true}
-      animationType="slide"
-      onRequestClose={onRequestClose}
-    >
-      <TouchableOpacity
-        style={styles.modalContainer}
-        activeOpacity={1}
-        onPress={onRequestClose}
-      >
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onRequestClose}>
+      <TouchableOpacity style={styles.modalContainer} activeOpacity={1} onPress={onRequestClose}>
         <View style={styles.modalContent}>
           {content.map((item, index) => (
             <Text key={index} style={styles.aboutText}>
