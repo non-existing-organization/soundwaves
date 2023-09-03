@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
