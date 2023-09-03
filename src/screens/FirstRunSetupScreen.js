@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Dimensions } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-import { getSettings, updateSetting } from '../utils/settingsStorage';
-import styles from '../utils/styles';
 import DotsIndicator from '../components/DotsIndicator';
-import NameSetting from '../components/SettingsComponents/NameSetting';
 import AnimationSetting from '../components/SettingsComponents/AnimationSetting';
 import BackgroundColorSetting from '../components/SettingsComponents/BackgroundColorSetting';
+import NameSetting from '../components/SettingsComponents/NameSetting';
+import { getSettings, updateSetting } from '../utils/settingsStorage';
+import styles from '../utils/styles';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -19,9 +19,9 @@ const SettingsScreen = ({ navigation }) => {
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF');
   const [startVolume, setStartVolume] = useState(50);
-  const [showFirstRunMessage, setShowFirstRunMessage] = useState(true);
+  const [showFirstRunMessage] = useState(true);
   const [isFirstRun, setIsFirstRun] = useState(true);
-  const [message, setMessage] = useState('');
+  const [, setMessage] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
 

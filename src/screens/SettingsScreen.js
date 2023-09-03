@@ -1,13 +1,12 @@
+import Constants from 'expo-constants';
 import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, Switch, TextInput, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Constants from 'expo-constants';
 import ColorPicker from 'react-native-wheel-color-picker';
-import Slider from '@react-native-community/slider'; // Import the slider component
 
+import InfoModal from '../components/InfoModal';
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
-import InfoModal from '../components/InfoModal';
 
 /**
  * The settings screen where users can modify their application settings.
@@ -20,7 +19,7 @@ const SettingsScreen = ({ navigation }) => {
   const [aboutModalVisible, setAboutModalVisible] = useState(false);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(false);
   const [name, setName] = useState('');
-  const [firstRun, setIsFirstRun] = useState(true);
+  const [firstRun] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Default selected color is white
@@ -93,29 +92,6 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   /**
-   * Handle start volume change event from the slider.
-   * @param {number} volume The selected volume.
-   */
-  const handleStartVolumeChange = (volume) => {
-    setStartVolume(volume);
-  };
-
-  /**
-   * Handle the next button press.
-   * @date 27/08/2023 - 22:18:58
-   *
-   * @description
-   * When the button si pressed the setting isFirstRun is set to false and the user is redirected to the MainScreen.
-   *
-   *
-   *
-   */
-  const handleNextPress = () => {
-    setIsFirstRun(false);
-    navigation.navigate('Main');
-  };
-
-  /**
    * Get the contrast text color based on the background color.
    * @date 27/08/2023 - 22:18:58
    *
@@ -184,7 +160,7 @@ const SettingsScreen = ({ navigation }) => {
               <View
                 style={{
                   ...styles.pickColorBox, // A new style for the wrapping View
-                  backgroundColor: backgroundColor,
+                  backgroundColor,
                   // borderColor: getContrastTextColor(backgroundColor), // Use contrasting text color as border color
                 }}>
                 <Text
@@ -204,7 +180,7 @@ const SettingsScreen = ({ navigation }) => {
       {colorPickerVisible && (
         <Modal
           animationType="slide"
-          transparent={true}
+          transparent
           visible={colorPickerVisible}
           onRequestClose={() => setColorPickerVisible(false)}>
           <View style={styles.modalBackground}>
@@ -215,7 +191,7 @@ const SettingsScreen = ({ navigation }) => {
                 onColorChange={handleColorChange}
                 thumbSize={40}
                 sliderSize={40}
-                noSnap={true}
+                noSnap
                 row={false}
               />
               <View style={styles.buttonGap} />

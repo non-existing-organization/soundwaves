@@ -1,31 +1,31 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
-import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Animated, ScrollView, Dimensions, Text } from 'react-native';
-import { Audio } from 'expo-av';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as FileSystem from 'expo-file-system';
-import { useFocusEffect } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-
+import { useFocusEffect } from '@react-navigation/native';
+import { Audio } from 'expo-av';
+import * as FileSystem from 'expo-file-system';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TouchableOpacity, Animated, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import colorMap from '../utils/colorMap';
-import styles from '../utils/styles';
+
 import CustomButton from '../components/CustomButton';
-import BubbleOverlay from '../utils/BubbleOverlay';
 import InfoModal from '../components/InfoModal';
+import BubbleOverlay from '../utils/BubbleOverlay';
+import colorMap from '../utils/colorMap';
 import { getSettings } from '../utils/settingsStorage';
+import styles from '../utils/styles';
 
 const MainScreen = ({ navigation }) => {
   const [mainColor, setMainColor] = useState(null);
   const [sound, setSound] = useState(null);
-  const [currentAudioFile, setCurrentAudioFile] = useState(null);
+  const [, setCurrentAudioFile] = useState(null);
   const [loopCount, setLoopCount] = useState(0);
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [, setIsLoading] = useState(false);
   const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
   const [appSettings, setAppSettings] = useState({}); // State to hold the settings
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true); // Default value
@@ -453,12 +453,12 @@ const MainScreen = ({ navigation }) => {
         {/* Use ScrollView for horizontal scrolling */}
         <ScrollView
           horizontal
-          showsHorizontalScrollIndicator={true}
+          showsHorizontalScrollIndicator
           indicatorStyle="white"
-          invertStickyHeaders={true}
+          invertStickyHeaders
           contentContainerStyle={styles.scrollViewContent}
-          bounces={true}
-          bouncesZoom={true}>
+          bounces
+          bouncesZoom>
           {/* Left icon */}
           <View style={[styles.iconButton, styles.leftIconButton]}>
             <AntDesign name="left" style={styles.scrollViewIcon} />

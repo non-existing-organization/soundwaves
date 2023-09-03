@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import ColorPicker from 'react-native-wheel-color-picker';
+
 import styles from '../../utils/styles';
 
 const BackgroundColorSetting = ({
@@ -17,7 +18,7 @@ const BackgroundColorSetting = ({
       <View style={styles.backgroundColorContainer}>
         <Text style={styles.settingsText}>What should be the default color?</Text>
         <TouchableOpacity onPress={() => setColorPickerVisible(true)}>
-          <View style={{ ...styles.pickColorBox, backgroundColor: backgroundColor }}>
+          <View style={{ ...styles.pickColorBox, backgroundColor }}>
             <Text
               style={{
                 ...styles.pickColorText,
@@ -34,7 +35,7 @@ const BackgroundColorSetting = ({
     {colorPickerVisible && (
       <Modal
         animationType="slide"
-        transparent={true}
+        transparent
         visible={colorPickerVisible}
         onRequestClose={() => setColorPickerVisible(false)}>
         <View style={styles.modalBackground}>
