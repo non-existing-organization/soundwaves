@@ -21,9 +21,6 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.non-existing-organization.soundwaves",
       "icon": "./assets/icon.png",
-      "config": {
-        "usesNonExemptEncryption": false
-      },
       "infoPlist": {
         "UIBackgroundModes": [
           "audio"
@@ -37,14 +34,18 @@
       },
       "package": "com.nonexistingorganization.soundwaves",
       "permissions": [
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/ee2a1a14-bd1f-462f-b2e3-ed94801478d5"
     },
     "extra": {
       "eas": {
@@ -58,6 +59,9 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
       ]
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }
