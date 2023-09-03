@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 
-import styles from '../../utils/styles'; // Adjust the import according to your actual path
+import styles from '../../utils/styles';
 
 const NameSetting = ({ name, setName }) => (
   <View style={styles.settingRow}>

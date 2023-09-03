@@ -13,6 +13,17 @@ const colorMap = new Map([
     },
   ],
   [
+    'wind',
+    {
+      name: 'wind',
+      colors: ['#00FFFF', '#1AFFFF', '#33FFFF', '#4DFFFF', '#66FFFF'],
+      thumbnail: require('../../assets/thumbnails/wind.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/wind.mp3',
+      description: 'Wind',
+    },
+  ],
+  [
     'brown',
     {
       name: 'Brown',
@@ -22,6 +33,17 @@ const colorMap = new Map([
         'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/brown.mp3',
       description:
         'Brown noise, commonly associated with the calming rumble of a waterfall or distant thunder, presents greater energy at lower frequencies, offering a deep, ambient sound that may foster relaxation and aid in promoting deeper sleep.',
+    },
+  ],
+  [
+    'fire',
+    {
+      name: 'fire',
+      colors: ['#FF0000', '#FF1A1A', '#FF3333', '#FF4D4D', '#FF6666'],
+      thumbnail: require('../../assets/thumbnails/fire.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/fire.mp3',
+      description: 'Fire',
     },
   ],
   [
@@ -45,28 +67,6 @@ const colorMap = new Map([
       audioFile:
         'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/storm.mp3',
       description: 'Rain',
-    },
-  ],
-  [
-    'fire',
-    {
-      name: 'fire',
-      colors: ['#FF0000', '#FF1A1A', '#FF3333', '#FF4D4D', '#FF6666'],
-      thumbnail: require('../../assets/thumbnails/fire.png'),
-      audioFile:
-        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/fire.mp3',
-      description: 'Fire',
-    },
-  ],
-  [
-    'wind',
-    {
-      name: 'wind',
-      colors: ['#00FFFF', '#1AFFFF', '#33FFFF', '#4DFFFF', '#66FFFF'],
-      thumbnail: require('../../assets/thumbnails/wind.png'),
-      audioFile:
-        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/wind.mp3',
-      description: 'Wind',
     },
   ],
 ]);
