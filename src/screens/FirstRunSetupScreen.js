@@ -6,6 +6,7 @@ import DotsIndicator from '../components/DotsIndicator';
 import AnimationSetting from '../components/SettingsComponents/AnimationSetting';
 import BackgroundColorSetting from '../components/SettingsComponents/BackgroundColorSetting';
 import NameSetting from '../components/SettingsComponents/NameSetting';
+import SmallStory from '../components/SettingsComponents/SmallStory';
 import { getSettings, updateSetting } from '../utils/settingsStorage';
 import styles from '../utils/styles';
 
@@ -18,7 +19,6 @@ const SettingsScreen = ({ navigation }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF');
-  const [startVolume, setStartVolume] = useState(50);
   const [showFirstRunMessage] = useState(true);
   const [isFirstRun, setIsFirstRun] = useState(true);
   const [, setMessage] = useState('');
@@ -50,6 +50,17 @@ const SettingsScreen = ({ navigation }) => {
   ];
 
   useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // Navigate to the first item in the carousel when the screen is focused
+      if (carouselRef.current) {
+        carouselRef.current.snapToItem(0);
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
     if (showFirstRunMessage) {
       setMessage(getRandomMessage());
     }
@@ -61,7 +72,6 @@ const SettingsScreen = ({ navigation }) => {
       setPlaytimeAnimationEnabled(settings.playtimeAnimationEnabled || false);
       setName(settings.name || '');
       setBackgroundColor(settings.backgroundColor || '#FFFFFF');
-      setStartVolume(settings.startVolume || 50);
       setIsFirstRun(settings.isFirstRun || true);
     };
     loadSettings();
@@ -72,12 +82,11 @@ const SettingsScreen = ({ navigation }) => {
       await updateSetting('playtimeAnimationEnabled', playtimeAnimationEnabled);
       await updateSetting('name', name);
       await updateSetting('backgroundColor', backgroundColor);
-      await updateSetting('startVolume', startVolume);
       await updateSetting('isFirstRun', isFirstRun);
     };
 
     saveSettings();
-  }, [playtimeAnimationEnabled, name, backgroundColor, startVolume, isFirstRun]);
+  }, [playtimeAnimationEnabled, name, backgroundColor, isFirstRun]);
 
   /**
    * Retrieves a random message from the 'messages' array.
@@ -123,9 +132,9 @@ const SettingsScreen = ({ navigation }) => {
         } else {
           navigation.navigate('Main');
         }
-      } else if (nextIndex < 3) {
+      } else if (nextIndex < 4) {
         carouselRef.current.snapToItem(nextIndex);
-      } else if (nextIndex === 3) {
+      } else if (nextIndex === 4) {
         carouselRef.current.snapToItem(nextIndex);
         await updateSetting('isFirstRun', false);
         navigation.navigate('Main'); // Navigate to Main Screen
@@ -187,7 +196,10 @@ const SettingsScreen = ({ navigation }) => {
               getContrastTextColor={getContrastTextColor}
             />
           )}
+          {/* Small Story */}
+          {screenType === 'smallStory' && <SmallStory />}
         </View>
+
         {/* Other components and code */}
         {/* Next Button at the Bottom */}
         <TouchableOpacity
@@ -214,7 +226,7 @@ const SettingsScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Carousel
         ref={carouselRef}
-        data={['name', 'animation', 'backgroundColor']}
+        data={['name', 'animation', 'backgroundColor', 'smallStory']}
         renderItem={({ item }) => renderSettingsScreen(item)}
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
@@ -227,7 +239,7 @@ const SettingsScreen = ({ navigation }) => {
         inactiveDotOpacity={1}
         inactiveDotScale={1}
       />
-      <DotsIndicator activeIndex={activeIndex} length={3} />
+      <DotsIndicator activeIndex={activeIndex} length={4} />
     </View>
   );
 };

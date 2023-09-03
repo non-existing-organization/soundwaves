@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Switch } from 'react-native';
 
-import styles from '../../utils/styles'; // Adjust the import according to your actual path
+import styles from '../../utils/styles';
+
+// TODO #102 show animation when toggle is switched as a preview of what it looks like
 
 const AnimationSetting = ({ playtimeAnimationEnabled, setPlaytimeAnimationEnabled }) => (
   <View style={styles.settingRow}>

@@ -20,7 +20,7 @@ const MainScreen = ({ navigation }) => {
   const [mainColor, setMainColor] = useState(null);
   const [sound, setSound] = useState(null);
   const [, setCurrentAudioFile] = useState(null);
-  const [loopCount, setLoopCount] = useState(0);
+  const [setLoopCount] = useState(0);
   const [activeColor, setActiveColor] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
   const previousColorRef = useRef(null);
@@ -33,7 +33,6 @@ const MainScreen = ({ navigation }) => {
   useEffect(() => {
     return () => {
       if (sound) {
-        console.log('Unloading Sound on component unmount');
         sound.unloadAsync();
       }
     };
@@ -96,6 +95,7 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue downloading the file.
    */
   const downloadAudioFile = async (audioFileUrl) => {
+    // TODO #105 Download sound is not interactive, User is not aware of the status or state of the download
     const uriArray = audioFileUrl.split('/');
     const audioFile = uriArray[uriArray.length - 1];
 
@@ -105,7 +105,6 @@ const MainScreen = ({ navigation }) => {
     // Check if the file already exists
     const fileInfo = await FileSystem.getInfoAsync(path);
     if (fileInfo.exists) {
-      // console.log(`File already exists at path: ${path}`);
       console.log(`File already exists`);
       return path;
     } else {
@@ -158,14 +157,9 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue stopping or unloading a sound.
    */
   const handleButtonPress = async (colorName, image, audioFileUrl) => {
-    console.log(
-      `Button press detected. Color: ${colorName}, Image: ${image}, Audio File: ${audioFileUrl}`
-    );
-
     // If the same sound/colorName is selected
     if (activeColor === colorName) {
       if (sound) {
-        console.log('Same sound selected, stopping and unloading current sound');
         try {
           // Check if the sound is loaded before attempting to stop or unload
           if (await isSoundLoaded()) {
@@ -183,7 +177,6 @@ const MainScreen = ({ navigation }) => {
 
     // Stop the currently playing sound, if any other sound is playing
     if (sound) {
-      console.log('Stopping and unloading current sound');
       try {
         // Check if the sound is loaded before attempting to stop or unload
         if (await isSoundLoaded()) {
@@ -230,7 +223,6 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue loading or playing the sound.
    */
   const loadAndPlayNewSound = async (audioFile, colorName) => {
-    console.log('Loading new sound');
     // Fade in the BubbleOverlay
     Animated.timing(opacityValue, {
       toValue: 1,
@@ -250,18 +242,13 @@ const MainScreen = ({ navigation }) => {
         (status) => {
           if (status.didJustFinish && !status.isLooping) {
             setLoopCount((prevCount) => prevCount + 1);
-            console.log('Loop count:', loopCount);
           }
         }
       );
       setSound(newSound);
       setCurrentAudioFile(colorName);
       setActiveColor(colorName);
-      console.log('New sound loaded');
-
-      console.log('Playing new sound');
       await newSound.playAsync();
-      console.log('New sound playing');
     } catch (e) {
       console.error('Error loading or playing new sound:', e);
     }
@@ -289,14 +276,13 @@ const MainScreen = ({ navigation }) => {
    * @throws Will throw an error if there's an issue setting the mute state on the sound object.
    */
   const handleSpeakerButtonPress = async () => {
+    // BUG #104 Mute button is not working on Android
     if (sound) {
       if (isMuted) {
-        console.log('Unmuting sound');
         await sound.setIsMutedAsync(false);
         setIsMuted(false);
         setActiveColor(previousColorRef.current || null);
         previousColorRef.current = null;
-        console.log('Sound unmuted');
 
         // Fade in the BubbleOverlay
         Animated.timing(opacityValue, {
@@ -304,13 +290,10 @@ const MainScreen = ({ navigation }) => {
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
         }).start();
-      } else {
-        console.log('Muting sound');
         await sound.setIsMutedAsync(true);
         setIsMuted(true);
         previousColorRef.current = activeColor;
         setActiveColor('red');
-        console.log('Sound muted');
 
         // Fade out the BubbleOverlay
         Animated.timing(opacityValue, {
@@ -329,7 +312,8 @@ const MainScreen = ({ navigation }) => {
    * Navigates to the SettingsScreen.
    */
   const handleSettingsPress = () => {
-    navigation.navigate('Settings'); // Navigate to the SettingsScreen
+    // BUG #106 Settings button is not always working on android, cannot navigate to the FirstRunSetupScreen
+    navigation.navigate('FirstRunSetup'); // Navigate to the SettingsScreen
   };
 
   /**
@@ -399,9 +383,6 @@ const MainScreen = ({ navigation }) => {
    * @type {string} - The selected background color.
    */
   const backgroundColor = mainColor || backgroundColorDefault; // Default to white if no color is selected
-
-  // conso0le log the settings
-  console.log('Settings:', appSettings);
 
   /**
    * Main screen rendering which consists of:
