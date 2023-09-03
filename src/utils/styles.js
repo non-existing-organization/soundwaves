@@ -70,6 +70,18 @@ const styles = StyleSheet.create({
     backgroundColor: blackColor,
     borderWidth: 1,
   },
+
+  buttonSideScreen: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: commonMargin,
+    width: 50,
+    height: 50,
+    borderRadius: commonBorderRadius,
+    backgroundColor: blackColor,
+    borderWidth: 6,
+  },
+
   buttonImage: {
     borderRadius: 10,
     height: 40,
@@ -496,6 +508,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: blackColor, // Set background color to black
+  },
+  buttonWrapperHorizontal: {
+    marginRight: 10, // Adjust this value as needed for spacing between buttons
+  },
+  scrollViewContent: {
+    paddingLeft: 30, // Add space on the left
+    paddingRight: 30, // Add space on the right
+  },
+  iconButton: {
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15,
+    position: 'absolute',
+    zIndex: 2, // Higher zIndex to place the icons on top
+  },
+  leftIconButton: {
+    left: 10, // Adjust position from the left edge
+    top: '50%', // Center vertically
+    transform: [{ translateY: -15 }], // Adjust to center vertically
+  },
+  rightIconButton: {
+    right: 10, // Adjust position from the right edge
+    top: '50%', // Center vertically
+    transform: [{ translateY: -15 }], // Adjust to center vertically
+  },
+  scrollViewIcon: {
+    fontSize: 18,
+    color: greyLightColor,
   },
 });
 
