@@ -58,17 +58,17 @@ const colorMap = new Map([
       description: 'Fire',
     },
   ],
-  // [
-  //   'wind',
-  //   {
-  //     name: 'wind',
-  //     colors: ['#00FFFF', '#1AFFFF', '#33FFFF', '#4DFFFF', '#66FFFF'],
-  //     thumbnail: require('../../assets/thumbnails/wind.png'),
-  //     audioFile:
-  //       'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/wind.mp3',
-  //     description: 'Wind',
-  //   },
-  // ],
+  [
+    'wind',
+    {
+      name: 'wind',
+      colors: ['#00FFFF', '#1AFFFF', '#33FFFF', '#4DFFFF', '#66FFFF'],
+      thumbnail: require('../../assets/thumbnails/wind.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/wind.mp3',
+      description: 'Wind',
+    },
+  ],
 ]);
 
 export default colorMap;
