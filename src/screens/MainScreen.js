@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 // MainScreen.js
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TouchableOpacity, Animated } from 'react-native';
+import { View, TouchableOpacity, Animated, ScrollView, Dimensions, Text } from 'react-native';
 import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as FileSystem from 'expo-file-system';
-import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
+import { useFocusEffect } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colorMap from '../utils/colorMap';
@@ -349,13 +350,27 @@ const MainScreen = ({ navigation }) => {
    * - For each color, a button is rendered with its respective image, thumbnail, and active/muted states.
    * - On press of the button, the handleButtonPress function is called with the color's properties.
    */
-  const renderCustomButton = ([colorName, { name, image, thumbnail, audioFile }]) => {
+  const renderCustomButton = ([
+    colorName,
+    { name, image, thumbnail, audioFile, positionX, width },
+  ]) => {
     const onPress = () => handleButtonPress(colorName, image, audioFile);
     const isButtonActive = activeColor === colorName;
     const isButtonMuted = isMuted;
 
+    const screenWidth = Dimensions.get('window').width; // Get the screen width
+
+    const buttonMargin = 30; // Margin to check for proximity to the sides
+    const isCloseToLeft = positionX <= buttonMargin;
+    const isCloseToRight = screenWidth - (positionX + width) <= buttonMargin;
+
+    const buttonStyles = [
+      styles.buttonWrapperHorizontal,
+      isCloseToLeft || isCloseToRight ? styles.buttonSideScreen : null,
+    ];
+
     return (
-      <View key={colorName} style={styles.buttonWrapper}>
+      <View key={colorName} style={buttonStyles}>
         <CustomButton
           onPress={onPress}
           image={image}
@@ -386,8 +401,8 @@ const MainScreen = ({ navigation }) => {
   const backgroundColor = mainColor || backgroundColorDefault; // Default to white if no color is selected
 
   // conso0le log the settings
-
   console.log('Settings:', appSettings);
+
   /**
    * Main screen rendering which consists of:
    * - A top bar with a volume toggle button.
@@ -435,7 +450,26 @@ const MainScreen = ({ navigation }) => {
 
       <View style={styles.buttonsContainer}>
         {/* Buttons for color selection */}
-        {Array.from(colorMap).map(renderCustomButton)}
+        {/* Use ScrollView for horizontal scrolling */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={true}
+          indicatorStyle="white"
+          invertStickyHeaders={true}
+          contentContainerStyle={styles.scrollViewContent}
+          bounces={true}
+          bouncesZoom={true}>
+          {/* Left icon */}
+          <View style={[styles.iconButton, styles.leftIconButton]}>
+            <AntDesign name="left" style={styles.scrollViewIcon} />
+          </View>
+          {/* Buttons for color selection */}
+          {Array.from(colorMap).map(renderCustomButton)}
+          {/* Right icon */}
+          <View style={[styles.iconButton, styles.rightIconButton]}>
+            <AntDesign name="right" style={styles.scrollViewIcon} />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
