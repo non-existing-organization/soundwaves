@@ -211,10 +211,11 @@ const styles = StyleSheet.create({
     height: 40,
   },
   labelContainer: {
-    flex: 0.5,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 20,
   },
   loadingText: {
     color: whiteColor,
@@ -499,22 +500,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   backgroundColorContainer: {
-    flexDirection: 'column', // Stack items vertically
-    alignItems: 'center', // Center items horizontally
-    justifyContent: 'center', // Center items vertically
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   welcomeContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: blackColor, // Set background color to black
+    backgroundColor: blackColor,
   },
   buttonWrapperHorizontal: {
-    marginRight: 10, // Adjust this value as needed for spacing between buttons
+    marginRight: 10,
   },
   scrollViewContent: {
-    paddingLeft: 30, // Add space on the left
-    paddingRight: 30, // Add space on the right
+    paddingLeft: 30,
+    paddingRight: 30,
   },
   iconButton: {
     width: 30,
@@ -523,21 +524,55 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     position: 'absolute',
-    zIndex: 2, // Higher zIndex to place the icons on top
+    zIndex: 2,
   },
   leftIconButton: {
-    left: 10, // Adjust position from the left edge
-    top: '50%', // Center vertically
-    transform: [{ translateY: -15 }], // Adjust to center vertically
+    left: 10,
+    top: '50%',
+    transform: [{ translateY: -15 }],
   },
   rightIconButton: {
-    right: 10, // Adjust position from the right edge
-    top: '50%', // Center vertically
-    transform: [{ translateY: -15 }], // Adjust to center vertically
+    right: 10,
+    top: '50%',
+    transform: [{ translateY: -15 }],
   },
   scrollViewIcon: {
     fontSize: 18,
     color: greyLightColor,
+  },
+  descriptionText: {
+    color: whiteColor,
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  punchlineText: {
+    color: whiteColor,
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    paddingTop: 50,
+  },
+  titleText: {
+    color: whiteColor,
+    fontSize: 24,
+    marginBottom: 50,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  benefitsText: {
+    color: whiteColor,
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  benefitsList: {
+    color: whiteColor,
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });
 
