@@ -10,7 +10,8 @@
     "deploy": "gh-pages -d web-build",
     "predeploy": "expo export:web",
     "lint": "eslint . --ext .js,.jsx",
-    "lint:fix": "eslint . --ext .js,.jsx --fix"
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --log-level warn --write \"**/**/*.{jsx,js}\""
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",

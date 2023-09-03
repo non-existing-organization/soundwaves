@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Switch } from 'react-native';
+
 import styles from '../../utils/styles'; // Adjust the import according to your actual path
 
 const AnimationSetting = ({ playtimeAnimationEnabled, setPlaytimeAnimationEnabled }) => (
