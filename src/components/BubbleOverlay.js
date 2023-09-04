@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import styles from './styles';
+import styles from '../utils/styles';
 
 const BubbleOverlay = ({
   bubbleCount = 150,
