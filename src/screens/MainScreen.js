@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CustomButton from '../components/CustomButton';
 import InfoModal from '../components/InfoModal';
-import BubbleOverlay from '../utils/BubbleOverlay';
+import BubbleOverlay from '../components/BubbleOverlay';
 import colorMap from '../utils/colorMap';
 import { getSettings } from '../utils/settingsStorage';
 import styles from '../utils/styles';
@@ -26,7 +26,7 @@ const MainScreen = ({ navigation }) => {
   const previousColorRef = useRef(null);
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const [, setIsLoading] = useState(false);
-  const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
+  const opacityValue = useRef(new Animated.Value(0)).current;
   const [appSettings, setAppSettings] = useState({}); // State to hold the settings
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true); // Default value
 
