@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Switch } from 'react-native';
 
 import styles from '../../utils/styles';
+import BubbleOverlay from '../BubbleOverlay'; // Import the BubbleOverlay component
 
-// TODO #102 show animation when toggle is switched as a preview of what it looks like
+const AnimationSetting = () => {
+  // Initialize the playtimeAnimationEnabled state to true
+  const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
 
-const AnimationSetting = ({ playtimeAnimationEnabled, setPlaytimeAnimationEnabled }) => (
-  <View style={styles.settingRow}>
-    <View style={styles.animationContainer}>
-      <Text style={styles.settingsText}>Would you like animations during playback</Text>
-      <Switch
-        value={playtimeAnimationEnabled}
-        onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}
-      />
+  return (
+    <View style={styles.settingRow}>
+      {playtimeAnimationEnabled && <BubbleOverlay />}
+      <View style={styles.animationContainer}>
+        <Text style={styles.settingsText}>Would you like animations during playback</Text>
+        <Switch
+          value={playtimeAnimationEnabled}
+          onValueChange={(newValue) => setPlaytimeAnimationEnabled(newValue)}
+        />
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export default AnimationSetting;
