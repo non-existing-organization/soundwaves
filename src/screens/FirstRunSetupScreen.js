@@ -19,35 +19,11 @@ const SettingsScreen = ({ navigation }) => {
   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
   const [selectedColor, setSelectedColor] = useState('#FFFFFF');
-  const [showFirstRunMessage] = useState(true);
   const [isFirstRun, setIsFirstRun] = useState(true);
-  const [, setMessage] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
 
   // TODO #90 remove message from FirstRunSetupScreen
-  const messages = [
-    'Hi, welcome to Soundwaves, time to relax',
-    'Hello, let Soundwaves soothe your soul',
-    'Welcome! Unwind with the sounds of Soundwaves',
-    'Hey there, Soundwaves is here to bring you peace',
-    'Step into serenity with Soundwaves',
-    'Soundwaves welcomes you to a world of calm',
-    'Hi! Ready to experience tranquility with Soundwaves?',
-    'Welcome! Let Soundwaves be your sanctuary',
-    'Hello! Your oasis of relaxation starts with Soundwaves',
-    'Greetings! Find your inner calm with Soundwaves',
-    'Hey! Let Soundwaves wash away your stress',
-    'Welcome! Tune into relaxation with Soundwaves',
-    "Hi there! Let's create your perfect ambiance with Soundwaves",
-    'Hello and welcome! Soundwaves is your gateway to peace',
-    "Hi, you've reached Soundwaves. Time for some me-time",
-    'Welcome! Let Soundwaves be your peaceful escape',
-    'Hey! Discover your Zen moment with Soundwaves',
-    'Hello! Soundwaves is your passport to relaxation',
-    'Welcome to Soundwaves, where your calm awaits',
-    'Hey there! Dive into relaxation with Soundwaves',
-  ];
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -59,12 +35,6 @@ const SettingsScreen = ({ navigation }) => {
 
     return unsubscribe;
   }, [navigation]);
-
-  useEffect(() => {
-    if (showFirstRunMessage) {
-      setMessage(getRandomMessage());
-    }
-  }, [showFirstRunMessage]);
 
   useEffect(() => {
     const loadSettings = async () => {
@@ -87,16 +57,6 @@ const SettingsScreen = ({ navigation }) => {
 
     saveSettings();
   }, [playtimeAnimationEnabled, name, backgroundColor, isFirstRun]);
-
-  /**
-   * Retrieves a random message from the 'messages' array.
-   *
-   * @returns {string} A random message.
-   */
-  const getRandomMessage = () => {
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    return messages[randomIndex];
-  };
 
   /**
    * Handles the change of color by setting the selected color.
