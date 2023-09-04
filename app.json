@@ -1,5 +1,6 @@
 {
   "expo": {
+    "jsEngine": "jsc",
     "name": "SoundWaves",
     "slug": "soundwaves",
     "description": "Experience the therapeutic power of soundwaves, finely tuned to promote focus, relaxation, and a restful sleep",
@@ -18,6 +19,7 @@
       "**/*"
     ],
     "ios": {
+      "jsEngine": "jsc",
       "supportsTablet": true,
       "bundleIdentifier": "com.non-existing-organization.soundwaves",
       "icon": "./assets/icon.png",
@@ -28,15 +30,13 @@
       }
     },
     "android": {
+      "jsEngine": "hermes",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.nonexistingorganization.soundwaves",
       "permissions": [
-        "RECORD_AUDIO",
-        "MODIFY_AUDIO_SETTINGS",
-        "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
     },
@@ -52,16 +52,8 @@
         "projectId": "ee2a1a14-bd1f-462f-b2e3-ed94801478d5"
       }
     },
-    "plugins": [
-      [
-        "expo-av",
-        {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
-        }
-      ]
-    ],
     "runtimeVersion": {
-      "policy": "sdkVersion"
+      "policy": "appVersion"
     }
   }
 }
