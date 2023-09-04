@@ -69,6 +69,50 @@ const colorMap = new Map([
       description: 'Rain',
     },
   ],
+  [
+    'rain',
+    {
+      name: 'rain',
+      colors: ['#0000FF', '#1A1AFF', '#3333FF', '#4D4DFF', '#6666FF'],
+      thumbnail: require('../../assets/thumbnails/rain.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/rain.mp3',
+      description: 'Rain',
+    },
+  ],
+  [
+    'forest',
+    {
+      name: 'forest',
+      colors: ['#00FF00', '#1AFF1A', '#33FF33', '#4DFF4D', '#66FF66'],
+      thumbnail: require('../../assets/thumbnails/forest.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/forest.mp3',
+      description: 'Forest',
+    },
+  ],
+  [
+    'night',
+    {
+      name: 'night',
+      colors: ['#FFFF00', '#FFFF1A', '#FFFF33', '#FFFF4D', '#FFFF66'],
+      thumbnail: require('../../assets/thumbnails/night.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/night.mp3',
+      description: 'Night',
+    },
+  ],
+  [
+    'tent',
+    {
+      name: 'tent',
+      colors: ['#FF5722', '#FF7043', '#FF8A65', '#FFAB91', '#FFCCBC'],
+      thumbnail: require('../../assets/thumbnails/tent.png'),
+      audioFile:
+        'https://github.com/stiliajohny/soundwaves/raw/master/assets/noise_audios/tent.mp3',
+      description: 'Tent',
+    },
+  ],
 ]);
 
 export default colorMap;
