@@ -5,6 +5,18 @@ import * as Animatable from 'react-native-animatable';
 
 import styles from '../utils/styles';
 
+/**
+ * BubbleOverlay Component.
+ * Generates an animated overlay of bubbles.
+ *
+ * @param {Object} props - The component properties.
+ * @param {number} [props.bubbleCount=150] - Number of bubbles to be displayed.
+ * @param {number} [props.minRadius=5] - Minimum radius size for the bubbles.
+ * @param {number} [props.maxRadius=100] - Maximum radius size for the bubbles.
+ * @param {string} [props.bubbleColor='rgba(255, 255, 255, 0.1)'] - The color of the bubbles.
+ *
+ * @returns {JSX.Element} A View component containing animated bubbles.
+ */
 const BubbleOverlay = ({
   bubbleCount = 150,
   minRadius = 5,

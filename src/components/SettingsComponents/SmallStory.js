@@ -3,6 +3,13 @@ import { View, Text } from 'react-native';
 
 import styles from '../../utils/styles';
 
+/**
+ * SmallStory Component.
+ * Provides a textual introduction to the SoundWaves experience.
+ *
+ *
+ * @returns {JSX.Element} A View component containing multiple Text components that describe the SoundWaves experience and its benefits.
+ */
 const SmallStory = () => (
   // BUG #103 SmallStory Text is not horizontaly fiting on the Android Screen
   <View style={styles.settingRow}>
