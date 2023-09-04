@@ -17,7 +17,10 @@
     },
     "production": {
       "autoIncrement": true,
-      "releaseChannel": "production"
+      "releaseChannel": "production",
+      "ios": {
+        "image": "latest"
+      }
     }
   },
   "submit": {
@@ -25,7 +28,7 @@
       "ios": {
         "appleId": "stilia.johny@gmail.com",
         "ascAppId": "8943PTRNBX",
-        "appleTeamId": "73ET9TF83J"
+        "appleTeamId": "73ET9TF83J",
       }
     }
   }
