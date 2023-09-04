@@ -4,8 +4,29 @@ import { View, Text, Switch } from 'react-native';
 import styles from '../../utils/styles';
 import BubbleOverlay from '../BubbleOverlay'; // Import the BubbleOverlay component
 
+/**
+ * AnimationSetting Component.
+ * Allows the user to enable or disable animations during playback.
+ *
+ * @returns {JSX.Element} Returns a View component that contains the BubbleOverlay and Switch components.
+ *
+ * @example
+ * import AnimationSetting from './AnimationSetting';
+ *
+ * const ParentComponent = () => {
+ *   return (
+ *     <View>
+ *       <AnimationSetting />
+ *       // other components
+ *     </View>
+ *   );
+ * };
+ */
 const AnimationSetting = () => {
-  // Initialize the playtimeAnimationEnabled state to true
+  /**
+   * State to manage whether or not animations are enabled during playtime.
+   * @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]}
+   */
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true);
 
   return (

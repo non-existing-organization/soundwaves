@@ -4,6 +4,59 @@ import ColorPicker from 'react-native-wheel-color-picker';
 
 import styles from '../../utils/styles';
 
+/**
+ * BackgroundColorSetting Component.
+ * Allows the user to select a default background color.
+ *
+ * @param {Object} props - The component properties.
+ * @param {string} props.backgroundColor - The current background color.
+ * @param {Function} props.setColorPickerVisible - Function to set visibility of the color picker.
+ * @param {boolean} props.colorPickerVisible - Whether the color picker is visible or not.
+ * @param {string} props.selectedColor - The currently selected color in the color picker.
+ * @param {Function} props.handleColorChange - Function to handle changes in the color picker.
+ * @param {Function} props.handleColorConfirm - Function to confirm the selected color.
+ * @param {Function} props.getContrastTextColor - Function to get contrasting text color for a given background color.
+ *
+ * @returns {JSX.Element} A View component containing Text, TouchableOpacity, and Modal for color selection.
+ *
+ * @example
+ *
+ * import BackgroundColorSetting from './BackgroundColorSetting';
+ *
+ * const ParentComponent = () => {
+ *   const [colorPickerVisible, setColorPickerVisible] = useState(false);
+ *   const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
+ *   const [selectedColor, setSelectedColor] = useState('#FFFFFF');
+ *
+ *   const handleColorChange = (newColor) => {
+ *     setSelectedColor(newColor);
+ *   };
+ *
+ *   const handleColorConfirm = () => {
+ *     setBackgroundColor(selectedColor);
+ *     setColorPickerVisible(false);
+ *   };
+ *
+ *   const getContrastTextColor = (bgColor) => {
+ *     // Implementation to get a contrasting text color based on bgColor
+ *   };
+ *
+ *   return (
+ *     <View>
+ *       <BackgroundColorSetting
+ *         backgroundColor={backgroundColor}
+ *         setColorPickerVisible={setColorPickerVisible}
+ *         colorPickerVisible={colorPickerVisible}
+ *         selectedColor={selectedColor}
+ *         handleColorChange={handleColorChange}
+ *         handleColorConfirm={handleColorConfirm}
+ *         getContrastTextColor={getContrastTextColor}
+ *       />
+ *       // other components
+ *     </View>
+ *   );
+ * };
+ */
 const BackgroundColorSetting = ({
   backgroundColor,
   setColorPickerVisible,

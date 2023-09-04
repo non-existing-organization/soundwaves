@@ -26,7 +26,6 @@ const App = () => {
   }, []);
 
   if (isLoading) {
-    // You can show a loading indicator here while settings are being checked
     return null;
   }
 
