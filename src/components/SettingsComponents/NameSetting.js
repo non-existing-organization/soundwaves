@@ -10,6 +10,7 @@ const NameSetting = ({ name, setName }) => (
       <TextInput
         style={styles.input}
         placeholder="Enter your name"
+        placeholderTextColor="#666666"
         value={name}
         onChangeText={(newName) => setName(newName)}
       />
