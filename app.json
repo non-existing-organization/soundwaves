@@ -1,6 +1,5 @@
 {
   "expo": {
-    "jsEngine": "jsc",
     "name": "SoundWaves",
     "slug": "soundwaves",
     "description": "Experience the therapeutic power of soundwaves, finely tuned to promote focus, relaxation, and a restful sleep",
@@ -58,5 +57,15 @@
     "runtimeVersion": {
       "policy": "appVersion"
     }
-  }
+  },
+  "plugins": [
+    [
+      "expo-build-properties",
+      {
+        "ios": {
+          "flipper": true
+        }
+      }
+    ]
+  ]
 }
