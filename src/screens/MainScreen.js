@@ -9,9 +9,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, Animated, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import BubbleOverlay from '../components/BubbleOverlay';
 import CustomButton from '../components/CustomButton';
 import InfoModal from '../components/InfoModal';
+import BubbleOverlay from '../components/BubbleOverlay';
 import colorMap from '../utils/colorMap';
 import { getSettings } from '../utils/settingsStorage';
 import styles from '../utils/styles';
@@ -26,7 +26,7 @@ const MainScreen = ({ navigation }) => {
   const previousColorRef = useRef(null);
   const [downloadModalVisible, setDownloadModalVisible] = useState(false);
   const [, setIsLoading] = useState(false);
-  const opacityValue = useRef(new Animated.Value(0)).current;
+  const opacityValue = useRef(new Animated.Value(0)).current; // Initialize with 0 opacity
   const [appSettings, setAppSettings] = useState({}); // State to hold the settings
   const [playtimeAnimationEnabled, setPlaytimeAnimationEnabled] = useState(true); // Default value
 
@@ -156,7 +156,7 @@ const MainScreen = ({ navigation }) => {
    *
    * @throws Will throw an error if there's an issue stopping or unloading a sound.
    */
-  const handleButtonPress = async (colorName, audioFileUrl) => {
+  const handleButtonPress = async (colorName, image, audioFileUrl) => {
     // If the same sound/colorName is selected
     if (activeColor === colorName) {
       if (sound) {
@@ -290,6 +290,7 @@ const MainScreen = ({ navigation }) => {
           duration: 1000, // Adjust duration as needed
           useNativeDriver: true,
         }).start();
+      } else {
         await sound.setIsMutedAsync(true);
         setIsMuted(true);
         previousColorRef.current = activeColor;
@@ -338,7 +339,7 @@ const MainScreen = ({ navigation }) => {
     colorName,
     { name, image, thumbnail, audioFile, positionX, width },
   ]) => {
-    const onPress = () => handleButtonPress(colorName, image);
+    const onPress = () => handleButtonPress(colorName, image, audioFile);
     const isButtonActive = activeColor === colorName;
     const isButtonMuted = isMuted;
 
