@@ -1,19 +1,32 @@
 {
   "cli": {
     "version": ">= 3.10.2",
-    "promptToConfigurePushNotifications": false
+    "requireCommit": false,
+    "promptToConfigurePushNotifications": false,
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "development"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "channel": "preview"
     },
-    "production": {}
+    "production": {
+      "distribution": "store",
+      "channel": "default"
+    }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "stilia.johny@gmail.com",
+        "ascAppId": "8943PTRNBX",
+        "appleTeamId": "73ET9TF83J"
+      }
+    }
   }
 }
