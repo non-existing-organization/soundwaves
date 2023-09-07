@@ -1,51 +1,19 @@
 {
   "cli": {
-    "version": ">= 3.15.0",
-    "requireCommit": false,
-    "promptToConfigurePushNotifications": false,
-    "appVersionSource": "remote"
+    "version": ">= 3.10.2",
+    "promptToConfigurePushNotifications": false
   },
   "build": {
-    "development-simulator": {
-      "developmentClient": true,
-      "distribution": "internal",
-      "ios": {
-        "simulator": true
-      }
-    },
     "development": {
-      "ios": {
-        "image": "latest"
-      },
       "developmentClient": true,
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal",
-      "channel": "preview"
+      "distribution": "internal"
     },
-    "production": {
-      "autoIncrement": true,
-      "releaseChannel": "production",
-      "ios": {
-        "image": "latest"
-      }
-    },
-    "production-ios": {
-      "ios": {
-        "image": "latest"
-      },
-      "distribution": "store",
-      "releaseChannel": "production.ios-1.7.1"
-    }
+    "production": {}
   },
   "submit": {
-    "production": {
-      "ios": {
-        "appleId": "stilia.johny@gmail.com",
-        "ascAppId": "8943PTRNBX",
-        "appleTeamId": "73ET9TF83J",
-      }
-    }
+    "production": {}
   }
 }

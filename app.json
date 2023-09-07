@@ -14,9 +14,6 @@
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
       "jsEngine": "jsc",
       "supportsTablet": true,
@@ -26,9 +23,6 @@
         "UIBackgroundModes": [
           "audio"
         ]
-      },
-      "config": {
-        "usesNonExemptEncryption": false
       }
     },
     "android": {
@@ -42,13 +36,6 @@
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/ee2a1a14-bd1f-462f-b2e3-ed94801478d5"
-    },
     "extra": {
       "eas": {
         "projectId": "ee2a1a14-bd1f-462f-b2e3-ed94801478d5"
@@ -57,15 +44,5 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     }
-  },
-  "plugins": [
-    [
-      "expo-build-properties",
-      {
-        "ios": {
-          "flipper": true
-        }
-      }
-    ]
-  ]
+  }
 }
