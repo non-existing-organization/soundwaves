@@ -9,9 +9,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, TouchableOpacity, Animated, ScrollView, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import BubbleOverlay from '../components/BubbleOverlay';
 import CustomButton from '../components/CustomButton';
 import InfoModal from '../components/InfoModal';
-import BubbleOverlay from '../components/BubbleOverlay';
 import colorMap from '../utils/colorMap';
 import { getSettings } from '../utils/settingsStorage';
 import styles from '../utils/styles';
