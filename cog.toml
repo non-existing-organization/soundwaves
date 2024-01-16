@@ -1,0 +1,31 @@
+# A list of glob patterns describing branches on which semver bump are allowed
+branch_whitelist = ["master"]
+
+# Ignore merge commits from conventional commit checks
+ignore_merge_commits = true
+
+pre_bump_hooks = [
+    "echo {{version}}",
+]
+
+
+post_bump_hooks = [
+    "git push -f",
+    "git push -f origin {{version}} ",
+]
+
+[changelog]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+repository = "soundwaves"
+owner = "stiliajohny"
+authors = [
+  { username = "stiliajohny", signature = "John Stilia"}
+]
+
+
+# An optional list of additional allowed commit type
+# `cog commit {commit_type}` commit command will be generated at runtime
+[commit_types]
+ex = { changelog_title = "This is the markdown title for `ex` commit type" }
